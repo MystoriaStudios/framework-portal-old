@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient {
+    position: relative;
+    background-image: repeating-linear-gradient(
+            to right,
+            #63DFFA,
+            #6C47FF,
+            #63DFFA
+    );
+    z-index: 1;
+    background-position-x: 0%;
+    background-size: 200%;
+    animation: gradimate 3s linear infinite;
+    background-clip: text;
+}
+
+@keyframes gradimate {
+    0% {
+        background-position-x: 0%;
+    }
+    50% {
+        background-position-x: 100%;
+    }
+    100% {
+        background-position-x: 200%;
+    }
+}
+
+.card {
+    background: hsl(339 10% 18%);
+    border-radius: 5px;
+    box-shadow: 0 10px 12px rgba(0, 0, 0, .1);
+    color: white;
+    padding: 0 0 1rem 0;
+}

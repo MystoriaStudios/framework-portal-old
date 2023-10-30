@@ -1,7 +1,6 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
-import {OrgDetails, UserDetails, NodeDetails} from "./details";
-import Link from "next/link";
+import {NodeDetails, OrgDetails} from "./details";
 
 export default async function DashboardPage() {
     const {userId} = auth();
@@ -20,10 +19,16 @@ export default async function DashboardPage() {
                         👋 Hi, {user.firstName || `Stranger`}
                     </h1>
                     <span>Welcome to your dashboard!</span>
-                    <div className="grid gap-4 mt-8 lg:grid-cols-3">
-                        <UserDetails/>
-                        <OrgDetails/>
-                        <NodeDetails/>
+
+                    <div className="flex flex-row w-7/8">
+                        <div className="w-7/12">
+                            <OrgDetails />
+                        </div>
+                        <div className="w-72 ml-12 bg-gray-50 rounded">
+                            <div className="text-center font-bold text-2xl bg-sky-400 text-white border-sky-600 rounded shadow-md">
+                                Notification Bar
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

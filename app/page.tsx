@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {DownArrow, RightArrow} from "./icons";
 import "./home.css";
 import React from "react";
 

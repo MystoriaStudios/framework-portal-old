@@ -1,6 +1,5 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
-import Link from "next/link";
 
 // @ts-ignore
 export default async function Username({children}) {

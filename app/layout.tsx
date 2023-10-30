@@ -1,23 +1,13 @@
-import {ClerkProvider, SignedIn, SignedOut, UserButton, OrganizationSwitcher} from "@clerk/nextjs";
+import {ClerkProvider, SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
 
 import "./globals.css";
 import {Dosis} from "next/font/google";
-import {dark} from "@clerk/themes"
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
 import Navbar from "@/app/_components/navbar";
 
-import {
-    faBookBookmark,
-    faDollar,
-    faCube,
-    faBlog,
-    faSearch,
-    faServer,
-    faTools
-} from '@fortawesome/free-solid-svg-icons'
-import {faHive} from "@fortawesome/free-brands-svg-icons";
+import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Username from "@/app/_components/username";
 
@@ -66,7 +56,7 @@ export default function RootLayout({
                       <Username className="text-sm font-bold text-gray-800"></Username>
                       <span className="text-[10px] font-bold uppercase text-green-400 tracking-wider">Logged in</span>
                     </span>
-                        <span className="ml-2">
+                    <span className="ml-2">
                       <UserButton afterSignOutUrl="/"/>
                     </span>
 
@@ -84,7 +74,7 @@ export default function RootLayout({
             </Navbar>
             <main className="grow">
 
-                        {children}
+                {children}
             </main>
 
 
@@ -99,7 +89,8 @@ export default function RootLayout({
                             UNSTABLE
                         </h1>
                     </div>
-                    <span className="text-xs font-normal tracking-tight text-gray-200">Page loaded in <b>104ms</b></span>
+                    <span
+                        className="text-xs font-normal tracking-tight text-gray-200">Page loaded in <b>104ms</b></span>
                 </span>
                 <span className="text-xs">
                     A Solution provided by

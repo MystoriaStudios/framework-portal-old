@@ -2,18 +2,9 @@
 import React from 'react'
 import {Disclosure} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import Image from "next/image";
-import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import {
-    faBookBookmark,
-    faDollar,
-    faCube,
-    faBlog,
-    faSearch,
-    faServer,
-    faTools
-} from '@fortawesome/free-solid-svg-icons'
+import {faCube, faSearch} from '@fortawesome/free-solid-svg-icons'
 
 // @ts-ignore
 export default function Navbar({children}) {
@@ -41,20 +32,22 @@ export default function Navbar({children}) {
                                 <div>
                                     Framew
 
-                                <FontAwesomeIcon icon={faCube} className="mx-0.5" />
+                                    <FontAwesomeIcon icon={faCube} className="mx-0.5"/>
 
-                                rk
+                                    rk
                                 </div>
                                 <div className="text-xs">
                                     The all in one cloud solution.
                                 </div>
                             </div>
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
+                            <div
+                                className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
                                 <div className="mx-auto">
                                     <div className="relative mt-2 rounded-full shadow-sm">
-                                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <div
+                                            className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <span className="text-black sm:text-sm pl-80">
-                                                <FontAwesomeIcon icon={faSearch} className="-ml-0.5" />
+                                                <FontAwesomeIcon icon={faSearch} className="-ml-0.5"/>
                                             </span>
                                         </div>
                                         <input

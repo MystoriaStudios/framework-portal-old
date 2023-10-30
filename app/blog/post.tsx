@@ -10,7 +10,7 @@ export function Post(key: String) {
     const route = `http://localhost:7777/api/blog/post/${key}`
     console.log(route)
 
-    const { data, error, isValidating } = useSWR(route, fetcher)
+    const {data, error, isValidating} = useSWR(route, fetcher)
 
     if (error) {
         return <p>{error.toString()}</p>

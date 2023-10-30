@@ -4,29 +4,25 @@ import {Disclosure} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import Image from "next/image";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faCube, faSearch } from '@fortawesome/free-solid-svg-icons'
-import {Input} from "postcss";
 
-const navigation = [
-    {name: 'Dashboard', href: '/dashboard', current: true},
-    {name: 'Team', href: '/team', current: false},
-    {name: 'Stats', href: '/stats', current: false},
-    {name: 'Blog', href: '/blog', current: false},
-]
-
-// @ts-ignore
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+import {
+    faBookBookmark,
+    faDollar,
+    faCube,
+    faBlog,
+    faSearch,
+    faServer,
+    faTools
+} from '@fortawesome/free-solid-svg-icons'
 
 // @ts-ignore
 export default function Navbar({children}) {
     return (
         <Disclosure as="nav"
-                    className="pt-8 pb-4">
+                    className="pt-8 pb-4 bg-white shadow-sm border-b-2 border-gray-200">
             {({open}) => (
                 <>
-                    <div className="mx-auto px-52">
+                    <div className="mx-auto pr-52">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
@@ -41,47 +37,36 @@ export default function Navbar({children}) {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="text-black font-bold tracking-wider">
-                                Framew
+                            <div className="text-black ml-12 text-2xl flex-col font-bold tracking-wider">
+                                <div>
+                                    Framew
 
                                 <FontAwesomeIcon icon={faCube} className="mx-0.5" />
 
                                 rk
+                                </div>
+                                <div className="text-xs">
+                                    The all in one cloud solution.
+                                </div>
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
                                 <div className="mx-auto">
-                                    <div className="relative mt-2 rounded-md shadow-sm">
+                                    <div className="relative mt-2 rounded-full shadow-sm">
                                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <span className="text-violet-700 sm:text-sm">
+                                            <span className="text-black sm:text-sm pl-80">
                                                 <FontAwesomeIcon icon={faSearch} className="-ml-0.5" />
                                             </span>
                                         </div>
                                         <input
                                             type="text"
-                                            name="price"
-                                            id="price"
-                                            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            placeholder="Search..."
+                                            name="search"
+                                            id="search"
+                                            className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                                            placeholder="sᴇᴀʀᴄʜ . . ."
                                         />
                                     </div>
                                 </div>
-                                {/*<div className="block">
-                                    <div className="flex space-x-4">
-                                        {navigation.map((item) => (
-                                            <a
-                                                key={item.name}
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.current ? 'text-black' : 'text-gray-300 hover:text-black',
-                                                    'px-3 py-2 text-sm font-semibold tracking-wide hover:border-b-2 border-b-white'
-                                                )}
-                                                aria-current={item.current ? 'page' : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>*/}
+                                {}
 
                             </div>
                             <div
@@ -90,27 +75,9 @@ export default function Navbar({children}) {
                             </div>
                         </div>
                     </div>
-
-                    <Disclosure.Panel className="sm:hidden">
-                        <div className="space-y-1 px-2 pb-3 pt-2">
-                            {navigation.map((item) => (
-                                <Disclosure.Button
-                                    key={item.name}
-                                    as="a"
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current ? 'bg-gray-900 text-black' : 'text-gray-300 hover:bg-gray-700 hover:text-black',
-                                        'block rounded-md px-3 py-2 text-base font-medium'
-                                    )}
-                                    aria-current={item.current ? 'page' : undefined}
-                                >
-                                    {item.name}
-                                </Disclosure.Button>
-                            ))}
-                        </div>
-                    </Disclosure.Panel>
                 </>
             )}
+
         </Disclosure>
     )
 }

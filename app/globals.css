@@ -30,9 +30,9 @@
 }
 
 .card {
-    background: hsl(339 10% 18%);
+    color: black;
+    background-color: white;
     border-radius: 5px;
-    box-shadow: 0 10px 12px rgba(0, 0, 0, .1);
-    color: white;
+    box-shadow: -12px -12px 5px rgba(0, 0, 0, .001);
     padding: 0 0 1rem 0;
 }

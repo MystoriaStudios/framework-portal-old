@@ -2,7 +2,7 @@
 
 import {useOrganization, useSession, useUser} from "@clerk/nextjs";
 import classNames from "classnames";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CopyIcon, Dot} from "../icons";
 import Image from "next/image";
 import "./prism.css";
@@ -18,23 +18,19 @@ export function UserDetails() {
     const [jsonOutput, setJsonOutput] = useState(false);
 
     return (
-        <div
-            className="card overflow-hidden sm:rounded-lg text-blue-400"
-            style={{
-                boxShadow: `0px 20px 24px -4px rgba(16, 24, 40, 0.08)`,
-            }}
-        >
-            <div className="flex p-8">
-                <h3 className="text-lg leading-6 gradient font-semibold uppercase tracking-wider my-auto">
-                    User
-                </h3>
-
-                <Toggle
-                    checked={jsonOutput}
-                    onChange={() => setJsonOutput(!jsonOutput)}
-                    disabled={!isLoaded}
-                />
+        <div className="p-4 relative  bg-gray-50 border border-gray-100 shadow-lg  rounded-2xl">
+            <img
+            src={user?.imageUrl || ""}
+            className="rounded-full h-14 w-14  absolute top-4 right-3 text-blue-500"
+            />
+            <div className="flex justify-between items-center ">
+                <i className="fab fa-behance text-xl text-gray-400"></i>
             </div>
+            <div className="ml-5 -mt-4">
+                <div className="text-2xl text-gray-900 font-medium leading-8 mt-5">{user?.firstName}</div>
+                <div className="text-sm text-gray-500">User</div>
+            </div>
+            <div className="mt-4">
             {isLoaded && user ? (
                 jsonOutput ? (
                     <div className="overflow-scroll max-h-96 pb-6">
@@ -45,7 +41,7 @@ export function UserDetails() {
                         <dl>
                             <div className="px-8 py-2">
                                 <dt className="text-sm font-semibold">User ID</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2 flex gap-2">
+                                <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2 flex gap-2">
                                     {user.id}
                                     <CopyButton text={user.id}/>
                                 </dd>
@@ -53,7 +49,7 @@ export function UserDetails() {
                             {user.firstName && (
                                 <div className="px-8 py-2">
                                     <dt className="text-sm font-semibold mb-1">First Name</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                         {user.firstName}
                                     </dd>
                                 </div>
@@ -61,14 +57,14 @@ export function UserDetails() {
                             {user.lastName && (
                                 <div className="px-8 py-2">
                                     <dt className="text-sm font-semibold mb-1">Last Name</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                         {user.lastName}
                                     </dd>
                                 </div>
                             )}
                             <div className="px-8 py-2">
                                 <dt className="text-sm font-semibold mb-1">Email addresses</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                     {user.emailAddresses.map((email) => (
                                         <div key={email.id} className="flex gap-2 mb-1">
                                             {email.emailAddress}
@@ -82,17 +78,6 @@ export function UserDetails() {
                                     ))}
                                 </dd>
                             </div>
-                            {user.imageUrl && (
-                                <div className="px-8 py-2">
-                                    <dt className="text-sm font-semibold mb-1">Profile Image</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
-                                        <img
-                                            src={user.imageUrl}
-                                            className="rounded-full w-12 h-12"
-                                        />
-                                    </dd>
-                                </div>
-                            )}
                         </dl>
                     </div>
                 )
@@ -101,85 +86,7 @@ export function UserDetails() {
                     Loading user data...
                 </div>
             )}
-        </div>
-    );
-}
-
-export function SessionDetails() {
-    const {isLoaded, session} = useSession();
-    const [jsonOutput, setJsonOutput] = useState(false);
-
-    return (
-        <div
-            className="card shadow overflow-hidden sm:rounded-lg text-blue-400"
-            style={{
-                boxShadow: `0px 20px 24px -4px rgba(16, 24, 40, 0.08)`,
-            }}
-        >
-            <div className="flex p-8">
-                <h3 className="text-lg leading-6 gradient font-semibold uppercase tracking-wider my-auto">
-                    Session
-                </h3>
-                <Toggle
-                    checked={jsonOutput}
-                    onChange={() => setJsonOutput(!jsonOutput)}
-                    disabled={!isLoaded}
-                />
             </div>
-            {isLoaded && session ? (
-                jsonOutput ? (
-                    <div className="overflow-scroll max-h-96 pb-6">
-                        <JSONOutput
-                            json={{
-                                ...session,
-                                user: undefined,
-                            }}
-                        />
-                    </div>
-                ) : (
-                    <div className="pb-6 max-h-96">
-                        <dl>
-                            <div className="px-8 py-2">
-                                <dt className="text-sm font-semibold">Session ID</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2 flex gap-2">
-                                    {session.id}
-                                    <CopyButton text={session.id}/>
-                                </dd>
-                            </div>
-                            <div className="px-8 py-2">
-                                <dt className="text-sm font-semibold mb-1">Status</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
-                                    {session.status === `active` && (
-                                        <span
-                                            className="text-xs bg-success-50 text-success-700 flex w-min gap-1 px-2 py-[1px] rounded-2xl font-medium">
-                      <div className="m-auto">
-                        <Dot/>
-                      </div>
-                      Active
-                    </span>
-                                    )}
-                                </dd>
-                            </div>
-                            <div className="px-8 py-2">
-                                <dt className="text-sm font-semibold mb-1">Last Active</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
-                                    {session.lastActiveAt.toLocaleString()}
-                                </dd>
-                            </div>
-                            <div className="px-8 py-2">
-                                <dt className="text-sm font-semibold mb-1">Expiry</dt>
-                                <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
-                                    {session.expireAt.toLocaleString()}
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
-                )
-            ) : (
-                <div className="text-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    Loading user data...
-                </div>
-            )}
         </div>
     );
 }
@@ -188,23 +95,25 @@ export function OrgDetails() {
     const {isLoaded, organization} = useOrganization();
     const [jsonOutput, setJsonOutput] = useState(false);
 
+    // @ts-ignore
     return (
-        <div
-            className="card shadow overflow-hidden sm:rounded-lg text-blue-400"
-            style={{
-                boxShadow: `0px 20px 24px -4px rgba(16, 24, 40, 0.08)`,
-            }}
-        >
-            <div className="flex p-8">
-                <h3 className="text-lg leading-6 gradient font-semibold uppercase tracking-wider my-auto">
-                    Organization
-                </h3>
-                <Toggle
-                    checked={jsonOutput}
-                    onChange={() => setJsonOutput(!jsonOutput)}
-                    disabled={!(isLoaded && organization)}
-                />
+        <div className="p-4 relative  bg-gray-50 border border-gray-100 shadow-lg  rounded-2xl">
+
+            <Image
+                className="h-14 w-14  absolute top-4 right-3 text-blue-500 rounded"
+                src={organization?.imageUrl || ""}
+                alt={`Logo for ${organization?.name || ""}`}
+                width={48}
+                height={48}
+            />
+            <div className="flex justify-between items-center ">
+                <i className="fab fa-behance text-xl text-gray-400"></i>
             </div>
+            <div className="ml-5 -mt-4">
+                <div className="text-2xl text-gray-900 font-medium leading-8 mt-5">{organization?.name || "unknown"}</div>
+                <div className="text-sm text-gray-500">Organization</div>
+            </div>
+            <div className="mt-4">
             {isLoaded ? (
                 organization ? (
                     jsonOutput ? (
@@ -216,20 +125,20 @@ export function OrgDetails() {
                             <dl>
                                 <div className="px-8 py-2">
                                     <dt className="text-sm font-semibold">Organization ID</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2 flex gap-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2 flex gap-2">
                                         {organization.id}
                                         <CopyButton text={organization.id}/>
                                     </dd>
                                 </div>
                                 <div className="px-8 py-2">
                                     <dt className="text-sm font-semibold mb-1">Name</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                         {organization.name}
                                     </dd>
                                 </div>
                                 <div className="px-8 py-2">
                                     <dt className="text-sm font-semibold mb-1">Members</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                         {organization.membersCount}
                                     </dd>
                                 </div>
@@ -237,20 +146,8 @@ export function OrgDetails() {
                                     <dt className="text-sm font-semibold mb-1">
                                         Pending invitations
                                     </dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                                    <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
                                         {organization.pendingInvitationsCount}
-                                    </dd>
-                                </div>
-                                <div className="px-8 py-2">
-                                    <dt className="text-sm font-semibold mb-1">Image</dt>
-                                    <dd className="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
-                                        <Image
-                                            className="rounded"
-                                            src={organization.imageUrl}
-                                            alt={`Logo for ${organization.name}`}
-                                            width={48}
-                                            height={48}
-                                        />
                                     </dd>
                                 </div>
                             </dl>
@@ -268,6 +165,104 @@ export function OrgDetails() {
                     Loading organization data...
                 </div>
             )}
+            </div>
+        </div>
+    );
+}
+
+import useSWR from 'swr'
+
+const fetcher = async (...args) => await fetch(...args).then(async res => {
+    const response = await res.json()
+    console.log(response)
+    return response
+})
+
+export function NodeDetails() {
+    const {isLoaded, organization} = useOrganization();
+
+    const route = `http://localhost:7777/api/nodes/${organization?.id}`
+    console.log(route)
+
+    const { data, error, isValidating } = useSWR(route, fetcher)
+    const [jsonOutput, setJsonOutput] = useState(false);
+
+    if (error) {
+        return <p>{error.toString()}</p>
+    }
+
+    // @ts-ignore
+    return (
+        <div className="p-4 relative  bg-gray-50 border border-gray-100 shadow-lg  rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14  absolute top-4 right-3 text-blue-500"
+                 viewBox="0 0 20 20" fill="currentColor">
+                <path
+                    d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+            </svg>
+            <div className="flex justify-between items-center ">
+                <i className="fab fa-behance text-xl text-gray-400"></i>
+            </div>
+            <div className="ml-5 -mt-4">
+                <div className="text-2xl text-gray-900 font-medium leading-8 mt-5">{data?.length}</div>
+                <div className="text-sm text-gray-500">Nodes</div>
+            </div>
+            <div className="mt-4">
+            {isLoaded ? (
+                data ? (
+                    jsonOutput ? (
+                        <div className="overflow-scroll max-h-96 pb-6">
+                            <JSONOutput json={data}/>
+                        </div>
+                    ) : (
+                        <div className="pb-6 max-h-96">
+                            <ul className="flex flex-col gap-y-4 overflow-scroll-y">
+                                {
+                                // @ts-ignore
+                                    data.map((node: any) => {
+                                    return (
+                                        <a
+                                            key={node.identifier}
+                                            href={node.href}
+                                            className='font-semibold tracking-wide w-full mx-auto text-5xl border-black flex'
+                                        >
+                                        <span className="flex px-12">
+                                            {node.state === "ONLINE" ? (
+                                                <span className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-2">
+                                                    Online
+                                                </span>
+                                            ) : (
+                                                <span className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-2">
+                                                    Offline
+                                                </span>
+                                            )
+
+                                            }
+                                            <span className='font-semibold text-sm my-auto ml-5 tracking-wide w-full mx-auto border-black'>
+                                                {
+                                                    node.name
+                                                }
+                                            </span>
+                                        </span>
+                                        </a>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    )
+                ) : (
+                    <div className="text-gray-700 px-8 pb-5 text-sm">
+                        There are no nodes found on this organization or
+                        <br/>
+                        Create or switch to an organization to see its details.
+                    </div>
+                )
+            ) : (
+                <div className="text-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    Loading node data...
+                </div>
+            )}
+
+            </div>
         </div>
     );
 }

@@ -1,13 +1,40 @@
-import {ClerkProvider, SignedIn, SignedOut, UserButton,} from "@clerk/nextjs";
+import {ClerkProvider, SignedIn, SignedOut, UserButton, OrganizationSwitcher} from "@clerk/nextjs";
+
 import "./globals.css";
-import {Inter} from "next/font/google";
+import {Dosis} from "next/font/google";
 import {dark} from "@clerk/themes"
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
 import Navbar from "@/app/_components/navbar";
 
-const inter = Inter({subsets: ["latin"]});
+import {
+    faBookBookmark,
+    faDollar,
+    faCube,
+    faBlog,
+    faSearch,
+    faServer,
+    faTools
+} from '@fortawesome/free-solid-svg-icons'
+import {faHive} from "@fortawesome/free-brands-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Username from "@/app/_components/username";
+
+const inter = Dosis({subsets: ["latin"]});
+
+const navigation = [
+    {name: 'Dashboard', href: '/dashboard', current: true, icon: <FontAwesomeIcon icon={faServer}/>},
+    {name: 'Tools', href: '/tools', current: false, icon: <FontAwesomeIcon icon={faTools}/>},
+    {name: 'Blog', href: '/blog', current: false, icon: <FontAwesomeIcon icon={faBlog}/>},
+    {name: 'Marketplace', href: '/marketplace', current: false, icon: <FontAwesomeIcon icon={faDollar}/>},
+]
+
+
+// @ts-ignore
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 
 export default function RootLayout({
                                        children,
@@ -15,6 +42,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+
+    // @ts-ignore
+
     return (
         <html lang="en">
         <ClerkProvider
@@ -27,16 +59,18 @@ export default function RootLayout({
                 },
             }}
         >
-            <body className={`${inter.className} min-h-screen flex flex-col`}>
+            <body className={`${inter.className} min-h-screen flex flex-col bg-cover bg-white`}>
             <Navbar>
                 <SignedIn>
-                <span className="mr-4 flex flex-col text-right">
-                  <span className="text-sm font-semibold text-gray-900">Namee0</span>
-                  <span className="text-[10px] font-bold uppercase text-green-400 tracking-wider">Logged in</span>
-                </span>
-                    <span className="ml-2">
-                  <UserButton afterSignOutUrl="/"/>
-                </span>
+                    <span className="mr-4 flex flex-col text-right">
+                      <Username className="text-sm font-bold text-gray-800"></Username>
+                      <span className="text-[10px] font-bold uppercase text-green-400 tracking-wider">Logged in</span>
+                    </span>
+                        <span className="ml-2">
+                      <UserButton afterSignOutUrl="/"/>
+                    </span>
+
+
                 </SignedIn>
                 <SignedOut>
                     <Link href="/sign-in" className="flex">
@@ -48,11 +82,41 @@ export default function RootLayout({
                     </Link>
                 </SignedOut>
             </Navbar>
-            <main className="grow">{children}</main>
-            s
+            <main className="grow">
+
+                        {children}
+            </main>
+
 
             <footer className="flex items-center h-20 gap-1 px-8 font-medium border-t md:px-20">
-                test
+                <span className="mr-4 uppercase mt-3 font-extrabold tracking-widest">
+                    Framework
+                    <div className="flex gap-2">
+                        <h1 className="text-xs tracking-tight bg-orange-400 w-fit px-2 rounded-full ">
+                            v1.302
+                        </h1>
+                        <h1 className="text-xs tracking-tight bg-red-600 w-fit px-2 rounded-full text-white">
+                            UNSTABLE
+                        </h1>
+                    </div>
+                    <span className="text-xs font-normal tracking-tight text-gray-200">Page loaded in <b>104ms</b></span>
+                </span>
+                <span className="text-xs">
+                    A Solution provided by
+                    <h1 className="-mt-1 font-bold text-lg">Mystoria Studios</h1>
+                </span>
+
+                <div className="flex-row flex ml-auto gap-x-8">
+                    {navigation.map((item) => (
+                        <Link
+                            href={item.href}
+                            className="flex flex-col text-center">
+                            {item.icon}
+                            {item.name}
+                        </Link>
+                    ))
+                    }
+                </div>
             </footer>
             </body>
         </ClerkProvider>

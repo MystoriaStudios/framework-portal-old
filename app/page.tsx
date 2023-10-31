@@ -5,7 +5,7 @@ import React from "react";
 export default function Home() {
     return (
         <main className="mx-24 p-12 pt-4">
-            <div className="text-black text-bold text-center mt-26">
+            <div className="text-bold text-center mt-26">
                 <br/>
                 <br/>
                 <br/>

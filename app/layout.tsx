@@ -9,7 +9,6 @@ import Navbar from "@/app/_components/navbar";
 
 import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Username from "@/app/_components/username";
 import {dark} from "@clerk/themes";
 
 const inter = Dosis({subsets: ["latin"]});

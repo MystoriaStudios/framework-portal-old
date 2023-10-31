@@ -1,6 +1,6 @@
-# Next.js Clerk Template
+# Framework Portal
 
-![Next.js Clerk Template](./public/og.png)
+![Click to view production branch](https://framework-portal.vercel.app/dashboard)
 
 This template shows how to
 use [Clerk](https://www.clerk.com/?utm_source=github&utm_medium=template_repos&utm_campaign=nextjs_template) in a

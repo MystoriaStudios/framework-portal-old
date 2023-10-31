@@ -78,7 +78,7 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 export function NodeDetails() {
     const {isLoaded, organization} = useOrganization();
 
-    const route = `http://2.tcp.eu.ngrok.io:18621/api/nodes/${organization?.id}`
+    const route = `http://65.108.1.20:7777/api/nodes/${organization?.id}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)

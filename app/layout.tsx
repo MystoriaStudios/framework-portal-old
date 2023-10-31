@@ -9,7 +9,6 @@ import Navbar from "@/app/_components/navbar";
 
 import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Username from "@/app/_components/username";
 import { ThemeProvider } from "next-themes"
 
 const inter = Dosis({subsets: ["latin"]});
@@ -20,8 +19,14 @@ const navigation = [
     {name: 'Blog', href: '/blog', current: false, icon: <FontAwesomeIcon icon={faBlog}/>},
     {name: 'Marketplace', href: '/marketplace', current: false, icon: <FontAwesomeIcon icon={faDollar}/>},
 ]
+interface UsernameProps {
+    className: string;
+}
 
 
+function Username({ className }: UsernameProps) {
+    return <div className={className}>Your Username</div>;
+}
 // @ts-ignore
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')

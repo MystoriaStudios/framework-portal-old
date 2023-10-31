@@ -1,15 +1,28 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
+import { useState, useEffect } from 'react';
 
-// @ts-ignore
-export default async function Username({children}) {
-    const {userId} = auth();
+interface UsernameProps {
+    className?: string;
+}
 
-    if (!userId) {
-        redirect("/");
-    }
+export default function Username({ className }: UsernameProps) {
+    const [username, setUsername] = useState('Stranger');
 
-    const user = await clerkClient.users.getUser(userId);
+    useEffect(() => {
+        const fetchUsername = async () => {
+            const {userId} = auth();
 
-    return user.username || `Stranger`
+            if (!userId) {
+                redirect("/");
+            }
+
+            const user = await clerkClient.users.getUser(userId);
+            setUsername(user.username || 'Stranger');
+        };
+
+        fetchUsername();
+    }, []);
+
+    return <div className={className}>{username}</div>;
 }

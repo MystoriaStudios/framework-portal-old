@@ -1,13 +1,13 @@
 import useSWR from 'swr'
 
-const fetcher = async (...args) => await fetch(...args).then(async res => {
+const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()
     console.log(response)
     return response
 })
 
 export function Post(key: String) {
-    const route = `http://2.tcp.eu.ngrok.io:18621/api/blog/post/${key}`
+    const route = `http://65.108.1.20:7777/api/blog/post/${key}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)

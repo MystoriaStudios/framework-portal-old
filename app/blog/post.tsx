@@ -7,7 +7,7 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 })
 
 export function Post(key: String) {
-    const route = `http://100.67.254.17:7777/api/blog/post/${key}`
+    const route = `http://https://api.nopox.xyz/api/blog/post/${key}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)

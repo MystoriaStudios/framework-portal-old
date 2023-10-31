@@ -48,7 +48,8 @@ export default async function BlogCreatePage() {
                         <br/>
                         <button role="submit"
                                 className="h-8 px-3 rounded flex bg-green-400 border-green-600 opacity-80 text-white font-bold text-xl">
-                            Create Post
+                            Create
+                            Post
                         </button>
                     </form>
                 </div>

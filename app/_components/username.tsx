@@ -1,3 +1,5 @@
+"use client"
+
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
 import { useState, useEffect } from 'react';

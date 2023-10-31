@@ -65,7 +65,7 @@ export default function RootLayout({
                 <SignedOut>
                     <Link href="/sign-in" className="flex">
                     <span className="mr-4 flex flex-col text-right">
-                      <span className="text-sm font-semibold text-gray-900">Oh noo :(</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">Oh noo :(</span>
                       <span className="text-[10px] font-bold uppercase text-red-400">Not logged in</span>
                     </span>
                         <img src="https://minotar.net/avatar/MHF_Question/32" height={32} width={32}/>

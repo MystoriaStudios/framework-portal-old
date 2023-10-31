@@ -57,10 +57,6 @@ export default function RootLayout({
                 className={`${inter.className} min-h-screen flex flex-col bg-cover bg-neutral-100 dark:bg-neutral-900 dark:text-white`}>
             <Navbar>
                 <SignedIn>
-                    <span className="mr-4 flex flex-col text-right">
-                      <Username className="text-sm font-bold text-gray-800"></Username>
-                      <span className="text-sm font-bold text-green-400 tracking-wider">Logged in</span>
-                    </span>
                     <span className="ml-2">
                       <UserButton afterSignOutUrl="/"/>
                     </span>
@@ -70,8 +66,8 @@ export default function RootLayout({
                 <SignedOut>
                     <Link href="/sign-in" className="flex">
                     <span className="mr-4 flex flex-col text-right">
-                      <span className="text-sm font-semibold text-gray-900">Guest</span>
-                      <span className="text-[10px] font-bold uppercase text-amber-400">Not logged in</span>
+                      <span className="text-sm font-semibold text-gray-900">Oh noo :(</span>
+                      <span className="text-[10px] font-bold uppercase text-red-400">Not logged in</span>
                     </span>
                         <img src="https://minotar.net/avatar/MHF_Question/32" height={32} width={32}/>
                     </Link>

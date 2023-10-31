@@ -72,7 +72,7 @@ export function OrgDetails() {
     );
 }
 
-const fetcher = async (...args) => await fetch(...args).then(async res => {
+const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()
     console.log(response)
     return response

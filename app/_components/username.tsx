@@ -8,23 +8,17 @@ interface UsernameProps {
     className?: string;
 }
 
-export default function Username({className}: UsernameProps) {
+export default async function Username({className}: UsernameProps) {
     const [username, setUsername] = useState('Stranger');
 
-    useEffect(() => {
-        const fetchUsername = async () => {
-            const {userId} = auth();
+    const {userId} = auth();
 
-            if (!userId) {
-                redirect("/");
-            }
+    if (!userId) {
+        redirect("/");
+    }
 
-            const user = await clerkClient.users.getUser(userId);
-            setUsername(user.username || 'Stranger');
-        };
-
-        fetchUsername();
-    }, []);
+    const user = await clerkClient.users.getUser(userId);
+    setUsername(user.username || "Stranger")
 
     return <div className={className}>{username}</div>;
 }

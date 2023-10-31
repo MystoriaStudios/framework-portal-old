@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
+import {useUser} from "@clerk/nextjs";
 
 function useDarkMode() {
-    const [theme, setTheme] = useState("dark");
+    const user = useUser()
+    const [theme, setTheme] = useState(user.user?.publicMetadata["theme"]?.toString() || "dark");
     const colorTheme = theme === "dark" ? "light" : "dark";
 
     useEffect(() => {
@@ -12,6 +14,9 @@ function useDarkMode() {
 
         if (window !== undefined) {
             localStorage.setItem("theme", theme);
+            if (user.isSignedIn) {
+                user.user.publicMetadata["theme"] = theme
+            }
         }
     }, [theme]);
 

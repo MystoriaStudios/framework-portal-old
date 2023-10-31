@@ -10,7 +10,7 @@ import Navbar from "@/app/_components/navbar";
 import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Username from "@/app/_components/username";
-import { ThemeProvider } from "next-themes"
+import {dark} from "@clerk/themes";
 
 const inter = Dosis({subsets: ["latin"]});
 
@@ -44,6 +44,7 @@ export default function RootLayout({
 
         <ClerkProvider
             appearance={{
+                baseTheme: dark,
                 variables: {colorPrimary: "#000000"},
                 elements: {
                     membersPageInviteButton:
@@ -52,7 +53,8 @@ export default function RootLayout({
                 },
             }}
         >
-            <body className={`${inter.className} min-h-screen flex flex-col bg-cover bg-gray-100`}>
+            <body
+                className={`${inter.className} min-h-screen flex flex-col bg-cover bg-neutral-100 dark:bg-neutral-900 dark:text-white`}>
             <Navbar>
                 <SignedIn>
                     <span className="mr-4 flex flex-col text-right">
@@ -78,7 +80,6 @@ export default function RootLayout({
 
             </Navbar>
             <main className="grow">
-
                 {children}
             </main>
 

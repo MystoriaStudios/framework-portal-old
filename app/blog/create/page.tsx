@@ -27,21 +27,22 @@ export default async function BlogCreatePage() {
                         <span>Create a new blog post below!</span>
                     </div>
 
-                    <form className="mt-12 flex-row gap-10" method="post" action="http://2.tcp.eu.ngrok.io:18621/api/blog/post">
+                    <form className="mt-12 flex-row gap-10" method="post"
+                          action="http://2.tcp.eu.ngrok.io:18621/api/blog/post">
                         <input placeholder="Enter a key (slug)" type="text" id="key" name="key"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
                         <input placeholder="Enter a title" type="text" id="title" name="title"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
                         <input placeholder="Enter some content" type="textarea" id="content" name="content"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
                         <input value={user.firstName} type="text" id="author" name="author"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
                         <button role="submit"

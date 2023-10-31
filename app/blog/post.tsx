@@ -18,7 +18,7 @@ export function Post(key: String) {
 
     // @ts-ignore
     return (
-        <div className="p-4 relative  bg-gray-50 border border-gray-100 shadow-lg  rounded-2xl">
+        <div className="p-4 relative  bg-neutral-50 border border-gray-100 shadow-lg  rounded-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14  absolute top-4 right-3 text-blue-500"
                  viewBox="0 0 20 20" fill="currentColor">
                 <path

@@ -49,7 +49,7 @@ export default async function BlogPage() {
                         {posts.length > 0 ? (
                             posts.map((post): any => (
                                 <Link key={post.key} href={`/blog/post/${post.key}`}
-                                      className="flex-col rounded my-4 shadow-lg bg-gray-100 text-black">
+                                      className="flex-col rounded my-4 shadow-lg bg-neutral-100">
                                     <h1 className="font-bold text-2xl mt-4">{post.title}</h1>
                                     <h2 className="font-normal text-sm">Written by, {post.author}</h2>
                                     <hr/>

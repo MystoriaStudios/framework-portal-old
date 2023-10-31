@@ -1,7 +1,7 @@
 import {OrganizationSwitcher} from "@clerk/nextjs";
 import React from "react";
 
-import {faBookBookmark, faChartArea, faPodcast, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
+import {faBookBookmark, faChartArea, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {faHive} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -9,7 +9,6 @@ const navigation = [
     {name: 'Dashboard', href: '/dashboard', current: true, icon: <FontAwesomeIcon icon={faServer}/>},
     {name: 'Templates', href: '/templates', current: false, icon: <FontAwesomeIcon icon={faBookBookmark}/>},
     {name: 'Analytics', href: '/stats', current: false, icon: <FontAwesomeIcon icon={faChartArea}/>},
-    {name: 'Pods', href: '/pods', current: false, icon: <FontAwesomeIcon icon={faPodcast}/>},
     {name: 'Tools', href: '/tools', current: false, icon: <FontAwesomeIcon icon={faTools}/>},
     {name: 'Database Hive', href: '/hive', current: false, icon: <FontAwesomeIcon icon={faHive}/>},
 ]
@@ -30,9 +29,12 @@ export default function RootLayout({
         <main className="grow">
             <div className="flex">
                 {true &&
-                    <div className="block w-64 bg-gray-50 border-r-2 border-gray-100">
-                        <div className="flex flex-col text-center pb-12 h-[80vh] border-r-2 border-gray-300">
-                            <div className="w-full border-b-2 flex justify-center py-6 bg-gray-100 border-gray-300">
+                    <div
+                        className="block w-64 bg-neutral-50 border-r-2 border-gray-100 dark:bg-neutral-950 dark:border-black">
+                        <div
+                            className="flex flex-col text-center pb-12 h-[80vh] border-r-2 border-gray-300 dark:border-black">
+                            <div
+                                className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
                                 <div className="hidden sm:block">
                                     <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
                                 </div>
@@ -57,13 +59,13 @@ export default function RootLayout({
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     <span className="flex">
-                                        <span className="w-28 text-gray-800">
+                                        <span className="w-28 text-gray-800 dark:text-gray-700">
                                             {
                                                 item.icon
                                             }
                                         </span>
                                         <span className={classNames(
-                                            item.current ? 'border-b-4 text-black' : 'text-gray-800 hover:text-black',
+                                            item.current ? 'border-b-4 text-black dark:text-white' : 'text-gray-800 dark:text-gray-700 hover:text-black',
                                             'px-1 py-1 mt-1 font-bold text-sm my-auto ml-5 tracking-widest w-full mx-auto border-amber-400'
                                         )}>
                                             {

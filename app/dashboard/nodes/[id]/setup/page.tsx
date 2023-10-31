@@ -16,9 +16,9 @@ export default async function DashboardPage() {
             {user && (
                 <>
                     <h1 className="text-3xl font-semibold">
-                        Dashboard
+                        Node Setup
                     </h1>
-                    <OrgDetails/>
+
                 </>
             )}
         </div>

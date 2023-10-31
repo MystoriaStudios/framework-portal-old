@@ -3,7 +3,7 @@ import {redirect} from "next/navigation";
 import Link from "next/link";
 
 export default async function BlogPage() {
-    const route = `http://https://api.nopox.xyz/api/blog/posts`
+    const route = `https://api.nopox.xyz/api/blog/posts`
 
     let posts: any[] = []
     await fetch(route).then(async it => {

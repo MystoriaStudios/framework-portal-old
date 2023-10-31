@@ -83,7 +83,7 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 export function NodeDetails() {
     const {isLoaded, organization} = useOrganization();
 
-    const route = `http://https://api.nopox.xyz/api/nodes/${organization?.id}`
+    const route = `https://api.nopox.xyz/api/nodes/${organization?.id}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)

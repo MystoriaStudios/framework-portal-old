@@ -40,7 +40,7 @@ export default async function BlogCreatePage() {
                                className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
-                        <input value={user.firstName} type="text" id="author" name="author"
+                        <input value={user.firstName!!} type="text" id="author" name="author"
                                className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>

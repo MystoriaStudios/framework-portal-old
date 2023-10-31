@@ -3,7 +3,7 @@ import {redirect} from "next/navigation";
 import Link from "next/link";
 
 export default async function BlogPage() {
-    const route = `http://localhost:7777/api/blog/posts`
+    const route = `http://2.tcp.eu.ngrok.io:18621/api/blog/posts`
 
     let posts: any[] = []
     await fetch(route).then(async it => {

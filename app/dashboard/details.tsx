@@ -14,6 +14,18 @@ declare global {
     }
 }
 
+interface InfoCardProps {
+    title: string;
+    value: string | number;
+}
+
+const InfoCard = ({title, value}: InfoCardProps) => (
+    <div className="text-black text-center border-transparent px-2 py-1 w-full">
+        <h1 className="text-amber-400 font-bold tracking-wider whitespace-nowrap">{title}</h1>
+        <h2 className="whitespace-nowrap overflow-auto">{value}</h2>
+    </div>
+);
+
 export function OrgDetails() {
     const {isLoaded, organization} = useOrganization();
 
@@ -34,30 +46,12 @@ export function OrgDetails() {
                                             {organization.name}
                                         </span>
                                     </div>
-
-                                    <div className="flex flex-row mt-2 gap-x-12">
-                                        <div className="-ml-12 text-black text-center border-gray-300 border-r-2 px-6">
-                                            <h1 className="text-amber-400 font-bold tracking-wider">IDENTIFIER</h1>
-                                            <h2>{organization.id}</h2>
-                                        </div>
-
-                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
-                                            <h1 className="text-amber-400 font-bold tracking-wider">MEMBERS</h1>
-                                            {organization?.membersCount || 0}
-                                        </div>
-                                        <div className="text-black text-center border-gray-300 border-l-2 px-6">
-                                            <h1 className="text-amber-400 font-bold tracking-wider">PENDING INVITATIONS</h1>
-                                            {organization?.pendingInvitationsCount || 0}
-                                        </div>
-                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
-                                            <h1 className="text-amber-400 font-bold tracking-wider">BILLING</h1>
-                                            Not Required
-                                        </div>
-
-                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
-                                            <h1 className="text-amber-400 font-bold tracking-wider">NODES</h1>
-                                            {0 || 0}
-                                        </div>
+                                    <div className="flex width-full gap-16 grid-cols-5 mt-2">
+                                        <InfoCard title="IDENTIFIER" value={organization.id} />
+                                        <InfoCard title="MEMBERS" value={organization?.membersCount || 0} />
+                                        <InfoCard title="PENDING INVITATIONS" value={organization?.pendingInvitationsCount || 0} />
+                                        <InfoCard title="BILLING" value="Not Required" />
+                                        <InfoCard title="NODES" value={0} />
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +78,7 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 export function NodeDetails() {
     const {isLoaded, organization} = useOrganization();
 
-    const route = `http://localhost:7777/api/nodes/${organization?.id}`
+    const route = `http://2.tcp.eu.ngrok.io:18621/api/nodes/${organization?.id}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)
@@ -151,6 +145,7 @@ export function NodeDetails() {
         </div>
     );
 }
+
 
 function Toggle(props: {
     checked: boolean;

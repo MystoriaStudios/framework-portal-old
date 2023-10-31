@@ -7,7 +7,7 @@ const fetcher = async (...args) => await fetch(...args).then(async res => {
 })
 
 export function Post(key: String) {
-    const route = `http://localhost:7777/api/blog/post/${key}`
+    const route = `http://2.tcp.eu.ngrok.io:18621/api/blog/post/${key}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)

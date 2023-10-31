@@ -54,7 +54,7 @@ export default function RootLayout({
                 <SignedIn>
                     <span className="mr-4 flex flex-col text-right">
                       <Username className="text-sm font-bold text-gray-800"></Username>
-                      <span className="text-[10px] font-bold uppercase text-green-400 tracking-wider">Logged in</span>
+                      <span className="text-sm font-bold text-green-400 tracking-wider">Logged in</span>
                     </span>
                     <span className="ml-2">
                       <UserButton afterSignOutUrl="/"/>

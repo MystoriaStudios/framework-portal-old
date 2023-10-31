@@ -31,8 +31,8 @@ export default function RootLayout({
             <div className="flex">
                 {true &&
                     <div className="block w-64 bg-white border-r-2 border-gray-100">
-                        <div className="flex flex-col text-center py-12 h-[80vh]">
-                            <div className="w-full border-b-2 flex justify-center pb-6 border-gray-300">
+                        <div className="flex flex-col text-center pb-12 h-[80vh]">
+                            <div className="w-full border-b-2 flex justify-center py-6 bg-gray-100 border-gray-300">
                                 <div className="hidden sm:block">
                                     <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
                                 </div>
@@ -53,7 +53,7 @@ export default function RootLayout({
                                 <a
                                     key={item.name}
                                     href={item.href}
-                                    className='px-3 py-2 pr-12 font-semibold tracking-wide w-full mx-auto text-4xl border-black'
+                                    className='px-3 pr-12 font-semibold tracking-wide w-full mx-auto my-3.5 text-2xl border-black'
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     <span className="flex">
@@ -63,8 +63,8 @@ export default function RootLayout({
                                             }
                                         </span>
                                         <span className={classNames(
-                                            item.current ? 'border-b-4 rounded' : 'text-gray-800 hover:text-black',
-                                            'px-1 py-2 font-bold text-sm my-auto ml-5 tracking-widest w-full mx-auto border-black'
+                                            item.current ? 'border-b-4 text-black' : 'text-gray-800 hover:text-black',
+                                            'px-1 py-1 mt-1 font-bold text-sm my-auto ml-5 tracking-widest w-full mx-auto border-amber-400'
                                         )}>
                                             {
                                                 item.name
@@ -73,14 +73,6 @@ export default function RootLayout({
                                     </span>
                                 </a>
                             ))}
-                            <div
-                                className="bg-green-400 mt-auto mx-8 text-xs tracking-tighter hover:bg-green-500 hover:text-white hover:border-green-400 text-green-800 px-2 py-0.5 border-green-300 border-2 rounded-2xl">
-                                Provided by Mystoria Studios
-                            </div>
-                            <div
-                                className="bg-red-400 mx-8 text-xs tracking-tighter hover:bg-red-500 hover:text-white hover:border-red-400 text-red-800 px-2 py-0.5 border-red-300 border-2 rounded-2xl">
-                                Not affiliated with Mojang
-                            </div>
                         </div>
                     </div>
                 }

@@ -20,43 +20,47 @@ export function OrgDetails() {
     // @ts-ignore
     return (
         <div className="mt-12">
-            <div className="flex justify-between items-center ">
-                <i className="fab fa-behance text-xl text-gray-400"></i>
-            </div>
-            <div className="-mt-4 flex-row flex">
-                <Image
-                    className="h-24 mt-8 w-24 text-blue-500 rounded"
-                    src={organization?.imageUrl || ""}
-                    alt={`Logo for ${organization?.name || ""}`}
-                    width={128}
-                    height={128}
-                />
-                <div className="ml-4 my-auto">
-                    <div className="text-2xl text-gray-900 font-medium leading-8 mt-5">{organization?.name || "unknown"}</div>
-                    <div className="text-sm text-gray-500">Organization</div>
-
-                    <div className="flex-row flex">
-                        <div className="py-2">
-                            <dt className="text-sm font-semibold mb-1">Members</dt>
-                            <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
-                                {organization?.membersCount || 0}
-                            </dd>
-                        </div>
-                        <div className="px-4 py-2">
-                            <dt className="text-sm font-semibold mb-1">
-                                Pending invitations
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-800 sm:mt-0 sm:col-span-2">
-                                {organization?.pendingInvitationsCount || 0}
-                            </dd>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div className="mt-4">
                 {isLoaded && organization ? (
                     <div className="max-h-96">
-                        {JSON.stringify(organization)}
+                        <div className="flex flex-col rounded-[2.5rem] bg-gray-50">
+                            <div className="block sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl w-full">
+                                <div className="flex gap-x-12 flex-col lg:flex-row">
+                                    <div className="bg-amber-400 flex flex-col text-center rounded-tl-[2.5rem] rounded-br-[2.5rem] py-1 px-16 font-bold tracking-widest text-white">
+                                        <span>
+                                            ORGANIZATION
+                                        </span>
+                                        <span className="text-2xl">
+                                            {organization.name}
+                                        </span>
+                                    </div>
+                                    <div className="-ml-12 text-black text-center border-gray-300 border-r-2 px-4">
+                                        <h1 className="text-amber-400 font-bold tracking-wider">IDENTIFIER</h1>
+                                        <h2>{organization.id}</h2>
+                                    </div>
+
+                                    <div className="text-black text-center px-4">
+                                        <h1 className="text-amber-400 font-bold tracking-wider">MEMBERS</h1>
+                                        {organization?.membersCount || 0}
+                                    </div>
+                                    <div className="text-black text-center border-gray-300 border-x-2 px-6">
+                                        <h1 className="text-amber-400 font-bold tracking-wider">PENDING INVITATIONS</h1>
+                                        {organization?.pendingInvitationsCount || 0}
+                                    </div>
+                                    <div className="text-black text-center border-gray-300 border-r-2 pr-8 -ml-4">
+                                        <h1 className="text-amber-400 font-bold tracking-wider">BILLING</h1>
+                                        Not Required
+                                    </div>
+
+                                    <div className="text-black text-center px-4">
+                                        <h1 className="text-amber-400 font-bold tracking-wider">NODES</h1>
+                                        {0 || 0}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <NodeDetails />
+                        </div>
                     </div>
                 ) : (
                     <div className="text-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -89,7 +93,7 @@ export function NodeDetails() {
 
     // @ts-ignore
     return (
-        <div className="p-4 relative  bg-gray-50 border border-gray-100 shadow-lg  rounded-2xl">
+        <div className="p-4 relative ">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14  absolute top-4 right-3 text-blue-500"
                  viewBox="0 0 20 20" fill="currentColor">
                 <path

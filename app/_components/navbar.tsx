@@ -28,11 +28,11 @@ export default function Navbar({children}) {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="text-black ml-12 text-2xl flex-col font-bold tracking-wider">
-                                <div>
+                            <div className="ml-12 text-2xl flex-col font-bold tracking-wider">
+                                <div className="text-amber-400">
                                     Framew
 
-                                    <FontAwesomeIcon icon={faCube} className="mx-0.5"/>
+                                    <FontAwesomeIcon icon={faCube} className="mx-0.5 text-amber-500"/>
 
                                     rk
                                 </div>
@@ -42,11 +42,11 @@ export default function Navbar({children}) {
                             </div>
                             <div
                                 className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
-                                <div className="mx-auto">
+                                <div className="ml-12">
                                     <div className="relative mt-2 rounded-full shadow-sm">
                                         <div
                                             className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <span className="text-black sm:text-sm pl-80">
+                                            <span className="text-gray-600 sm:text-sm">
                                                 <FontAwesomeIcon icon={faSearch} className="-ml-0.5"/>
                                             </span>
                                         </div>
@@ -54,8 +54,8 @@ export default function Navbar({children}) {
                                             type="text"
                                             name="search"
                                             id="search"
-                                            className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-gray-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                                            placeholder="sᴇᴀʀᴄʜ . . ."
+                                            className="block w-[50vh] rounded-full bg-transparent border-0 py-1.5 pl-7 pr-20 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-lg sm:leading-6"
+                                            placeholder="    Search for something."
                                         />
                                     </div>
                                 </div>

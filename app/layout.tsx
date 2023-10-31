@@ -10,6 +10,7 @@ import Navbar from "@/app/_components/navbar";
 import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Username from "@/app/_components/username";
+import { ThemeProvider } from "next-themes"
 
 const inter = Dosis({subsets: ["latin"]});
 
@@ -37,8 +38,10 @@ export default function RootLayout({
 
     // @ts-ignore
 
+    // @ts-ignore
     return (
         <html lang="en">
+
         <ClerkProvider
             appearance={{
                 variables: {colorPrimary: "#000000"},
@@ -71,6 +74,8 @@ export default function RootLayout({
                         <img src="https://minotar.net/avatar/MHF_Question/32" height={32} width={32}/>
                     </Link>
                 </SignedOut>
+
+
             </Navbar>
             <main className="grow">
 
@@ -111,6 +116,7 @@ export default function RootLayout({
             </footer>
             </body>
         </ClerkProvider>
+
 
         <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js"/>
         <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js"/>

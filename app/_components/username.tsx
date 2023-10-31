@@ -2,13 +2,13 @@
 
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 
 interface UsernameProps {
     className?: string;
 }
 
-export default function Username({ className }: UsernameProps) {
+export default function Username({className}: UsernameProps) {
     const [username, setUsername] = useState('Stranger');
 
     useEffect(() => {

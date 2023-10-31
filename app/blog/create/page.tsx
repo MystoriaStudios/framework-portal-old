@@ -42,14 +42,13 @@ export default async function BlogCreatePage() {
                         />
                         <br/>
                         <input // @ts-ignore
-                            value={user.firstName } type="text" id="author" name="author"
+                            value={user.firstName} type="text" id="author" name="author"
                             className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                         />
                         <br/>
                         <button role="submit"
                                 className="h-8 px-3 rounded flex bg-green-400 border-green-600 opacity-80 text-white font-bold text-xl">
-                            Create
-                            Post
+                            Create Post
                         </button>
                     </form>
                 </div>

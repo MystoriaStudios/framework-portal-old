@@ -112,19 +112,23 @@ export function NodeDetails() {
 
                                              <span className="flex gap-x-6 ml-6">
                                                 {node.state === "ONLINE" ? (
-                                                    <span className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-4 py-1 font-extrabold">
+                                                    <span
+                                                        className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-4 py-1 font-extrabold">
                                                         Online
                                                     </span>
                                                 ) : (node.state === "BOOTING" ? (
-                                                    <span className="bg-amber-400 mx-auto my-auto rounded-full w-fit text-sm border-amber-600 px-4 py-1 font-extrabold">
+                                                    <span
+                                                        className="bg-amber-400 mx-auto my-auto rounded-full w-fit text-sm border-amber-600 px-4 py-1 font-extrabold">
                                                         Booting
                                                     </span>
                                                 ) : (node.state === "SETUP" ? (
-                                                    <span className="bg-blue-400 mx-auto my-auto rounded-full w-fit text-sm border-blue-600 px-4 py-1 font-extrabold animate-pulse">
+                                                        <span
+                                                            className="bg-blue-400 mx-auto my-auto rounded-full w-fit text-sm border-blue-600 px-4 py-1 font-extrabold animate-pulse">
                                                         Setup
                                                     </span>
-                                                ) : (
-                                                    <span className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-4 py-1 font-extrabold animate-pulse">
+                                                    ) : (
+                                                        <span
+                                                            className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-4 py-1 font-extrabold animate-pulse">
                                                         Offline
                                                     </span>
                                                     )
@@ -144,32 +148,36 @@ export function NodeDetails() {
                                                 </span>
 
                                                 <div className="flex flex-row gap-x-1 ml-4">
-                                                    <Link href={`/dashboard/nodes/${node.name}/pods`} className="flex flex-col p-2 text-gray-400 font-bold">
+                                                    <Link href={`/dashboard/nodes/${node.name}/pods`}
+                                                          className="flex flex-col p-2 text-gray-400 font-bold">
                                                         <FontAwesomeIcon icon={faPodcast}/>
                                                         <span className="-mt-2">
                                                              Pods
                                                          </span>
                                                     </Link>
-                                                    <Link href={`/dashboard/nodes/${node.name}`}  className="flex flex-col p-2 text-gray-400 font-bold">
+                                                    <Link href={`/dashboard/nodes/${node.name}`}
+                                                          className="flex flex-col p-2 text-gray-400 font-bold">
                                                         <FontAwesomeIcon icon={faDashboard}/>
                                                         <span className="-mt-2">
                                                              Details
                                                          </span>
                                                     </Link>
-                                                    <Link href={`/dashboard/nodes/${node.name}/modules`}  className="flex flex-col p-2 text-gray-400 font-bold">
+                                                    <Link href={`/dashboard/nodes/${node.name}/modules`}
+                                                          className="flex flex-col p-2 text-gray-400 font-bold">
                                                         <FontAwesomeIcon icon={faCube}/>
                                                         <span className="-mt-2">
                                                              Modules
                                                          </span>
                                                     </Link>
-                                                    { node.state === "SETUP" ? (
-                                                        <Link href={`/dashboard/nodes/${node.name}/setup`}  className="animate-pulse flex flex-col p-2 text-blue-400 font-bold">
+                                                    {node.state === "SETUP" ? (
+                                                        <Link href={`/dashboard/nodes/${node.name}/setup`}
+                                                              className="animate-pulse flex flex-col p-2 text-blue-400 font-bold">
                                                             <FontAwesomeIcon icon={faCogs}/>
                                                             <span className="-mt-2">
                                                                  Setup
                                                             </span>
                                                         </Link>
-                                                    ) : (<></>) }
+                                                    ) : (<></>)}
                                                 </div>
                                             </div>
                                         </li>

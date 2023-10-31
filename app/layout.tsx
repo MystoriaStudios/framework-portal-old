@@ -49,7 +49,7 @@ export default function RootLayout({
                 },
             }}
         >
-            <body className={`${inter.className} min-h-screen flex flex-col bg-cover bg-white`}>
+            <body className={`${inter.className} min-h-screen flex flex-col bg-cover bg-gray-100`}>
             <Navbar>
                 <SignedIn>
                     <span className="mr-4 flex flex-col text-right">

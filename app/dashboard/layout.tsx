@@ -30,8 +30,8 @@ export default function RootLayout({
         <main className="grow">
             <div className="flex">
                 {true &&
-                    <div className="block w-64 bg-white border-r-2 border-gray-100">
-                        <div className="flex flex-col text-center pb-12 h-[80vh]">
+                    <div className="block w-64 bg-gray-50 border-r-2 border-gray-100">
+                        <div className="flex flex-col text-center pb-12 h-[80vh] border-r-2 border-gray-300">
                             <div className="w-full border-b-2 flex justify-center py-6 bg-gray-100 border-gray-300">
                                 <div className="hidden sm:block">
                                     <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>

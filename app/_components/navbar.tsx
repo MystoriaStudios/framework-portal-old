@@ -10,7 +10,7 @@ import {faCube, faSearch} from '@fortawesome/free-solid-svg-icons'
 export default function Navbar({children}) {
     return (
         <Disclosure as="nav"
-                    className="pt-8 pb-4 bg-white shadow-sm border-b-2 border-gray-200">
+                    className="pt-8 pb-4 bg-gray-50 shadow-sm border-b-2 border-gray-200">
             {({open}) => (
                 <>
                     <div className="mx-auto pr-52">

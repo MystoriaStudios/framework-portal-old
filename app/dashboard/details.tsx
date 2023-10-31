@@ -23,38 +23,41 @@ export function OrgDetails() {
             <div className="mt-4">
                 {isLoaded && organization ? (
                     <div className="max-h-96">
-                        <div className="flex flex-col rounded-[2.5rem] bg-gray-50">
+                        <div className="flex flex-col rounded-[1.5rem] bg-white shadow-md">
                             <div className="block sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl w-full">
                                 <div className="flex gap-x-12 flex-col lg:flex-row">
-                                    <div className="bg-amber-400 flex flex-col text-center rounded-tl-[2.5rem] rounded-br-[2.5rem] py-1 px-16 font-bold tracking-widest text-white">
+                                    <div className="bg-amber-400 flex flex-col text-center rounded-tl-[1.5rem] rounded-br-[1.5rem] pb-1 pt-2 px-16 font-bold tracking-widest text-white">
                                         <span>
                                             ORGANIZATION
                                         </span>
-                                        <span className="text-2xl">
+                                        <span className="text-4xl -mt-2">
                                             {organization.name}
                                         </span>
                                     </div>
-                                    <div className="-ml-12 text-black text-center border-gray-300 border-r-2 px-4">
-                                        <h1 className="text-amber-400 font-bold tracking-wider">IDENTIFIER</h1>
-                                        <h2>{organization.id}</h2>
-                                    </div>
 
-                                    <div className="text-black text-center px-4">
-                                        <h1 className="text-amber-400 font-bold tracking-wider">MEMBERS</h1>
-                                        {organization?.membersCount || 0}
-                                    </div>
-                                    <div className="text-black text-center border-gray-300 border-x-2 px-6">
-                                        <h1 className="text-amber-400 font-bold tracking-wider">PENDING INVITATIONS</h1>
-                                        {organization?.pendingInvitationsCount || 0}
-                                    </div>
-                                    <div className="text-black text-center border-gray-300 border-r-2 pr-8 -ml-4">
-                                        <h1 className="text-amber-400 font-bold tracking-wider">BILLING</h1>
-                                        Not Required
-                                    </div>
+                                    <div className="flex flex-row mt-2 gap-x-12">
+                                        <div className="-ml-12 text-black text-center border-gray-300 border-r-2 px-6">
+                                            <h1 className="text-amber-400 font-bold tracking-wider">IDENTIFIER</h1>
+                                            <h2>{organization.id}</h2>
+                                        </div>
 
-                                    <div className="text-black text-center px-4">
-                                        <h1 className="text-amber-400 font-bold tracking-wider">NODES</h1>
-                                        {0 || 0}
+                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
+                                            <h1 className="text-amber-400 font-bold tracking-wider">MEMBERS</h1>
+                                            {organization?.membersCount || 0}
+                                        </div>
+                                        <div className="text-black text-center border-gray-300 border-l-2 px-6">
+                                            <h1 className="text-amber-400 font-bold tracking-wider">PENDING INVITATIONS</h1>
+                                            {organization?.pendingInvitationsCount || 0}
+                                        </div>
+                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
+                                            <h1 className="text-amber-400 font-bold tracking-wider">BILLING</h1>
+                                            Not Required
+                                        </div>
+
+                                        <div className="text-black text-center border-gray-300 border-r-2 px-6">
+                                            <h1 className="text-amber-400 font-bold tracking-wider">NODES</h1>
+                                            {0 || 0}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +88,6 @@ export function NodeDetails() {
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)
-    const [jsonOutput, setJsonOutput] = useState(false);
 
     if (error) {
         return <p>{error.toString()}</p>
@@ -93,77 +95,57 @@ export function NodeDetails() {
 
     // @ts-ignore
     return (
-        <div className="p-4 relative ">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14  absolute top-4 right-3 text-blue-500"
-                 viewBox="0 0 20 20" fill="currentColor">
-                <path
-                    d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
-            </svg>
-            <div className="flex justify-between items-center ">
-                <i className="fab fa-behance text-xl text-gray-400"></i>
-            </div>
-            <div className="ml-5 -mt-4">
-                <div className="text-2xl text-gray-900 font-medium leading-8 mt-5">{data?.length}</div>
-                <div className="text-sm text-gray-500">Nodes</div>
-            </div>
+        <div>
             <div className="mt-4">
-                {isLoaded ? (
-                    data ? (
-                        jsonOutput ? (
-                            <div className="overflow-scroll max-h-96 pb-6">
-                                <JSONOutput json={data}/>
-                            </div>
-                        ) : (
-                            <div className="pb-6 max-h-96">
-                                <ul className="flex flex-col gap-y-4 overflow-scroll-y">
-                                    {
-                                        // @ts-ignore
-                                        data.map((node: any) => {
-                                            return (
-                                                <a
-                                                    key={node.identifier}
-                                                    href={node.href}
-                                                    className='font-semibold tracking-wide w-full mx-auto text-5xl border-black flex'
-                                                >
-                                        <span className="flex px-12">
-                                            {node.state === "ONLINE" ? (
-                                                <span
-                                                    className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-2">
-                                                    Online
-                                                </span>
-                                            ) : (
-                                                <span
-                                                    className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-2">
-                                                    Offline
-                                                </span>
-                                            )
+                {isLoaded && data ? (
+                    <div className="pb-6 max-h-96">
+                        <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                            Nodes
+                        </div>
+                        <ul role="list" className="divide-y divide-gray-100">
+                            {
+                                // @ts-ignore
+                                data.map((node: any) => {
+                                    return (
+                                        <li
+                                            className="flex justify-between gap-x-6 py-5"
+                                            key={node.identifier}>
 
-                                            }
-                                            <span
-                                                className='font-semibold text-sm my-auto ml-5 tracking-wide w-full mx-auto border-black'>
-                                                {
-                                                    node.name
+                                             <span className="flex gap-x-6">
+                                                 <span
+                                                     className='font-semibold text-sm my-auto ml-5 tracking-wide w-full mx-auto border-black'>
+                                                    {
+                                                        node.name
+                                                    }
+                                                </span>
+                                                {node.state === "ONLINE" ? (
+                                                    <span
+                                                        className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-2">
+                                                        Online
+                                                    </span>
+                                                ) : (
+                                                    <span
+                                                        className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-2">
+                                                        Offline
+                                                    </span>
+                                                )
+
                                                 }
                                             </span>
-                                        </span>
-                                                </a>
-                                            );
-                                        })}
-                                </ul>
-                            </div>
-                        )
-                    ) : (
-                        <div className="text-gray-700 px-8 pb-5 text-sm">
-                            There are no nodes found on this organization or
-                            <br/>
-                            Create or switch to an organization to see its details.
-                        </div>
-                    )
-                ) : (
-                    <div className="text-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        Loading node data...
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
                     </div>
-                )}
+                ) : (
+                    <div className="text-gray-700 px-8 pb-5 text-sm">
+                        There are no nodes found on this organization or
+                        <br/>
+                        Create or switch to an organization to see its details.
+                    </div>
+                )
+            }
 
             </div>
         </div>

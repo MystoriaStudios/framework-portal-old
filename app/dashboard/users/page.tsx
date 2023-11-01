@@ -18,12 +18,6 @@ export function UserDetails({ user }: UserDetailsProps) {
     );
 }
 export default function UsersPage() {
-    const {userId} = auth();
-
-    if (!userId) {
-        redirect("/");
-    }
-
     const [users, setUsers] = React.useState<any[]>([]);
 
     React.useEffect(() => {

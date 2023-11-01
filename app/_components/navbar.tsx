@@ -2,11 +2,18 @@
 import React from 'react'
 import {Disclosure} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {faCube, faDatabase, faSearch} from '@fortawesome/free-solid-svg-icons'
 import useDarkMode from "@/app/utils/useDarkMode";
 import Link from "next/link";
+import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+const navigation = [
+    {name: 'Dashboard', href: '/dashboard', current: true, icon: <FontAwesomeIcon className="text-blue-400" icon={faServer}/>},
+    {name: 'Blog', href: '/blog', current: false, icon: <FontAwesomeIcon className="text-amber-400" icon={faBlog}/>},
+    {name: 'Marketplace', href: '/marketplace', current: false, icon: <FontAwesomeIcon className="text-success" icon={faDollar}/>},
+]
 
 // @ts-ignore
 export default function Navbar({children}) {
@@ -66,6 +73,15 @@ export default function Navbar({children}) {
                                 {}
 
                             </div>
+                            <div className="flex flex-row gap-x-4 bg-gray-400 bg-opacity-10 px-3 py-2 mr-4 rounded-full">
+                                {navigation.map((nav) => (
+                                    <Link href={nav.href} className="mx-1 flex flex-row gap-2">
+                                        {nav.icon}
+                                        {nav.name}
+                                    </Link>
+                                ))
+                                }
+                            </div>
                             {colorTheme === "light" ? (
                                 <div className="flex flex-row gap-x-4 bg-gray-100 bg-opacity-10 px-3 py-2 rounded-full">
                                     <svg
@@ -86,7 +102,7 @@ export default function Navbar({children}) {
                                     </svg>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6"
+                                        className="h-6 w-6 stroke-indigo-800"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -98,17 +114,13 @@ export default function Navbar({children}) {
                                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                                         />
                                     </svg>
-
-                                    <Link className="mx-1" href="/dashboard">
-                                        <FontAwesomeIcon icon={faDatabase} />
-                                    </Link>
                                 </div>
                             ) : (
                                 <div className="flex flex-row gap-x-4 bg-gray-400 bg-opacity-10 px-3 py-2 rounded-full">
                                     <svg
                                         // @ts-ignore
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6"
+                                        className="h-6 w-6 stroke-amber-400"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -136,10 +148,6 @@ export default function Navbar({children}) {
                                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                                         />
                                     </svg>
-
-                                    <Link className="mx-1" href="/dashboard">
-                                        <FontAwesomeIcon icon={faDatabase} />
-                                    </Link>
                                 </div>
                             )}
                             <div

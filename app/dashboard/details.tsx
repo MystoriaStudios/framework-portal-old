@@ -36,30 +36,30 @@ export function OrgDetails() {
             <div className="mt-4">
                 {isLoaded && organization ? (
                     <div className="max-h-96">
-                        <div className="fleex flex-col pb-8">
-                            <div className="stats shadow">
+                        <div className="flex flex-row pb-8">
+                            <div className="shadow flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 
-                                <div className="stat bg-amber-400">
+                                <div className="stat rounded-2xl bg-amber-400">
                                     <div className="stat-title text-white">Total Traffic Volume</div>
                                     <div className="stat-value text-gray-50">89,400</div>
                                     <div className="stat-desc text-gray-50">21% more than last month</div>
                                 </div>
-                                <div className="stat bg-neutral-900">
+                                <div className="stat rounded-2xl bg-neutral-800">
                                     <div className="stat-title text-white">Hours Used</div>
                                     <div className="stat-value text-gray-50">1,427</div>
                                     <div className="stat-desc text-gray-50">53% more than last month</div>
                                 </div>
-                                <div className="stat bg-red-600">
+                                <div className="stat rounded-2xl bg-red-600">
                                     <div className="stat-title text-white">Co2 Reports</div>
                                     <div className="stat-value text-gray-50">1,427,000kg p/sqi</div>
                                     <div className="stat-desc text-gray-50">53% more than last month</div>
                                 </div>
-                                <div className="stat bg-neutral-900">
+                                <div className="stat rounded-2xl bg-neutral-800">
                                     <div className="stat-title text-white">Tickets</div>
                                     <div className="stat-value text-gray-50">4</div>
                                     <div className="stat-desc text-gray-50">400% more than last month</div>
                                 </div>
-                                <div className="stat bg-neutral-900">
+                                <div className="stat rounded-2xl bg-neutral-800">
                                     <div className="stat-title text-white">Individual Users</div>
                                     <div className="stat-value text-gray-50">119</div>
                                     <div className="stat-desc text-gray-50">80% more than last month</div>

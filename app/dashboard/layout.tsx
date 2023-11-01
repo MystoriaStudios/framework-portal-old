@@ -33,7 +33,7 @@ export default function RootLayout({
         <main className="grow">
             <div className="flex">
                 {<div
-                    className="block w-64 bg-neutral-50 dark:bg-neutral-950">
+                    className="block w-64 bg-neutral-100 dark:bg-neutral-950">
                     <div
                         className="flex flex-col text-center pb-12 h-[90vh]">
                         <div

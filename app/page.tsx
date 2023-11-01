@@ -7,11 +7,6 @@ export default function Home() {
     return (
         <main className="mx-24 p-12 pt-4">
             <div className="text-bold text-center mt-26">
-                <br/>
-                <br/>
-                <br/>
-                <h1>You have found your way to the Mystoria Studios new portal how fancy are you.</h1>
-                <br/>
                 <div className="mockup-code center mx-auto bg-neutral-800 md:mt-8 mb-4 text-primary-content text-left max-w-[32rem] w-full drop-shadow-2xl">
                     <pre data-prefix="$" className="text-warning"><code>
                         Welcome to Mystoria Cloud Solution
@@ -39,12 +34,12 @@ export default function Home() {
 
                 <br/>
                 <div className={"flex-row flex justify-center space-x-2.5"}>
-                    <div className={"bg-red-400 shadow-sm text-amber-50 font-bold px-4 py-1 w-fit rounded"}>
+                    <div className={"b-2 border-red-400 text-red-400 btn shadow-sm dark:text-amber-50 font-bold px-4 py-1 w-fit rounded"}>
                         In Development
                     </div>
                     <Link
                         href={"https://discord.gg/TAv6N6RKQk"}
-                        className={"bg-[#5865F2] shadow-sm text-amber-50 font-bold px-4 py-1 w-fit rounded"}>
+                        className={"b-2 border-[#5865F2] text-[#5865F2] btn shadow-sm dark:text-amber-50 font-bold px-4 py-1 w-fit rounded"}>
                         Discord
                     </Link>
                 </div>

@@ -37,32 +37,32 @@ export function OrgDetails() {
                 {isLoaded && organization ? (
                     <div className="max-h-96">
                         <div className="flex flex-row pb-8">
-                            <div className="shadow flex flex-row gap-x-4 justify-evenly w-full mx-auto">
+                            <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 
                                 <div className="stat rounded-2xl bg-amber-400">
                                     <div className="stat-title text-white">Total Traffic Volume</div>
-                                    <div className="stat-value text-gray-50">89,400</div>
-                                    <div className="stat-desc text-gray-50">21% more than last month</div>
+                                    <div className="stat-value text-neutral-50">89,400</div>
+                                    <div className="stat-desc text-neutral-50">21% more than last month</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-neutral-800">
+                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
                                     <div className="stat-title text-white">Hours Used</div>
-                                    <div className="stat-value text-gray-50">1,427</div>
-                                    <div className="stat-desc text-gray-50">53% more than last month</div>
+                                    <div className="stat-value text-neutral-50">1,427</div>
+                                    <div className="stat-desc text-neutral-50">53% more than last month</div>
                                 </div>
                                 <div className="stat rounded-2xl bg-red-600">
                                     <div className="stat-title text-white">Co2 Reports</div>
-                                    <div className="stat-value text-gray-50">1,427,000kg p/sqi</div>
-                                    <div className="stat-desc text-gray-50">53% more than last month</div>
+                                    <div className="stat-value text-neutral-50">1,427,000kg p/sqi</div>
+                                    <div className="stat-desc text-neutral-50">53% more than last month</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-neutral-800">
+                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
                                     <div className="stat-title text-white">Tickets</div>
-                                    <div className="stat-value text-gray-50">4</div>
-                                    <div className="stat-desc text-gray-50">400% more than last month</div>
+                                    <div className="stat-value text-neutral-50">4</div>
+                                    <div className="stat-desc text-neutral-50">400% more than last month</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-neutral-800">
+                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
                                     <div className="stat-title text-white">Individual Users</div>
-                                    <div className="stat-value text-gray-50">119</div>
-                                    <div className="stat-desc text-gray-50">80% more than last month</div>
+                                    <div className="stat-value text-neutral-50">119</div>
+                                    <div className="stat-desc text-neutral-50">80% more than last month</div>
                                 </div>
 
                             </div>
@@ -101,7 +101,7 @@ export function OrgDetails() {
                                     <div className="p-4">
                                         <input type="text" placeholder="Update primary domain" value={
                                             "tesst.xys"
-                                        } className="input input-bordered input-warning w-full max-w-xs" />
+                                        } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
                                     </div>
                                 </div>
                             ) : (
@@ -121,7 +121,7 @@ export function OrgDetails() {
                         </div>
                     </div>
                 ) : (
-                    <div className="text-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div className="text-neutral-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         Loading organization data...
                     </div>
                 )}
@@ -157,13 +157,13 @@ export function NodeDetails() {
                         <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                             Nodes
                         </div>
-                        <ul role="list" className="divide-y divide-gray-100">
+                        <ul role="list" className="divide-y divide-neutral-100">
                             {
                                 // @ts-ignore
                                 data.map((node: any) => {
                                     return (
                                         <li
-                                            className="flex justify-between gap-x-6 my-1 w-full pt-3 border-t-2 border-gray-400 dark:border-gray-700"
+                                            className="flex justify-between gap-x-6 my-1 w-full pt-3 border-t-2 border-neutral-400 dark:border-neutral-900"
                                             key={node.identifier}>
 
                                              <span className="flex gap-x-6 ml-6">
@@ -197,7 +197,7 @@ export function NodeDetails() {
                                                     }
                                                 </span>
                                             <div className="mr-16 flex flex-row">
-                                                <span className="my-auto w-56 dark:text-gray-300">
+                                                <span className="my-auto w-56 dark:text-neutral-300">
                                                     updated {
                                                     node.pushed_at
                                                 } snapshot
@@ -205,21 +205,21 @@ export function NodeDetails() {
 
                                                 <div className="join">
                                                     <Link href={`/dashboard/nodes/${node.name}/pods`}
-                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faPodcast}/>
                                                         <span className="-mt-2">
                                                              Pods
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}`}
-                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faDashboard}/>
                                                         <span className="-mt-2">
                                                              Details
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}/modules`}
-                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faCube}/>
                                                         <span className="-mt-2">
                                                              Modules
@@ -243,7 +243,7 @@ export function NodeDetails() {
                         </ul>
                     </div>
                 ) : (
-                    <div className="text-gray-700 px-8 pb-5 text-sm">
+                    <div className="text-neutral-700 px-8 pb-5 text-sm">
                         There are no nodes found on this organization or
                         <br/>
                         Create or switch to an organization to see its details.
@@ -268,10 +268,10 @@ function Toggle(props: {
                 disabled={props.disabled}
                 onClick={props.onChange}
                 className={classNames({
-                    "rounded-l-lg py-2 px-4 border-solid border border-gray-300 transition text-sm font-semibold":
+                    "rounded-l-lg py-2 px-4 border-solid border border-neutral-300 transition text-sm font-semibold":
                         true,
                     "bg-neutral-100": !props.checked,
-                    "bg-neutral-50 text-gray-500 cursor-not-allowed": props.disabled,
+                    "bg-neutral-50 text-neutral-500 cursor-not-allowed": props.disabled,
                 })}
             >
                 List
@@ -280,10 +280,10 @@ function Toggle(props: {
                 disabled={props.disabled}
                 onClick={props.onChange}
                 className={classNames({
-                    "rounded-r-lg py-2 px-4 border-solid border border-gray-300 -ml-[1px] transition text-sm font-semibold":
+                    "rounded-r-lg py-2 px-4 border-solid border border-neutral-300 -ml-[1px] transition text-sm font-semibold":
                         true,
                     "bg-neutral-100": props.checked,
-                    "bg-neutral-50 text-gray-500 cursor-not-allowed": props.disabled,
+                    "bg-neutral-50 text-neutral-500 cursor-not-allowed": props.disabled,
                 })}
             >
                 JSON
@@ -315,7 +315,7 @@ function CopyButton(props: { text: string }) {
 
             <div
                 className={classNames({
-                    "absolute z-10 bg-neutral-900 text-white rounded p-2 text-xs transition-all ease-in-out translate-x-60 shadow-sm shadow-gray-500":
+                    "absolute z-10 bg-neutral-900 text-white rounded p-2 text-xs transition-all ease-in-out translate-x-60 shadow-sm shadow-neutral-500":
                         true,
                     "translate-y-10 opacity-0": !tooltipShown,
                     "translate-y-6": tooltipShown,

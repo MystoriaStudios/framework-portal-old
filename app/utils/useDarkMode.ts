@@ -11,6 +11,8 @@ function useDarkMode() {
 
         root.classList.remove(colorTheme);
         root.classList.add(theme);
+        // @ts-ignore
+        root.setAttribute("data-theme", theme)
 
         if (window !== undefined) {
             localStorage.setItem("theme", theme);

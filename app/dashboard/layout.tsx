@@ -37,7 +37,7 @@ export default function RootLayout({
                     <div
                         className="flex flex-col text-center pb-12 h-[90vh]">
                         <div
-                            className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
+                            className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-neutral-300">
                             <div className="hidden sm:block">
                                 <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
                             </div>
@@ -66,7 +66,7 @@ export default function RootLayout({
                             >
                                     <span className="flex">
                                         <span className={classNames(
-                                            item.current ? "text-amber-400" : "text-gray-800 dark:text-gray-700",
+                                            item.current ? "text-amber-400" : "text-neutral-800 dark:text-neutral-700",
                                             "w-28 mt-1"
                                         )}>
                                             {
@@ -74,7 +74,7 @@ export default function RootLayout({
                                             }
                                         </span>
                                         <span className={classNames(
-                                            item.current ? 'border-b-4 text-black dark:text-white' : 'text-gray-800 dark:text-gray-700 hover:text-black',
+                                            item.current ? 'border-b-4 text-black dark:text-white' : 'text-neutral-800 dark:text-neutral-700 hover:text-black',
                                             'px-1 py-1 mt-1 font-bold text-sm my-auto ml-5 tracking-widest w-full mx-auto border-amber-400'
                                         )}>
                                             {
@@ -88,7 +88,7 @@ export default function RootLayout({
                 </div>
                 }
                 <div className="w-full bg-neutral-100 dark:bg-neutral-950">
-                    <div className="block pb-96 bg-neutral-50 p-16 min-h-fit dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl border-black">
+                    <div className="block pb-96 bg-neutral-50 p-16 min-h-fit dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black">
                         {children}
                     </div>
                 </div>

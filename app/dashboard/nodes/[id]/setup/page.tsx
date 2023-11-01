@@ -45,7 +45,7 @@ export default function DashboardPage() {
                         <div className={"flex flex-col gap-y-4"}>
                             <span className={"flex flex-col gap-1"}>
                                 Node Key:
-                                <input type="text" placeholder="Node key" value={"na-node-country"} id="key" name="key" className="input input-bordered w-full max-w-xs text-gray-100" disabled />
+                                <input type="text" placeholder="Node key" value={"na-node-country"} id="key" name="key" className="input input-bordered w-full max-w-xs text-neutral-100" disabled />
                             </span>
 
                             <span className={"flex flex-col gap-1"}>
@@ -63,14 +63,14 @@ export default function DashboardPage() {
 
                                 <div className="stat bg-success w-full">
                                     <div className="stat-title text-white">Use Organization Hive</div>
-                                    <div className="stat-value text-gray-50">RECOMMENDED</div>
-                                    <div className="stat-desc text-gray-50">Cloud hosted always accessible</div>
+                                    <div className="stat-value text-neutral-50">RECOMMENDED</div>
+                                    <div className="stat-desc text-neutral-50">Cloud hosted always accessible</div>
                                 </div>
 
                                 <div className="stat bg-neutral-800 hover:bg-red-600 delay-150 duration-150 w-full">
                                     <div className="stat-title text-white">Use External Databases</div>
-                                    <div className="stat-value text-gray-50">RISKY</div>
-                                    <div className="stat-desc text-gray-50">Use at your own risk.</div>
+                                    <div className="stat-value text-neutral-50">RISKY</div>
+                                    <div className="stat-desc text-neutral-50">Use at your own risk.</div>
                                 </div>
                             </div>
                             </span>

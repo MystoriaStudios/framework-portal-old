@@ -1,6 +1,7 @@
 import Link from "next/link";
 import "./home.css";
 import React from "react";
+import { BiAlarmExclamation, BiCheck, BiCommand, BiDownArrowAlt, BiSleepy, BiSolidNews, BiWrench } from "react-icons/bi";
 
 export default function Home() {
     return (
@@ -9,13 +10,31 @@ export default function Home() {
                 <br/>
                 <br/>
                 <br/>
-                <h1>You have found your way to the Mystoria Studios neew portal how fancy are you.</h1>
+                <h1>You have found your way to the Mystoria Studios new portal how fancy are you.</h1>
                 <br/>
-                <p>
-                    Quick intro tyhis isn't done ofc but if ur here u probably assumed that mk.
-                    dont break this thing plss ty vm.
-                    uhh we do cool things check the github fr fr
-                </p>
+                <div className="mockup-code center mx-auto bg-neutral-800 md:mt-8 mb-4 text-primary-content text-left max-w-[32rem] w-full drop-shadow-2xl">
+                    <pre data-prefix="$" className="text-warning"><code>
+                        Welcome to Mystoria Cloud Solution
+                    </code></pre>
+                    <pre data-prefix=">" className="text-warning"><code>
+                        <BiSleepy className="inline-block text-2xl" /> We're building something amazing for you [21%]
+                    </code></pre>
+                    <pre data-prefix=">" className="text-neutral-400"><code>
+                        <BiCommand className="inline-block text-2xl" /> Testing out what we've done... [46%]
+                    </code></pre>
+                    <pre data-prefix=">" className="text-error"><code>
+                        <BiAlarmExclamation className="inline-block text-2xl" /> Oops! We found a mistake! [72%]
+                    </code></pre>
+                    <pre data-prefix=">" className="text-fuchsia-500"><code>
+                        <BiWrench className="inline-block text-2xl" /> Just a sec, polishing up our work [95%]
+                    </code></pre>
+                    <pre data-prefix=">" className="text-success"><code>
+                        <BiCheck className="inline-block text-2xl" /> Success! An incredible design has been made.
+                    </code></pre>
+                    <pre data-prefix=">" className="text-success"><code>
+                        Check it out: <Link href="https://mystoria.dev" target="_blank" rel="noreferrer noopener" className="hover:underline">https://mystoria.dev</Link>
+                    </code></pre>
+                </div>
                 <br/>
 
                 <br/>

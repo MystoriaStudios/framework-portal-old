@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {faCube, faSearch} from '@fortawesome/free-solid-svg-icons'
 import useDarkMode from "@/app/utils/useDarkMode";
-
+import Link from "next/link";
 
 // @ts-ignore
 export default function Navbar({children}) {
@@ -33,13 +33,13 @@ export default function Navbar({children}) {
                                 </Disclosure.Button>
                             </div>
                             <div className="ml-12 text-2xl flex-col font-bold tracking-wider">
-                                <div className="text-amber-400">
+                                <Link href="/" className="text-amber-400">
                                     Framew
 
                                     <FontAwesomeIcon icon={faCube} className="mx-0.5 text-amber-500"/>
 
                                     rk
-                                </div>
+                                </Link>
                                 <div className="text-xs">
                                     The all in one cloud solution.
                                 </div>

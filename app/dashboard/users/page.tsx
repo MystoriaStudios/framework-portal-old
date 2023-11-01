@@ -8,15 +8,6 @@ interface UserDetailsProps {
     user: any; // Replace 'any' with the actual type of the user
 }
 
-export function UserDetails({ user }: UserDetailsProps) {
-    // Component implementation
-    return (
-        <div>
-            {/* Display user details here */}
-            <p>{user.name}</p>
-        </div>
-    );
-}
 export default function UsersPage() {
     const [users, setUsers] = React.useState<any[]>([]);
 
@@ -35,7 +26,7 @@ export default function UsersPage() {
                 Users
             </h1>
             {users.map((user) => (
-                <UserDetails key={user.id} user={user} />
+                <span>user.username</span>
             ))}
         </div>
     );

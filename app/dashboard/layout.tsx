@@ -1,5 +1,6 @@
 import {OrganizationSwitcher} from "@clerk/nextjs";
 import React from "react";
+import Link from "next/link"
 
 import {faBookBookmark, faChartArea, faComputer, faServer, faClipboard, faTools, faUsers} from '@fortawesome/free-solid-svg-icons'
 import {faHive} from "@fortawesome/free-brands-svg-icons";
@@ -31,36 +32,38 @@ export default function RootLayout({
     return (
         <main className="grow">
             <div className="flex">
-                {true &&
+                {<div
+                    className="block w-64 bg-neutral-50 dark:bg-neutral-950">
                     <div
-                        className="block w-64 bg-neutral-50 dark:bg-neutral-950">
+                        className="flex flex-col text-center pb-12 h-[90vh]">
                         <div
-                            className="flex flex-col text-center pb-12 h-[90vh]">
-                            <div
-                                className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
-                                <div className="hidden sm:block">
-                                    <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
-                                </div>
-                                <div className="block sm:hidden">
-                                    <OrganizationSwitcher
-                                        afterCreateOrganizationUrl="/dashboard"
-                                        appearance={{
-                                            elements: {
-                                                organizationSwitcherTriggerIcon: `hidden`,
-                                                organizationPreviewTextContainer: `hidden`,
-                                                organizationSwitcherTrigger: `pr-0`,
-                                            },
-                                        }}
-                                    />
-                                </div>
+                            className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
+                            <div className="hidden sm:block">
+                                <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
                             </div>
-                            {navigation.map((item) => (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    className='px-3 pr-12 font-semibold rounded-none tracking-wide w-full mx-auto my-1.5 text-2xl border-black'
-                                    aria-current={item.current ? 'page' : undefined}
-                                >
+                            <div className="block sm:hidden">
+                                <OrganizationSwitcher
+                                    afterCreateOrganizationUrl="/dashboard"
+                                    appearance={{
+                                        elements: {
+                                            organizationSwitcherTriggerIcon: `hidden`,
+                                            organizationPreviewTextContainer: `hidden`,
+                                            organizationSwitcherTrigger: `pr-0`,
+                                        },
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        {
+
+                            navigation.map((item) => (
+
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className='px-3 pr-12 font-semibold rounded-none tracking-wide w-full mx-auto my-1.5 text-2xl border-black'
+                                aria-current={item.current ? 'page' : undefined}
+                            >
                                     <span className="flex">
                                         <span className={classNames(
                                             item.current ? "text-amber-400" : "text-gray-800 dark:text-gray-700",
@@ -79,10 +82,10 @@ export default function RootLayout({
                                             }
                                         </span>
                                     </span>
-                                </a>
-                            ))}
-                        </div>
+                            </Link>
+                        ))}
                     </div>
+                </div>
                 }
                 <div className="w-full bg-neutral-100 dark:bg-neutral-950">
                     <div className="block pb-96 bg-neutral-50 p-16 min-h-fit dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl border-black">

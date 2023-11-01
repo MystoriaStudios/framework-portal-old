@@ -1,16 +1,19 @@
 import {OrganizationSwitcher} from "@clerk/nextjs";
 import React from "react";
 
-import {faBookBookmark, faChartArea, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
+import {faBookBookmark, faChartArea, faComputer, faServer, faClipboard, faTools, faUsers} from '@fortawesome/free-solid-svg-icons'
 import {faHive} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const navigation = [
     {name: 'Dashboard', href: '/dashboard', current: true, icon: <FontAwesomeIcon icon={faServer}/>},
-    {name: 'Templates', href: '/templates', current: false, icon: <FontAwesomeIcon icon={faBookBookmark}/>},
-    {name: 'Analytics', href: '/stats', current: false, icon: <FontAwesomeIcon icon={faChartArea}/>},
-    {name: 'Tools', href: '/tools', current: false, icon: <FontAwesomeIcon icon={faTools}/>},
-    {name: 'Database Hive', href: '/hive', current: false, icon: <FontAwesomeIcon icon={faHive}/>},
+    {name: 'Users', href: '/dashboard/users', current: false, icon: <FontAwesomeIcon icon={faUsers}/>},
+    {name: 'API', href: '/dashboard/api', current: false, icon: <FontAwesomeIcon icon={faComputer}/>},
+    {name: 'Forms', href: '/dashboard/forms', current: false, icon: <FontAwesomeIcon icon={faClipboard}/>},
+    {name: 'Templates', href: '/dashboard/templates', current: false, icon: <FontAwesomeIcon icon={faBookBookmark}/>},
+    {name: 'Analytics', href: '/dashboard/stats', current: false, icon: <FontAwesomeIcon icon={faChartArea}/>},
+    {name: 'Web Tools 3', href: '/dashboard/tools', current: false, icon: <FontAwesomeIcon icon={faTools}/>},
+    {name: 'Database Hive', href: '/dashboard/hive', current: false, icon: <FontAwesomeIcon icon={faHive}/>},
 ]
 
 
@@ -55,11 +58,14 @@ export default function RootLayout({
                                 <a
                                     key={item.name}
                                     href={item.href}
-                                    className='px-3 pr-12 font-semibold tracking-wide w-full mx-auto my-3.5 text-2xl border-black'
+                                    className='px-3 pr-12 font-semibold rounded-none tracking-wide w-full mx-auto my-1.5 text-2xl border-black'
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     <span className="flex">
-                                        <span className="w-28 text-gray-800 dark:text-gray-700">
+                                        <span className={classNames(
+                                            item.current ? "text-amber-400" : "text-gray-800 dark:text-gray-700",
+                                            "w-28 mt-1"
+                                        )}>
                                             {
                                                 item.icon
                                             }

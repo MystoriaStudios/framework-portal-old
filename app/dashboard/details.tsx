@@ -31,12 +31,43 @@ const InfoCard = ({title, value}: InfoCardProps) => (
 export function OrgDetails() {
     const {isLoaded, organization} = useOrganization();
 
-    // @ts-ignore
     return (
         <div className="mt-12">
             <div className="mt-4">
                 {isLoaded && organization ? (
                     <div className="max-h-96">
+                        <div className="fleex flex-col pb-8">
+                            <div className="stats shadow">
+
+                                <div className="stat bg-amber-400">
+                                    <div className="stat-title text-white">Total Traffic Volume</div>
+                                    <div className="stat-value text-gray-50">89,400</div>
+                                    <div className="stat-desc text-gray-50">21% more than last month</div>
+                                </div>
+                                <div className="stat bg-neutral-900">
+                                    <div className="stat-title text-white">Hours Used</div>
+                                    <div className="stat-value text-gray-50">1,427</div>
+                                    <div className="stat-desc text-gray-50">53% more than last month</div>
+                                </div>
+                                <div className="stat bg-red-600">
+                                    <div className="stat-title text-white">Co2 Reports</div>
+                                    <div className="stat-value text-gray-50">1,427,000kg p/sqi</div>
+                                    <div className="stat-desc text-gray-50">53% more than last month</div>
+                                </div>
+                                <div className="stat bg-neutral-900">
+                                    <div className="stat-title text-white">Tickets</div>
+                                    <div className="stat-value text-gray-50">4</div>
+                                    <div className="stat-desc text-gray-50">400% more than last month</div>
+                                </div>
+                                <div className="stat bg-neutral-900">
+                                    <div className="stat-title text-white">Individual Users</div>
+                                    <div className="stat-value text-gray-50">119</div>
+                                    <div className="stat-desc text-gray-50">80% more than last month</div>
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div className="flex flex-col rounded-[1.5rem] bg-white dark:bg-neutral-800 shadow-md">
                             <div
                                 className="block sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl w-full">
@@ -60,6 +91,31 @@ export function OrgDetails() {
                                     </div>
                                 </div>
                             </div>
+
+                            {organization ? (
+                                <div>
+                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                        Allocated Primary Domain
+                                    </div>
+
+                                    <div className="p-4">
+                                        <input type="text" placeholder="Update primary domain" value={
+                                            "tesst.xys"
+                                        } className="input input-bordered input-warning w-full max-w-xs" />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                        Allocate a Primary Domain
+                                    </div>
+
+                                    <div className="p-4">
+                                        <input type="text" placeholder="Set your primary domain" className="input input-bordered input-warning w-full max-w-xs" />
+                                    </div>
+                                </div>
+                            )
+                            }
 
                             <NodeDetails/>
                         </div>
@@ -107,28 +163,28 @@ export function NodeDetails() {
                                 data.map((node: any) => {
                                     return (
                                         <li
-                                            className="flex justify-between gap-x-6 py-5 w-full"
+                                            className="flex justify-between gap-x-6 my-1 w-full pt-3 border-t-2 border-gray-400 dark:border-gray-700"
                                             key={node.identifier}>
 
                                              <span className="flex gap-x-6 ml-6">
                                                 {node.state === "ONLINE" ? (
                                                     <span
-                                                        className="bg-green-400 mx-auto my-auto rounded-full w-fit text-sm border-green-600 px-4 py-1 font-extrabold">
+                                                        className="bg-green-400 mx-auto my-auto w-fit text-sm border-green-600 btn px-2 font-extrabold animate-pulse">
                                                         Online
                                                     </span>
                                                 ) : (node.state === "BOOTING" ? (
                                                     <span
-                                                        className="bg-amber-400 mx-auto my-auto rounded-full w-fit text-sm border-amber-600 px-4 py-1 font-extrabold">
+                                                        className="bg-amber-400 mx-auto my-auto w-fit text-sm border-amber-600 btn px-2 font-extrabold animate-pulse">
                                                         Booting
                                                     </span>
                                                 ) : (node.state === "SETUP" ? (
                                                         <span
-                                                            className="bg-blue-400 mx-auto my-auto rounded-full w-fit text-sm border-blue-600 px-4 py-1 font-extrabold animate-pulse">
+                                                            className="text-blue-400 mx-auto my-auto w-fit text-sm border-blue-600 btn px-2 font-extrabold animate-pulse">
                                                         Setup
                                                     </span>
                                                     ) : (
                                                         <span
-                                                            className="bg-red-400 mx-auto my-auto rounded-full w-fit text-sm border-red-600 px-4 py-1 font-extrabold animate-pulse">
+                                                            className="bg-red-400 mx-auto my-auto w-fit text-sm border-red-600 btn px-2 font-extrabold animate-pulse">
                                                         Offline
                                                     </span>
                                                     )
@@ -141,29 +197,29 @@ export function NodeDetails() {
                                                     }
                                                 </span>
                                             <div className="mr-16 flex flex-row">
-                                                <span className="my-auto w-56">
+                                                <span className="my-auto w-56 dark:text-gray-300">
                                                     updated {
                                                     node.pushed_at
                                                 } snapshot
                                                 </span>
 
-                                                <div className="flex flex-row gap-x-1 ml-4">
+                                                <div className="join">
                                                     <Link href={`/dashboard/nodes/${node.name}/pods`}
-                                                          className="flex flex-col p-2 text-gray-400 font-bold">
+                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faPodcast}/>
                                                         <span className="-mt-2">
                                                              Pods
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}`}
-                                                          className="flex flex-col p-2 text-gray-400 font-bold">
+                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faDashboard}/>
                                                         <span className="-mt-2">
                                                              Details
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}/modules`}
-                                                          className="flex flex-col p-2 text-gray-400 font-bold">
+                                                          className="flex flex-col p-2 text-gray-400 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faCube}/>
                                                         <span className="-mt-2">
                                                              Modules
@@ -171,7 +227,7 @@ export function NodeDetails() {
                                                     </Link>
                                                     {node.state === "SETUP" ? (
                                                         <Link href={`/dashboard/nodes/${node.name}/setup`}
-                                                              className="animate-pulse flex flex-col p-2 text-blue-400 font-bold">
+                                                              className="animate-pulse flex flex-col p-2 text-blue-400 btn join-item font-bold">
                                                             <FontAwesomeIcon icon={faCogs}/>
                                                             <span className="-mt-2">
                                                                  Setup

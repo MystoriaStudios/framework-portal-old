@@ -33,9 +33,9 @@ export default function RootLayout({
             <div className="flex">
                 {true &&
                     <div
-                        className="block w-64 bg-neutral-50 border-r-2 border-gray-100 dark:bg-neutral-950 dark:border-black">
+                        className="block w-64 bg-neutral-50 dark:bg-neutral-950">
                         <div
-                            className="flex flex-col text-center pb-12 h-[90vh] border-r-2 border-gray-300 dark:border-black">
+                            className="flex flex-col text-center pb-12 h-[90vh]">
                             <div
                                 className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
                                 <div className="hidden sm:block">
@@ -84,8 +84,10 @@ export default function RootLayout({
                         </div>
                     </div>
                 }
-                <div className="block w-full p-16 border-b-4 border-black">
-                    {children}
+                <div className="w-full bg-neutral-100 dark:bg-neutral-950">
+                    <div className="block pb-96 bg-neutral-50 p-16 min-h-fit dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl border-black">
+                        {children}
+                    </div>
                 </div>
             </div>
         </main>

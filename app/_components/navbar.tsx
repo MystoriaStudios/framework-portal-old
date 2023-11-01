@@ -4,7 +4,7 @@ import {Disclosure} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import {faCube, faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faCube, faDatabase, faSearch} from '@fortawesome/free-solid-svg-icons'
 import useDarkMode from "@/app/utils/useDarkMode";
 import Link from "next/link";
 
@@ -99,6 +99,9 @@ export default function Navbar({children}) {
                                         />
                                     </svg>
 
+                                    <Link className="mx-1" href="/dashboard">
+                                        <FontAwesomeIcon icon={faDatabase} />
+                                    </Link>
                                 </div>
                             ) : (
                                 <div className="flex flex-row gap-x-4 bg-gray-400 bg-opacity-10 px-3 py-2 rounded-full">
@@ -133,6 +136,10 @@ export default function Navbar({children}) {
                                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                                         />
                                     </svg>
+
+                                    <Link className="mx-1" href="/dashboard">
+                                        <FontAwesomeIcon icon={faDatabase} />
+                                    </Link>
                                 </div>
                             )}
                             <div

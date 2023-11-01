@@ -35,7 +35,7 @@ export default function RootLayout({
                     <div
                         className="block w-64 bg-neutral-50 border-r-2 border-gray-100 dark:bg-neutral-950 dark:border-black">
                         <div
-                            className="flex flex-col text-center pb-12 h-[80vh] border-r-2 border-gray-300 dark:border-black">
+                            className="flex flex-col text-center pb-12 h-[90vh] border-r-2 border-gray-300 dark:border-black">
                             <div
                                 className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-gray-300">
                                 <div className="hidden sm:block">
@@ -84,7 +84,7 @@ export default function RootLayout({
                         </div>
                     </div>
                 }
-                <div className="block w-full m-16">
+                <div className="block w-full p-16 border-b-4 border-black">
                     {children}
                 </div>
             </div>

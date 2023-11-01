@@ -60,8 +60,6 @@ export function UserDetails() {
                                         <InfoCard title="BILLING" value="Not Required"/>
                                         <InfoCard title="NODES" value={"1/3"}/>
                                     </div>
-
-                                    <MemberDetailsList></MemberDetailsList>
                                 </div>
                             </div>
 

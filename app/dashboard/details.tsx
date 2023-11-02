@@ -11,6 +11,7 @@ import {faCogs, faCube, faDashboard, faPodcast} from "@fortawesome/free-solid-sv
 import Link from "next/link";
 import moment from 'moment';
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
+import {faDocker} from "@fortawesome/free-brands-svg-icons";
 
 declare global {
     interface Window {
@@ -190,82 +191,106 @@ export function NodeDetails() {
                                     if (date > 60 * (60 * 1000)) return null
                                     return (
                                         <li
-                                            className="flex justify-between gap-x-6 my-1 w-full py-3 border-t-2 border-neutral-400 dark:border-neutral-900"
                                             key={node.identifier}>
-                                             <span className="flex gap-x-6 ml-6">
-                                                {node.state === "ONLINE" ? (
-                                                    <span
-                                                        className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
-                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                                                    </span>
-                                                ) : (node.state === "BOOTING" ? (
-                                                    <span
-                                                        className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
-                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                                                    </span>
-                                                ) : (node.state === "SETUP" ? (
-                                                        <span
-                                                            className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
-                                                        <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
-                                                    </span>
-                                                    ) : (
-                                                        <span
-                                                            className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
-                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                                                    </span>
-                                                    )
-                                                ))}
-                                            </span>
-                                            <span
-                                                className='text-mds my-auto flex flex-col ml-2 tracking-widest w-full mx-auto border-black'>
-                                                    <span className="font-extrabold">
-                                                        {
-                                                            node.name
-                                                        }
-                                                    </span>
-                                                <span className="-mt-1 text-sm w-56 dark:text-neutral-300">
-                                                    updated {
-                                                    date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + " mins" : (date / 1000).toString().split(".")[0] + " seconds")
-                                                    } {
-                                                        date > 2000 ? "ago" : ""
-                                                }
-                                                </span>
-                                                </span>
-                                            <div className="mr-16 flex flex-row">
+                                            <Link href={node.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-t-2 border-neutral-400 dark:border-neutral-900">
 
-                                                <div className="join">
-                                                    <Link href={`/dashboard/nodes/${node.name}/pods`}
-                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                        <FontAwesomeIcon icon={faPodcast}/>
-                                                        <span className="-mt-2">
-                                                             Pods
-                                                         </span>
-                                                    </Link>
-                                                    <Link href={`/dashboard/nodes/${node.name}`}
-                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                        <FontAwesomeIcon icon={faDashboard}/>
-                                                        <span className="-mt-2">
-                                                             Details
-                                                         </span>
-                                                    </Link>
-                                                    <Link href={`/dashboard/nodes/${node.name}/modules`}
-                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                        <FontAwesomeIcon icon={faCube}/>
-                                                        <span className="-mt-2">
-                                                             Modules
-                                                         </span>
-                                                    </Link>
-                                                    {node.state === "SETUP" ? (
-                                                        <Link href={`/dashboard/nodes/${node.name}/setup`}
-                                                              className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                            <FontAwesomeIcon icon={faCogs}/>
-                                                            <span className="-mt-2">
-                                                                 Setup
-                                                            </span>
-                                                        </Link>
-                                                    ) : (<></>)}
+                                                 <span className="flex gap-x-6 ml-6" >
+                                                    {node.state === "ONLINE" ? (
+                                                        <span
+                                                            className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
+                                                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                                                        </span>
+                                                    ) : (node.state === "BOOTING" ? (
+                                                        <span
+                                                            className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
+                                                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                                                        </span>
+                                                    ) : (node.state === "SETUP" ? (
+                                                            <span
+                                                                className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
+                                                            <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
+                                                        </span>
+                                                        ) : (
+                                                            <span
+                                                                className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
+                                                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                                                        </span>
+                                                        )
+                                                    ))}
+                                                </span>
+
+                                                <span
+                                                    className='text-mds my-auto flex flex-col ml-2 tracking-widest mr-auto border-black'>
+                                                        <span className="font-extrabold">
+                                                            {
+                                                                node.name
+                                                            }
+                                                        </span>
+                                                    <span className="-mt-1 text-sm w-56 dark:text-neutral-300">
+                                                        {
+                                                            node.state == "OFFLINE" ? "offline since" : "updated"
+                                                        } {
+                                                        date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + " mins" : (date / 1000).toString().split(".")[0] + " seconds")
+                                                        } {
+                                                            date > 2000 ? "ago" : ""
+                                                    }
+                                                    </span>
+                                                </span>
+                                                <div className="mr-8 flex flex-row">
+
+                                                    <div className="join mr-6">
+                                                        { node.state === "ONLINE" ?
+                                                            <>
+                                                                <Link href={`/dashboard/nodes/${node.name}/containers`}
+                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                    <FontAwesomeIcon icon={faDocker}/>
+                                                                    <span className="-mt-2">
+                                                                     Containers
+                                                                 </span>
+                                                                </Link>
+                                                                <Link href={`/dashboard/nodes/${node.name}`}
+                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                    <FontAwesomeIcon icon={faDashboard}/>
+                                                                    <span className="-mt-2">
+                                                                 Details
+                                                             </span>
+                                                                </Link>
+                                                                <Link href={`/dashboard/nodes/${node.name}/modules`}
+                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                    <FontAwesomeIcon icon={faCube}/>
+                                                                    <span className="-mt-2">
+                                                                 Modules
+                                                             </span>
+                                                                </Link>
+                                                            </> : <></>
+                                                        }
+                                                        {node.state === "SETUP" ? (
+                                                            <Link href={`/dashboard/nodes/${node.identifier}/setup`}
+                                                                  className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                <FontAwesomeIcon icon={faCogs}/>
+                                                                <span className="-mt-2">
+                                                                     Setup
+                                                                </span>
+                                                            </Link>
+                                                        ) : (<></>)}
+                                                    </div>
+
+                                                    <span className="flex flex-col text-right px-2 w-72">
+                                                        <span className="text-xs dark:text-neutral-700 font-bold">
+                                                            Node #{node.identifier}
+                                                        </span>
+
+                                                        <span className="text-xs dark:text-neutral-700 font-bold">
+                                                            Version #{node.version || "master"}
+                                                        </span>
+
+                                                        <span className="text-xs dark:text-neutral-700 font-bold">
+                                                            Host @{node.href || "master"}
+                                                        </span>
+                                                    </span>
                                                 </div>
-                                            </div>
+
+                                            </Link>
                                         </li>
                                     );
                                 })

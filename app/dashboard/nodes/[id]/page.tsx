@@ -1,8 +1,10 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
+import {NodeDetails} from "@/app/dashboard/nodes/[id]/details";
 
 export default async function DashboardPage() {
     const {userId} = auth();
+
 
     if (!userId) {
         redirect("/");
@@ -18,6 +20,7 @@ export default async function DashboardPage() {
                         Nodes
                     </h1>
 
+                    <NodeDetails></NodeDetails>
                 </>
             )}
         </div>

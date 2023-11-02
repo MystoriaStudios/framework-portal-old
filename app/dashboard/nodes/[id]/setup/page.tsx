@@ -3,6 +3,7 @@
 import {auth, clerkClient, useUser} from "@clerk/nextjs";
 import useSWR from "swr";
 import React from "react";
+import {useParams} from "next/navigation";
 
 const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()
@@ -12,10 +13,12 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 
 
 export default function DashboardPage() {
+    const params = useParams();
+    const id = params.id;
     const user = useUser()
 
 
-    const route = `https://api.nopox.xyz/api/nodes/na-node-country`
+    const route = `https://api.nopox.xyz/api/nodes/${id}`
     console.log(route)
 
     const {data, error, isValidating} = useSWR(route, fetcher)
@@ -26,7 +29,7 @@ export default function DashboardPage() {
 
     return (
         <div className="px-6 md:px-12">
-            {user && (
+            {user && data && (
                 <>
                     <h1 className="text-3xl font-semibold">
                         Node Setup
@@ -39,40 +42,12 @@ export default function DashboardPage() {
                         <span>Notice! This system is in alpha and may not function as expected.</span>
                     </div>
 
-
                     <form className="my-4 flex-row gap-10 w-1/2" method="post"
-                          action="https://api.nopox.xyz:8080/api/nodes/post">
+                          action={`http://${data[0].href}:8086/setup`}>
                         <div className={"flex flex-col gap-y-4"}>
                             <span className={"flex flex-col gap-1"}>
                                 Node Key:
-                                <input type="text" placeholder="Node key" value={"na-node-country"} id="key" name="key" className="input input-bordered w-full max-w-xs text-neutral-100" disabled />
-                            </span>
-
-                            <span className={"flex flex-col gap-1"}>
-                                Node Port:
-                                <input type="number" placeholder="Enter a port" id="port" name="port" className="input input-bordered input-error w-full max-w-xs" />
-                            </span>
-
-                            <span className={"flex flex-col gap-1"}>
-                                Kubernetes API Key:
-                                <input type="text" placeholder="Enter the kubernetes api key for the node"  id="kubernetes" name="kubernetes" className="input input-bordered input-error w-full max-w-md" />
-                            </span>
-                            <span className={"flex flex-col gap-1"}>
-                                Node Database:
-                                <div className="stats grid-cols-2 shadow w-full">
-
-                                <div className="stat bg-success w-full">
-                                    <div className="stat-title text-white">Use Organization Hive</div>
-                                    <div className="stat-value text-neutral-50">RECOMMENDED</div>
-                                    <div className="stat-desc text-neutral-50">Cloud hosted always accessible</div>
-                                </div>
-
-                                <div className="stat bg-neutral-800 hover:bg-red-600 delay-150 duration-150 w-full">
-                                    <div className="stat-title text-white">Use External Databases</div>
-                                    <div className="stat-value text-neutral-50">RISKY</div>
-                                    <div className="stat-desc text-neutral-50">Use at your own risk.</div>
-                                </div>
-                            </div>
+                                <input type="text" placeholder="Node key" value={data[0].name} id="key" name="key" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" disabled />
                             </span>
                             <button role="submit"
                                     className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">

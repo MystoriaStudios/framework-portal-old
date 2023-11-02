@@ -9,6 +9,8 @@ import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faCube, faDashboard, faPodcast} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import moment from 'moment';
+import {faHeart} from "@fortawesome/free-regular-svg-icons";
 
 declare global {
     interface Window {
@@ -137,17 +139,27 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
 })
 
 export function NodeDetails() {
+
     const {isLoaded, organization} = useOrganization();
 
     const route = `https://api.nopox.xyz/api/nodes/${organization?.id}`
     console.log(route)
 
-    const {data, error, isValidating} = useSWR(route, fetcher)
+    const {data, error, isValidating} = useSWR(route, fetcher, { refreshInterval: 5000 })
 
     if (error) {
         return <p>{error.toString()}</p>
     }
 
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
     // @ts-ignore
     return (
         <div>
@@ -157,51 +169,58 @@ export function NodeDetails() {
                         <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                             Nodes
                         </div>
-                        <ul role="list" className="divide-y divide-neutral-100">
+                        <ul role="list" className="divide-y divide-neutral-900">
                             {
                                 // @ts-ignore
-                                data.map((node: any) => {
+                                data.sort((first: any, second: any) => {
+                                    return (first.state == "SETUP" ? -10 : first.state == "OFFLINE" ? 199 : 0) - (second.state == "SETUP" ? -10 : second.state == "OFFLINE" ? 199 : 0)
+                                }).map((node: any) => {
+                                    const date = Date.now() - node.pushedAt
+                                    if (date > 60 * (60 * 1000)) return null
                                     return (
                                         <li
-                                            className="flex justify-between gap-x-6 my-1 w-full pt-3 border-t-2 border-neutral-400 dark:border-neutral-900"
+                                            className="flex justify-between gap-x-6 my-1 w-full py-3 border-t-2 border-neutral-400 dark:border-neutral-900"
                                             key={node.identifier}>
-
                                              <span className="flex gap-x-6 ml-6">
                                                 {node.state === "ONLINE" ? (
                                                     <span
-                                                        className="bg-green-400 mx-auto my-auto w-fit text-sm border-green-600 btn px-2 font-extrabold animate-pulse">
-                                                        Online
+                                                        className="text-green-400 mx-auto w-fit text-sm border-green-600 btn font-extrabold animate-pulse">
+                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                 ) : (node.state === "BOOTING" ? (
                                                     <span
-                                                        className="bg-amber-400 mx-auto my-auto w-fit text-sm border-amber-600 btn px-2 font-extrabold animate-pulse">
-                                                        Booting
+                                                        className="text-amber-400 mx-auto my-auto w-fit text-sm border-amber-600 btn font-extrabold animate-pulse">
+                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                 ) : (node.state === "SETUP" ? (
                                                         <span
-                                                            className="text-blue-400 mx-auto my-auto w-fit text-sm border-blue-600 btn px-2 font-extrabold animate-pulse">
-                                                        Setup
+                                                            className="text-blue-400 mx-auto my-auto w-fit text-sm border-blue-600 btn font-extrabold animate-pulse">
+                                                        <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
                                                     </span>
                                                     ) : (
                                                         <span
-                                                            className="bg-red-400 mx-auto my-auto w-fit text-sm border-red-600 btn px-2 font-extrabold animate-pulse">
-                                                        Offline
+                                                            className="text-red-400 mx-auto my-auto w-fit text-sm border-red-600 btn font-extrabold animate-pulse">
+                                                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                     )
                                                 ))}
                                             </span>
                                             <span
-                                                className='font-extrabold text-sm my-auto ml-2 tracking-widest w-full mx-auto border-black'>
-                                                    {
-                                                        node.name
-                                                    }
+                                                className='text-mds my-auto flex flex-col ml-2 tracking-widest w-full mx-auto border-black'>
+                                                    <span className="font-extrabold">
+                                                        {
+                                                            node.name
+                                                        }
+                                                    </span>
+                                                <span className="-mt-1 text-sm w-56 dark:text-neutral-300">
+                                                    updated {
+                                                    date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + " mins" : (date / 1000).toString().split(".")[0] + " seconds")
+                                                    } {
+                                                        date > 2000 ? "ago" : ""
+                                                }
+                                                </span>
                                                 </span>
                                             <div className="mr-16 flex flex-row">
-                                                <span className="my-auto w-56 dark:text-neutral-300">
-                                                    updated {
-                                                    node.pushed_at
-                                                } snapshot
-                                                </span>
 
                                                 <div className="join">
                                                     <Link href={`/dashboard/nodes/${node.name}/pods`}

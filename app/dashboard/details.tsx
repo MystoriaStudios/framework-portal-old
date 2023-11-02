@@ -90,6 +90,17 @@ export function OrgDetails() {
                                                   value={organization?.pendingInvitationsCount || 0}/>
                                         <InfoCard title="BILLING" value="Not Required"/>
                                         <InfoCard title="NODES" value={"1/3"}/>
+
+                                        <div className="relative">
+                                            <span className="bg-gray-600 w-3 h-3 absolute -right-[4rem] top-3 rounded-full">
+                                            </span>
+
+                                            <span className="bg-amber-400 w-3 h-3 absolute -right-[5rem] top-3 rounded-full">
+                                            </span>
+
+                                            <span className="bg-red-600 w-3 h-3 absolute -right-[6rem] top-3 rounded-full">
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +175,7 @@ export function NodeDetails() {
     return (
         <div>
             <div className="mt-4">
-                {isLoaded && data ? (
+                {isLoaded && data && !isValidating && data.length > 0 ? (
                     <div className="pb-6 max-h-96">
                         <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                             Nodes
@@ -184,22 +195,22 @@ export function NodeDetails() {
                                              <span className="flex gap-x-6 ml-6">
                                                 {node.state === "ONLINE" ? (
                                                     <span
-                                                        className="text-green-400 mx-auto w-fit text-sm border-green-600 btn font-extrabold animate-pulse">
+                                                        className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
                                                         <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                 ) : (node.state === "BOOTING" ? (
                                                     <span
-                                                        className="text-amber-400 mx-auto my-auto w-fit text-sm border-amber-600 btn font-extrabold animate-pulse">
+                                                        className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
                                                         <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                 ) : (node.state === "SETUP" ? (
                                                         <span
-                                                            className="text-blue-400 mx-auto my-auto w-fit text-sm border-blue-600 btn font-extrabold animate-pulse">
+                                                            className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
                                                         <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
                                                     </span>
                                                     ) : (
                                                         <span
-                                                            className="text-red-400 mx-auto my-auto w-fit text-sm border-red-600 btn font-extrabold animate-pulse">
+                                                            className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
                                                         <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                     </span>
                                                     )
@@ -224,21 +235,21 @@ export function NodeDetails() {
 
                                                 <div className="join">
                                                     <Link href={`/dashboard/nodes/${node.name}/pods`}
-                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faPodcast}/>
                                                         <span className="-mt-2">
                                                              Pods
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}`}
-                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faDashboard}/>
                                                         <span className="-mt-2">
                                                              Details
                                                          </span>
                                                     </Link>
                                                     <Link href={`/dashboard/nodes/${node.name}/modules`}
-                                                          className="flex flex-col p-2 text-neutral-400 btn join-item font-bold">
+                                                          className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
                                                         <FontAwesomeIcon icon={faCube}/>
                                                         <span className="-mt-2">
                                                              Modules
@@ -246,7 +257,7 @@ export function NodeDetails() {
                                                     </Link>
                                                     {node.state === "SETUP" ? (
                                                         <Link href={`/dashboard/nodes/${node.name}/setup`}
-                                                              className="animate-pulse flex flex-col p-2 text-blue-400 btn join-item font-bold">
+                                                              className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
                                                             <FontAwesomeIcon icon={faCogs}/>
                                                             <span className="-mt-2">
                                                                  Setup
@@ -262,10 +273,8 @@ export function NodeDetails() {
                         </ul>
                     </div>
                 ) : (
-                    <div className="text-neutral-700 px-8 pb-5 text-sm">
-                        There are no nodes found on this organization or
-                        <br/>
-                        Create or switch to an organization to see its details.
+                    <div className="text-gray-50 px-8 pb-5 text-2xl text-center">
+                        There are no nodes found on this organization you can follow our node setup guide <Link className="text-amber-400" href={"/"}>here</Link>
                     </div>
                 )
                 }

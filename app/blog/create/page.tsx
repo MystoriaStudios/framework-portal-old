@@ -45,7 +45,7 @@ export default async function BlogCreatePage() {
                             </span>
                             <input
                                 // @ts-ignore
-                                type="hidden" value={user.firstName} id="author" name="author"/>
+                                type="hidden" value={user?.firstName || ""} id="author" name="author"/>
                             <button role="submit"
                                     className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">
                                 Create Blog Posts

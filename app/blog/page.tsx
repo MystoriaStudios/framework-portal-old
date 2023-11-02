@@ -47,9 +47,9 @@ export default function BlogPage() {
 
 
                     <div className="grid grid-rows-4 grid-cols-3 gap-12 p-4">
-                        {data.length > 0 ? (
+                        {data && data.length > 0 ? (
                             data.map((post): any => (
-                                <Link key={post.key} href={`/blog/post/${post.key}`} className="card w-96 light:glass dark:bg-neutral-800 shadow-lg">
+                                <Link key={post.key} href={`/blog/${post.key}`} className="card w-96 light:glass dark:bg-neutral-800 shadow-lg">
                                     <figure><img src="https://imgs.search.brave.com/QA-ofQEF-eW6XEH42EiGzTAjNPmoXPyIyJmgKBencb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzIzL05vcnRoZXJu/XzMzMV8xMDFfbGVh/dmluZ19CZW5fUmh5/ZGRpbmcuanBn" alt="car!"/></figure>
                                     <div className="card-body">
                                         <h2 className="card-title dark:text-neutral-50">{post.title}</h2>

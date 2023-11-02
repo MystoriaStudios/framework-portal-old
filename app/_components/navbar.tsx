@@ -21,7 +21,7 @@ export default function Navbar({children}) {
 
     return (
         <Disclosure as="nav"
-                    className="pt-8 pb-4 bg-neutral-50 shadow-sm border-b-2 border-neutral-200 dark:border-black dark:bg-neutral-950">
+                    className="pt-8 z-50 pb-4 bg-neutral-50 shadow-sm border-b-2 border-neutral-200 dark:border-black dark:bg-neutral-950">
             {({open}) => (
                 <>
                     <div className="mx-auto pr-52">

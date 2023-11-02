@@ -239,7 +239,7 @@ export function NodeDetails() {
                                     return (
                                         <li
                                             key={node.identifier}>
-                                            <Link href={node.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-t-2 border-neutral-400 dark:border-neutral-900">
+                                            <Link href={node.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
 
                                                  <span className="flex gap-x-6 ml-6" >
                                                     {node.state === "ONLINE" ? (

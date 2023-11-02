@@ -43,7 +43,9 @@ export default async function BlogCreatePage() {
                                 Body
                                 <input type="textarea" id="content" name="content" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
                             </span>
-                            <input type="hidden" value={user.firstName} id="author" name="author"/>
+                            <input
+                                // @ts-ignore
+                                type="hidden" value={user.firstName} id="author" name="author"/>
                             <button role="submit"
                                     className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">
                                 Create Blog Posts

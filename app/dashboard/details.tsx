@@ -117,7 +117,8 @@ export function OrgDetails() {
                                                 Network Display Name
                                             </div>
                                             <div className="p-4">
-                                                <input type="text" placeholder="Enter a primary display name" value={
+                                                <input // @ts-ignore
+                                                    type="text" placeholder="Enter a primary display name" value={
                                                     organization.publicMetadata["network_displayName"] || ""
                                                 } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
                                             </div>

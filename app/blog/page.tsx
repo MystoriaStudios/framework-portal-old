@@ -1,40 +1,44 @@
-import {auth, clerkClient} from "@clerk/nextjs";
+"use client"
+
+import {auth, clerkClient, useUser} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
 import Link from "next/link";
+import useSWR from "swr";
 
-export default async function BlogPage() {
+const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
+    const response = await res.json()
+    console.log(response)
+    return response
+})
+
+export default function BlogPage() {
     const route = `https://api.nopox.xyz/api/blog/posts`
 
-    let posts: any[] = []
-    await fetch(route).then(async it => {
-        posts = await it.json()
-    })
+    const {data, error, isValidating} = useSWR(route, fetcher, { refreshInterval: 5000 })
 
-    const {userId} = auth();
-
-    if (!userId) {
-        redirect("/");
+    if (data && data[0] !== undefined && data[0].state == "SETUP") {
+        redirect(`/dashboard/nodes/${data[0].identifier}/setup`)
     }
 
-    const user = await clerkClient.users.getUser(userId);
+    const user = useUser()
 
     // @ts-ignore
     return (
         <div className="px-8 py-12 sm:py-16 md:px-20">
-            {user && (
+            {user.user && (
                 <div className="px-72">
                     <div className="flex-row flex">
                         <div className="flex-col flex">
                             <h1 className="text-3xl font-semibold">
-                                👋 Hi, {user.firstName || `Stranger`}
+                                👋 Hi, {user.user.firstName || `Stranger`}
                             </h1>
                             <span>Welcome to our blog space!</span>
                         </div>
                         {
                             // @ts-ignore
-                            user.publicMetadata["role"] >= 4 ? (
+                            user.user.publicMetadata["role"] >= 4 ? (
                                 <Link href="/blog/create"
-                                      className="ml-auto h-8 px-3 rounded flex bg-green-400 border-green-600 opacity-80 text-white font-bold text-xl">
+                                      className="ml-auto btn text-green-400 border-green-600 opacity-80 dark:bg-neutral-800 text-xl rounded-none rounded-tr-lg rounded-bl-lg">
                                     Create Post
                                 </Link>
                             ) : (<></>)
@@ -42,19 +46,19 @@ export default async function BlogPage() {
                     </div>
 
 
-                    <div className="flex-col gap-y-8">
-                        {
-                            posts.length
-                        } Posts
-                        {posts.length > 0 ? (
-                            posts.map((post): any => (
-                                <Link key={post.key} href={`/blog/post/${post.key}`}
-                                      className="flex-col rounded my-4 shadow-lg bg-neutral-100">
-                                    <h1 className="font-bold text-2xl mt-4">{post.title}</h1>
-                                    <h2 className="font-normal text-sm">Written by, {post.author}</h2>
-                                    <hr/>
-
-                                    <p>${post.content}</p>
+                    <div className="grid grid-rows-4 grid-cols-3 gap-12 p-4">
+                        {data.length > 0 ? (
+                            data.map((post): any => (
+                                <Link key={post.key} href={`/blog/post/${post.key}`} className="card w-96 light:glass dark:bg-neutral-800 shadow-lg">
+                                    <figure><img src="https://imgs.search.brave.com/QA-ofQEF-eW6XEH42EiGzTAjNPmoXPyIyJmgKBencb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzIzL05vcnRoZXJu/XzMzMV8xMDFfbGVh/dmluZ19CZW5fUmh5/ZGRpbmcuanBn" alt="car!"/></figure>
+                                    <div className="card-body">
+                                        <h2 className="card-title dark:text-neutral-50">{post.title}</h2>
+                                        <p className="dark:text-neutral-200">{post.content}</p>
+                                    </div>
+                                    <div className="card-actions gap-x-0 justify-end -mb-4">
+                                        <button className="btn rounded-none rounded-tl-xl text-sky-400 border-sky-400 border-1 dark:bg-neutral-800">Share Post</button>
+                                        <button className="btn rounded-none rounded-br-xl text-amber-400 border-amber-400 border-1 dark:bg-neutral-800">View post!</button>
+                                    </div>
                                 </Link>
                             ))
                         ) : (

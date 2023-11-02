@@ -30,12 +30,11 @@ export default function RootLayout({
 }) {
     // @ts-ignore
     return (
-        <main className="grow">
-            <div className="flex">
+            <div className="flex min-h-fit">
                 {<div
-                    className="block w-64 bg-neutral-100 dark:bg-neutral-950">
+                    className="w-64 bg-neutral-100 dark:bg-neutral-950 min-h-fit">
                     <div
-                        className="flex flex-col text-center pb-12 h-[90vh]">
+                        className="flex flex-col text-center pb-12">
                         <div
                             className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-neutral-300">
                             <div className="hidden sm:block">
@@ -87,12 +86,11 @@ export default function RootLayout({
                     </div>
                 </div>
                 }
-                <div className="w-full bg-neutral-100 dark:bg-neutral-950">
-                    <div className="block pb-96 bg-neutral-50 p-16 min-h-fit dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black">
+                <div className="w-full bg-neutral-100 dark:bg-neutral-950 h-fit">
+                    <div className="block bg-neutral-50 p-16 h-[100%] dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black">
                         {children}
                     </div>
                 </div>
             </div>
-        </main>
     );
 }

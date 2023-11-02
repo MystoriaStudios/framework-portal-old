@@ -58,7 +58,7 @@ export function NodeDetails() {
         <div className="mt-12">
             <div className="mt-4">
                 {!isValidating && data[0] !== undefined ? (
-                    <div className="max-h-96">
+                    <div>
                         <div className="flex flex-row pb-8">
                             <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 

@@ -11,7 +11,7 @@ import {faCogs, faCube, faDashboard, faPodcast} from "@fortawesome/free-solid-sv
 import Link from "next/link";
 import moment from 'moment';
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
-import {faDocker} from "@fortawesome/free-brands-svg-icons";
+import {faDiscord, faDocker, faSnapchat, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons";
 
 declare global {
     interface Window {
@@ -38,7 +38,7 @@ export function OrgDetails() {
         <div className="mt-12">
             <div className="mt-4">
                 {isLoaded && organization ? (
-                    <div className="max-h-96">
+                    <div>
                         <div className="flex flex-row pb-8">
                             <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 
@@ -108,26 +108,71 @@ export function OrgDetails() {
 
                             {organization ? (
                                 <div>
-                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
-                                        Allocated Primary Domain
+                                    <div className={"flex flex-row"}>
+                                        <div className={"flex flex-col"}>
+                                            <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                                Network Display Name
+                                            </div>
+                                            <div className="p-4">
+                                                <input type="text" placeholder="Enter a primary display name" value={
+                                                    organization.publicMetadata["network_displayName"] || ""
+                                                } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                            </div>
+                                        </div>
+
+
+
+                                        <div className={"flex flex-col"}>
+                                            <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                                Allocated Primary Domain
+                                            </div>
+                                            <div className="p-4">
+                                                <input type="text" placeholder="Update primary domain" value={
+                                                    "nopox.xyz"
+                                                } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                            </div>
+                                        </div>
                                     </div>
 
+                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                        Network Social Media Configuration
+                                    </div>
                                     <div className="p-4">
-                                        <input type="text" placeholder="Update primary domain" value={
-                                            "tesst.xys"
-                                        } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                        <div className={"flex flex-col gap-y-2"}>
+                                            <div className={"flex flex-row"}>
+                                                <FontAwesomeIcon className={"text-3xl p-2 mr-2 text-sky-400"} icon={faTwitter}></FontAwesomeIcon>
+                                                <input type="text" placeholder="Enter twitter handle" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-sky-400 w-full max-w-xs" />
+                                                <span className={"my-auto text-sky-400 text-bold tracking-wider ml-4"}>
+                                                    bound to "nopox.xyz/twitter"
+                                                </span>
+                                            </div>
+                                            <div className={"flex flex-row"}>
+                                                <FontAwesomeIcon className={"text-3xl p-1.5 py-2 mr-2 text-amber-400"} icon={faSnapchat}></FontAwesomeIcon>
+                                                <input type="text" placeholder="Enter snapchat tag" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-amber-400 w-full max-w-xs" />
+                                                <span className={"my-auto text-amber-400 text-bold tracking-wider ml-4"}>
+                                                    bound to "nopox.xyz/snapchat"
+                                                </span>
+                                            </div>
+                                            <div className={"flex flex-row"}>
+                                                <FontAwesomeIcon className={"text-3xl p-1 py-2 mr-2 text-[#5865F2]"} icon={faDiscord}></FontAwesomeIcon>
+                                                <input type="text" placeholder="Enter discord Guild ID" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-[#5865F2] w-full max-w-lg" />
+                                                <span className={"my-auto text-[#5865F2] text-bold tracking-wider ml-4"}>
+                                                    bound to "nopox.xyz/discord"
+                                                </span>
+                                            </div>
+                                            <div className={"flex flex-row"}>
+                                                <FontAwesomeIcon className={"text-3xl p-1 py-2 mr-2 text-red-600"} icon={faYoutube}></FontAwesomeIcon>
+                                                <input type="text" placeholder="Enter youtube channel ID" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-red-600 w-full max-w-lg" />
+                                                <span className={"my-auto text-red-600 text-bold tracking-wider ml-4"}>
+                                                    bound to "nopox.xyz/youtube"
+                                                </span>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
-                                <div>
-                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
-                                        Allocate a Primary Domain
-                                    </div>
-
-                                    <div className="p-4">
-                                        <input type="text" placeholder="Set your primary domain" className="input input-bordered input-warning w-full max-w-xs" />
-                                    </div>
-                                </div>
+                                "No organization found."
                             )
                             }
 
@@ -177,7 +222,7 @@ export function NodeDetails() {
         <div>
             <div className="mt-4 transition-all delay-300 transition">
                 {isLoaded && data && !isValidating && data.length > 0 ? (
-                    <div className="pb-6 max-h-96">
+                    <div className="pb-6">
                         <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                             Nodes
                         </div>

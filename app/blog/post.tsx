@@ -29,7 +29,7 @@ export function Post(key: String) {
             </div>
             <div className="mt-4">
                 {isValidating ? (
-                    <div className="pb-6 max-h-96">
+                    <div className="pb-6">
                         Loading post {key}..
                     </div>
                 ) : (

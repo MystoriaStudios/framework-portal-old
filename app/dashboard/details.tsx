@@ -201,7 +201,9 @@ export function NodeDetails() {
                                     if (date > 60 * (60 * 1000)) return null
                                     return (
                                         <li
-                                            key={node.identifier}>
+                                            key={node.identifier}
+                                            className="transition-all delay-150 duration-200"
+                                        >
                                             <Link href={node.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
 
                                                  <span className="flex gap-x-6 ml-6" >
@@ -240,7 +242,7 @@ export function NodeDetails() {
                                                         {
                                                             node.state == "OFFLINE" ? "offline since" : "updated"
                                                         } {
-                                                        date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + " mins" : (date / 1000).toString().split(".")[0] + " seconds")
+                                                        date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + "m" : (date / 1000).toString().split(".")[0] + "s")
                                                         } {
                                                             date > 2000 ? "ago" : ""
                                                     }

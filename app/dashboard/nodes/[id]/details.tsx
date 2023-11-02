@@ -84,18 +84,18 @@ export function NodeDetails() {
                                     <div
                                         className="bg-amber-400 flex flex-col text-center rounded-tl-[1.5rem] rounded-br-[1.5rem] pb-1 pt-2 px-16 font-bold tracking-widest text-white">
                                         <span>
-                                            Node
+                                            NODE
                                         </span>
-                                        <span className="text-4xl w-44 -mt-2">
+                                        <span className="text-3xl w-48 -mt-2">
                                             {data[0].name}
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
                                         <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
                                         <InfoCard title="ADDRESS" value={data[0].href}/>
-                                        <InfoCard title="CONTAINERS" value={"0"}/>
-                                        <InfoCard title="TEMPLATES" value={"13"}/>
-                                        <InfoCard title="MODULES" value={"6"}/>
+                                        <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
+                                        <InfoCard title="TEMPLATES" value={organization?.publicMetadata?.templates || 0}/>
+                                        <InfoCard title="MODULES" value={data[0].modules || 0}/>
                                         <InfoCard title="STATE" value={data[0].state}/>
 
                                         <div className="relative">

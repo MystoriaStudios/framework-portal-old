@@ -120,35 +120,31 @@ export function NodeDetails() {
                                             <span>Your docker installation is up to date!</span>
                                         </div>
                                     </div>
-                                    {
-                                        JSON.stringify(node)
-                                    }
-                                    {
-                                        JSON.stringify(data)
-                                    }
 
-                                    <div className="mockup-code center bg-neutral-800 md:mt-8 mb-4 text-primary-content text-left w-[90%] mx-[5%] drop-shadow-2xl">
+                                    <div className="mockup-code center bg-neutral-800 md:mt-8 m-4 text-primary-content text-left w-[96%] mx-[2%] drop-shadow-2xl">
                                         <pre data-prefix="$" className="text-warning"><code>
                                             Welcome to Framework Node version aa99f2
                                         </code></pre>
-                                                            <pre data-prefix=">" className="text-warning"><code>
-                                            <BiSleepy className="inline-block text-2xl" /> We're building something amazing for you [21%]
-                                        </code></pre>
-                                                            <pre data-prefix=">" className="text-neutral-400"><code>
-                                            <BiCommand className="inline-block text-2xl" /> Testing out what we've done... [46%]
-                                        </code></pre>
-                                                            <pre data-prefix=">" className="text-error"><code>
-                                            <BiAlarmExclamation className="inline-block text-2xl" /> Oops! We found a mistake! [72%]
-                                        </code></pre>
-                                                            <pre data-prefix=">" className="text-fuchsia-500"><code>
-                                            <BiWrench className="inline-block text-2xl" /> Just a sec, polishing up our work [95%]
-                                        </code></pre>
-                                                            <pre data-prefix=">" className="text-success"><code>
-                                            <BiCheck className="inline-block text-2xl" /> Success! We have setup docker and now setup!
-                                        </code></pre>
-                                                            <pre data-prefix=">" className="text-success"><code>
+                                        <pre data-prefix=">" className="text-success"><code>
                                             Setup in 2.042 seconds <Link href="https://mystoria.dev" target="_blank" rel="noreferrer noopener" className="hover:underline">https://mystoria.dev</Link>
                                         </code></pre>
+                                        <ul>
+
+                                        </ul>
+
+                                        <form className="my-4 flex-row gap-10 w-1/2" method="post"
+                                              action={`http://${data[0].href}:8086/setup/${data[0].identifier}`}>
+                                            <input list="data" autoComplete="off" placeholder="$   Type help to view a list of commands" id="key" name="key" className="ml-2 dark:bg-neutral-800 input border-none hover:border-none w-full text-neutral-100" />
+                                            <datalist id="data">
+                                                {[
+                                                    "help",
+                                                    "template",
+                                                    "container"
+                                                ].map((item, key) =>
+                                                    <option key={key} value={item} />
+                                                )}
+                                            </datalist>
+                                        </form>
                                     </div>
                                 </div>
                             ) : (

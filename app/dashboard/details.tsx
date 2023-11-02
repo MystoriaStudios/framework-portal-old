@@ -42,7 +42,7 @@ export function OrgDetails() {
                         <div className="flex flex-row pb-8">
                             <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 
-                                <div className="stat rounded-2xl bg-amber-400">
+                                <div className="stat rounded-bl-2xl rounded-tr-2xl bg-amber-400">
                                     <div className="stat-title text-white">Total Traffic Volume</div>
                                     <div className="stat-value text-neutral-50">89,400</div>
                                     <div className="stat-desc text-neutral-50">21% more than last month</div>
@@ -52,7 +52,7 @@ export function OrgDetails() {
                                     <div className="stat-value text-neutral-50">1,427</div>
                                     <div className="stat-desc text-neutral-50">53% more than last month</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-red-600">
+                                <div className="stat bg-red-600 rounded-br-2xl rounded-tl-2xl">
                                     <div className="stat-title text-white">Co2 Reports</div>
                                     <div className="stat-value text-neutral-50">1,427,000kg p/sqi</div>
                                     <div className="stat-desc text-neutral-50">53% more than last month</div>
@@ -105,6 +105,9 @@ export function OrgDetails() {
                                     </div>
                                 </div>
                             </div>
+
+
+                            <NodeDetails/>
 
                             {organization ? (
                                 <div>
@@ -175,8 +178,6 @@ export function OrgDetails() {
                                 "No organization found."
                             )
                             }
-
-                            <NodeDetails/>
                         </div>
                     </div>
                 ) : (
@@ -283,25 +284,25 @@ export function NodeDetails() {
                                                 </span>
                                                 <div className="mr-8 flex flex-row">
 
-                                                    <div className="join mr-6">
+                                                    <div className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl">
                                                         { node.state === "ONLINE" ?
                                                             <>
-                                                                <Link href={`/dashboard/nodes/${node.name}/containers`}
-                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/containers`}
+                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
                                                                     <FontAwesomeIcon icon={faDocker}/>
                                                                     <span className="-mt-2">
                                                                      Containers
                                                                  </span>
                                                                 </Link>
-                                                                <Link href={`/dashboard/nodes/${node.name}`}
-                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                <Link href={`/dashboard/nodes/${node.identifier}`}
+                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
                                                                     <FontAwesomeIcon icon={faDashboard}/>
                                                                     <span className="-mt-2">
                                                                  Details
                                                              </span>
                                                                 </Link>
-                                                                <Link href={`/dashboard/nodes/${node.name}/modules`}
-                                                                      className="flex flex-col p-2 px-4 text-neutral-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/modules`}
+                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
                                                                     <FontAwesomeIcon icon={faCube}/>
                                                                     <span className="-mt-2">
                                                                  Modules
@@ -310,13 +311,22 @@ export function NodeDetails() {
                                                             </> : <></>
                                                         }
                                                         {node.state === "SETUP" ? (
-                                                            <Link href={`/dashboard/nodes/${node.identifier}/setup`}
-                                                                  className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                                <FontAwesomeIcon icon={faCogs}/>
-                                                                <span className="-mt-2">
-                                                                     Setup
-                                                                </span>
-                                                            </Link>
+                                                                <>
+                                                                    <Link href={`/dashboard/nodes/${node.identifier}/setup`}
+                                                                          className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                        <FontAwesomeIcon icon={faYoutube}/>
+                                                                        <span className="-mt-2">
+                                                                             Watch tutorial
+                                                                        </span>
+                                                                    </Link>
+                                                                    <Link href={`/dashboard/nodes/${node.identifier}/setup`}
+                                                                          className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                        <FontAwesomeIcon icon={faCogs}/>
+                                                                        <span className="-mt-2">
+                                                                             Setup
+                                                                        </span>
+                                                                    </Link>
+                                                                </>
                                                         ) : (<></>)}
                                                     </div>
 

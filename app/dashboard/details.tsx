@@ -137,43 +137,6 @@ export function OrgDetails() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
-                                        Network Social Media Configuration
-                                    </div>
-                                    <div className="p-4">
-                                        <div className={"flex flex-col gap-y-2"}>
-                                            <div className={"flex flex-row"}>
-                                                <FontAwesomeIcon className={"text-3xl p-2 mr-2 text-sky-400"} icon={faTwitter}></FontAwesomeIcon>
-                                                <input type="text" placeholder="Enter twitter handle" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-sky-400 w-full max-w-xs" />
-                                                <span className={"my-auto text-sky-400 text-bold tracking-wider ml-4"}>
-                                                    bound to "nopox.xyz/twitter"
-                                                </span>
-                                            </div>
-                                            <div className={"flex flex-row"}>
-                                                <FontAwesomeIcon className={"text-3xl p-1.5 py-2 mr-2 text-amber-400"} icon={faSnapchat}></FontAwesomeIcon>
-                                                <input type="text" placeholder="Enter snapchat tag" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-amber-400 w-full max-w-xs" />
-                                                <span className={"my-auto text-amber-400 text-bold tracking-wider ml-4"}>
-                                                    bound to "nopox.xyz/snapchat"
-                                                </span>
-                                            </div>
-                                            <div className={"flex flex-row"}>
-                                                <FontAwesomeIcon className={"text-3xl p-1 py-2 mr-2 text-[#5865F2]"} icon={faDiscord}></FontAwesomeIcon>
-                                                <input type="text" placeholder="Enter discord Guild ID" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-[#5865F2] w-full max-w-lg" />
-                                                <span className={"my-auto text-[#5865F2] text-bold tracking-wider ml-4"}>
-                                                    bound to "nopox.xyz/discord"
-                                                </span>
-                                            </div>
-                                            <div className={"flex flex-row"}>
-                                                <FontAwesomeIcon className={"text-3xl p-1 py-2 mr-2 text-red-600"} icon={faYoutube}></FontAwesomeIcon>
-                                                <input type="text" placeholder="Enter youtube channel ID" className="input input-bordered bg-neutral-50 dark:bg-neutral-900 border-red-600 w-full max-w-lg" />
-                                                <span className={"my-auto text-red-600 text-bold tracking-wider ml-4"}>
-                                                    bound to "nopox.xyz/youtube"
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </div>
                                 </div>
                             ) : (
                                 "No organization found."
@@ -204,7 +167,7 @@ export function NodeDetails() {
     const route = `https://api.nopox.xyz/api/nodes/${organization?.id}`
     console.log(route)
 
-    const {data, error, isValidating} = useSWR(route, fetcher, { refreshInterval: 5000 })
+    const {data, error, isValidating} = useSWR(route, fetcher, { revalidateIfStale: true, revalidateOnFocus: true, refreshInterval: 30000 })
 
     if (error) {
         return <p>{error.toString()}</p>
@@ -215,7 +178,7 @@ export function NodeDetails() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(new Date());
-        }, 1000);
+        }, 1500);
 
         return () => clearInterval(interval);
     }, []);

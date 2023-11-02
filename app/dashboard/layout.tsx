@@ -87,7 +87,7 @@ export default function RootLayout({
                 </div>
                 }
                 <div className="w-full bg-neutral-100 dark:bg-neutral-950 h-fit pb-32">
-                    <div className="block bg-neutral-50 p-16 h-[100%] dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black">
+                    <div className="block bg-neutral-50 p-16 min-h-[80vh] dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black">
                         {children}
                     </div>
                 </div>

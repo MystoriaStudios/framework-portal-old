@@ -87,16 +87,21 @@ export function NodeDetails() {
                                             Node
                                         </span>
                                         <span className="text-4xl w-44 -mt-2">
-                                            {data[0].name}
+                                            {data[0].name || "unknown"}
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
-                                        <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
-                                        <InfoCard title="ADDRESS" value={data[0].href}/>
-                                        <InfoCard title="CONTAINERS" value={"0"}/>
-                                        <InfoCard title="TEMPLATES" value={"13"}/>
-                                        <InfoCard title="MODULES" value={"6"}/>
-                                        <InfoCard title="STATE" value={data[0].state}/>
+                                        { data.length && data.length > 0 ? (
+                                                <>
+                                                    <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
+                                                    <InfoCard title="ADDRESS" value={data[0].href}/>
+                                                    <InfoCard title="CONTAINERS" value={"0"}/>
+                                                    <InfoCard title="TEMPLATES" value={"13"}/>
+                                                    <InfoCard title="MODULES" value={"6"}/>
+                                                    <InfoCard title="STATE" value={data[0].state}/>
+                                                </>
+                                            ) : <></>
+                                        }
 
                                         <div className="relative">
                                             <span className="bg-gray-600 w-3 h-3 absolute -right-[4rem] top-3 rounded-full">

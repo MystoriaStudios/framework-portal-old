@@ -1,5 +1,6 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
+import React from "react";
 
 export default async function BlogCreatePage() {
     const {userId} = auth();
@@ -29,27 +30,25 @@ export default async function BlogCreatePage() {
 
                     <form className="mt-12 flex-row gap-10" method="post"
                           action="https://api.nopox.xyz/api/blog/post">
-                        <input placeholder="Enter a key (slug)" type="text" id="key" name="key"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-neutral-900 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                        />
-                        <br/>
-                        <input placeholder="Enter a title" type="text" id="title" name="title"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-neutral-900 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                        />
-                        <br/>
-                        <input placeholder="Enter some content" type="textarea" id="content" name="content"
-                               className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-neutral-900 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                        />
-                        <br/>
-                        <input // @ts-ignore
-                            value={user.firstName} type="text" id="author" name="author"
-                            className="block w-96 rounded-full bg-opacity-10 border-opacity-20 bg-neutral-200 border-0 py-1.5 pl-7 pr-20 text-neutral-900 ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                        />
-                        <br/>
-                        <button role="submit"
-                                className="h-8 px-3 rounded flex bg-green-400 border-green-600 opacity-80 text-white font-bold text-xl">
-                            Create Post
-                        </button>
+                        <div className={"flex flex-col gap-y-4"}>
+                            <span className={"flex flex-col gap-1"}>
+                                Slug
+                                <input type="text" id="key" name="key" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
+                            </span>
+                            <span className={"flex flex-col gap-1"}>
+                                Title
+                                <input type="text" id="title" name="title" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
+                            </span>
+                            <span className={"flex flex-col gap-1"}>
+                                Body
+                                <input type="textarea" id="content" name="content" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
+                            </span>
+                            <input type="hidden" value={user.firstName} id="author" name="author"/>
+                            <button role="submit"
+                                    className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">
+                                Create Blog Posts
+                            </button>
+                        </div>
                     </form>
                 </div>
             )}

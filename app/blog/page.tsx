@@ -10,7 +10,6 @@ const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).
     console.log(response)
     return response
 })
-
 export default function BlogPage() {
     const route = `https://api.nopox.xyz/api/blog/posts`
 

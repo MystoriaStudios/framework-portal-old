@@ -4,6 +4,8 @@ import {auth, clerkClient, useUser} from "@clerk/nextjs";
 import useSWR from "swr";
 import React from "react";
 import {useParams} from "next/navigation";
+import remarkGfm from "remark-gfm";
+import Markdown from "react-markdown";
 
 const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()
@@ -45,9 +47,7 @@ export default function PostPage() {
                             <button className="btn rounded-none rounded-br-xl rounded-tl-xl text-sky-400 border-sky-400 border-1 dark:bg-neutral-800 ml-auto">Share Post</button>
                         </div>
 
-                        <p>
-                            {data[0].content}
-                        </p>
+                        <Markdown remarkPlugins={[remarkGfm]}>{decodeURI(data[0].content)}</Markdown>
                     </div>
                 </>
             )}

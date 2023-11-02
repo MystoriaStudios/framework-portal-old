@@ -175,7 +175,7 @@ export function NodeDetails() {
     // @ts-ignore
     return (
         <div>
-            <div className="mt-4">
+            <div className="mt-4 transition-all delay-300 transition">
                 {isLoaded && data && !isValidating && data.length > 0 ? (
                     <div className="pb-6 max-h-96">
                         <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
@@ -298,7 +298,7 @@ export function NodeDetails() {
                         </ul>
                     </div>
                 ) : (
-                    <div className="text-gray-50 px-8 pb-5 text-2xl text-center">
+                    <div className="text-gray-50 px-8 pb-5 text-2xl text-center transition-all delay-300">
                         There are no nodes found on this organization you can follow our node setup guide <Link className="text-amber-400" href={"/"}>here</Link>
                     </div>
                 )

@@ -85,7 +85,7 @@ export function OrgDetails() {
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
-                                        <InfoCard title="IDENTIFIER" value={organization.id}/>
+                                        <InfoCard title="IDENTIFIER" value={organization.id.replace("org_", "")}/>
                                         <InfoCard title="MEMBERS" value={(organization?.membersCount || 0) + "/5"}/>
                                         <InfoCard title="PENDING INVITATIONS"
                                                   value={organization?.pendingInvitationsCount || 0}/>

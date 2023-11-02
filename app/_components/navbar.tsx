@@ -82,7 +82,7 @@ export default function Navbar({children}) {
                                 }
                             </div>
                             {colorTheme === "light" ? (
-                                <div className="flex flex-row gap-x-4 bg-neutral-100 bg-opacity-10 px-3 py-2 rounded-full">
+                                <div className="flex flex-row gap-x-4 bg-neutral-100 bg-opacity-10 px-3 py-2 rounded-tl-2xl rounded-br-2xl">
                                     <svg
                                         // @ts-ignore
                                         onClick={() => setTheme("light")}
@@ -115,7 +115,7 @@ export default function Navbar({children}) {
                                     </svg>
                                 </div>
                             ) : (
-                                <div className="flex flex-row gap-x-4 bg-neutral-400 bg-opacity-10 px-3 py-2 rounded-full">
+                                <div className="flex flex-row gap-x-4 bg-neutral-400 bg-opacity-10 px-3 py-2 rounded-tr-2xl rounded-bl-2xl">
                                     <svg
                                         // @ts-ignore
                                         xmlns="http://www.w3.org/2000/svg"

@@ -36,14 +36,20 @@ export function NodeDetails() {
     const params = useParams();
     const id = params.id;
 
-    const route = `https://api.nopox.xyz/api/nodes/${id}`
+
+    const {data, error, isValidating} = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, { refreshInterval: 5000 })
+
+/*    if (!isValidating && data[0].state == "SETUP") {
+        router.push(`/dashboard/nodes/${id}/setup`)
+    }*/
+
+    const route = `http://${data ? data[0].href : ""}:8086/peak`
     console.log(route)
 
-    const {data, error, isValidating} = useSWR(route, fetcher, { refreshInterval: 5000 })
+    const {data: node} = useSWR(route, fetcher, { refreshInterval: 5000 })
 
-    if (data && data[0] !== undefined && data[0].state == "SETUP") {
-        router.push(`/dashboard/nodes/${id}/setup`)
-    }
+    console.log(node)
+
     if (error) {
         return <p>{error.toString()}</p>
     }
@@ -57,31 +63,17 @@ export function NodeDetails() {
                             <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
 
                                 <div className="stat rounded-2xl bg-amber-400">
-                                    <div className="stat-title text-white">Total Traffic Volume</div>
-                                    <div className="stat-value text-neutral-50">89,400</div>
-                                    <div className="stat-desc text-neutral-50">21% more than last month</div>
+                                    <div className="stat-title text-white">Used Memory</div>
+                                    <div className="stat-value text-neutral-50">{(node?.usedMemory) / 10240000 || 0}GB</div>
                                 </div>
                                 <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
-                                    <div className="stat-title text-white">Hours Used</div>
-                                    <div className="stat-value text-neutral-50">1,427</div>
-                                    <div className="stat-desc text-neutral-50">53% more than last month</div>
-                                </div>
-                                <div className="stat rounded-2xl bg-red-600">
-                                    <div className="stat-title text-white">Co2 Reports</div>
-                                    <div className="stat-value text-neutral-50">1,427,000kg p/sqi</div>
-                                    <div className="stat-desc text-neutral-50">53% more than last month</div>
+                                    <div className="stat-title text-white">Assigned Memory</div>
+                                    <div className="stat-value text-neutral-50">{node?.assignedMemory || "None"}</div>
                                 </div>
                                 <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
-                                    <div className="stat-title text-white">Tickets</div>
-                                    <div className="stat-value text-neutral-50">4</div>
-                                    <div className="stat-desc text-neutral-50">400% more than last month</div>
+                                    <div className="stat-title text-white">Assignable Cores</div>
+                                    <div className="stat-value text-neutral-50">{node?.availableCores || 1}</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
-                                    <div className="stat-title text-white">Individual Users</div>
-                                    <div className="stat-value text-neutral-50">119</div>
-                                    <div className="stat-desc text-neutral-50">80% more than last month</div>
-                                </div>
-
                             </div>
                         </div>
 
@@ -99,7 +91,8 @@ export function NodeDetails() {
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
-                                        <InfoCard title="IDENTIFIER" value={data[0].identifier}/>
+                                        <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
+                                        <InfoCard title="ADDRESS" value={data[0].href}/>
                                         <InfoCard title="CONTAINERS" value={"0"}/>
                                         <InfoCard title="TEMPLATES" value={"13"}/>
                                         <InfoCard title="MODULES" value={"6"}/>
@@ -127,27 +120,39 @@ export function NodeDetails() {
                                             <span>Your docker installation is up to date!</span>
                                         </div>
                                     </div>
+                                    {
+                                        JSON.stringify(node)
+                                    }
+                                    {
+                                        JSON.stringify(data)
+                                    }
 
-                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
-                                        Allocated Primary Domain
-                                    </div>
-
-                                    <div className="p-4">
-                                        <input type="text" placeholder="Update primary domain" value={
-                                            "tesst.xys"
-                                        } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                    <div className="mockup-code center bg-neutral-800 md:mt-8 mb-4 text-primary-content text-left w-[90%] mx-[5%] drop-shadow-2xl">
+                                        <pre data-prefix="$" className="text-warning"><code>
+                                            Welcome to Framework Node version aa99f2
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-warning"><code>
+                                            <BiSleepy className="inline-block text-2xl" /> We're building something amazing for you [21%]
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-neutral-400"><code>
+                                            <BiCommand className="inline-block text-2xl" /> Testing out what we've done... [46%]
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-error"><code>
+                                            <BiAlarmExclamation className="inline-block text-2xl" /> Oops! We found a mistake! [72%]
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-fuchsia-500"><code>
+                                            <BiWrench className="inline-block text-2xl" /> Just a sec, polishing up our work [95%]
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-success"><code>
+                                            <BiCheck className="inline-block text-2xl" /> Success! We have setup docker and now setup!
+                                        </code></pre>
+                                                            <pre data-prefix=">" className="text-success"><code>
+                                            Setup in 2.042 seconds <Link href="https://mystoria.dev" target="_blank" rel="noreferrer noopener" className="hover:underline">https://mystoria.dev</Link>
+                                        </code></pre>
                                     </div>
                                 </div>
                             ) : (
-                                <div>
-                                    <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
-                                        Allocate a Primary Domain
-                                    </div>
-
-                                    <div className="p-4">
-                                        <input type="text" placeholder="Set your primary domain" className="input input-bordered input-warning w-full max-w-xs" />
-                                    </div>
-                                </div>
+                                "Loading"
                             )
                             }
                         </div>
@@ -161,6 +166,9 @@ export function NodeDetails() {
         </div>
     );
 }
+
+import { ResponsiveCalendar } from '@nivo/calendar'
+import {BiAlarmExclamation, BiCheck, BiCommand, BiSleepy, BiWrench} from "react-icons/bi";
 
 const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()

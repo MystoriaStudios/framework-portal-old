@@ -18,42 +18,39 @@ export default async function BlogCreatePage() {
     }
 
     return (
-        <div className="px-8 py-12 sm:py-16 md:px-20">
-            {user && (
-                <div className="flex-col flex px-72">
-                    <div className="flex-col flex">
-                        <h1 className="text-3xl font-semibold">
-                            👋 Hi, {user.firstName || `Stranger`}
-                        </h1>
-                        <span>Create a new blog post below!</span>
-                    </div>
+        <div className="w-[70%] mx-[17.5%] bg-red-400 block">
+            <div className={"flex"}>
+                <img className={"-mt-32 w-full"} src="https://imgs.search.brave.com/QA-ofQEF-eW6XEH42EiGzTAjNPmoXPyIyJmgKBencb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzIzL05vcnRoZXJu/XzMzMV8xMDFfbGVh/dmluZ19CZW5fUmh5/ZGRpbmcuanBn" alt="car!"/>
+            </div>
 
-                    <form className="mt-12 flex-row gap-10" method="post"
-                          action="https://api.nopox.xyz/api/blog/post">
-                        <div className={"flex flex-col gap-y-4"}>
-                            <span className={"flex flex-col gap-1"}>
-                                Slug
-                                <input type="text" id="key" name="key" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
-                            </span>
-                            <span className={"flex flex-col gap-1"}>
+
+            <div className="-mt-72 z-100 absolute bg-neutral-50 dark:bg-neutral-900 w-[70%] p-8 h-96">
+                <form className="mt-12 flex-row gap-10" method="post"
+                      action="https://api.nopox.xyz/api/blog/post">
+
+                <div className="flex flex-row">
+                    <h1 className="text-3xl font-semibold mb-8">
+                        <span className={"flex flex-col gap-1"}>
                                 Title
                                 <input type="text" id="title" name="title" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
+                                <input type="text" id="key" placeholder={"Enter a slug."} name="key" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
                             </span>
-                            <span className={"flex flex-col gap-1"}>
-                                Body
-                                <input type="textarea" id="content" name="content" className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100" />
-                            </span>
-                            <input
-                                // @ts-ignore
-                                type="hidden" value={user?.firstName || ""} id="author" name="author"/>
-                            <button role="submit"
-                                    className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">
-                                Create Blog Post
-                            </button>
-                        </div>
-                    </form>
+                        <input
+                            // @ts-ignore
+                            type="hidden" value={user?.firstName || ""} id="author" name="author"/>
+                    </h1>
+                    <button className="btn rounded-none rounded-br-xl rounded-tl-xl text-sky-400 border-sky-400 border-1 dark:bg-neutral-800 ml-auto">Share Post</button>
                 </div>
-            )}
+
+                <p>
+                    <span className={"flex flex-col gap-1"}>
+                                Body
+                                <textarea id="content" name="content" className="dark:bg-neutral-800 input input-bordered w-full h-32 max-w-full text-neutral-100" />
+                            </span>
+                </p>
+                </form>
+            </div>
         </div>
+
     );
 }

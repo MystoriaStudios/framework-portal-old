@@ -52,12 +52,12 @@ export function OrgDetails() {
                                     <div className="stat-value text-neutral-50">1,427</div>
                                     <div className="stat-desc text-neutral-50">53% more than last month</div>
                                 </div>
-                                <div className="stat bg-red-600 rounded-br-2xl rounded-tl-2xl">
+                                <div className="stat bg-red-600 rounded-br-2xl rounded-tl-2xl hidden xl:block">
                                     <div className="stat-title text-white">Co2 Reports</div>
                                     <div className="stat-value text-neutral-50">1,427,000kg p/sqi</div>
                                     <div className="stat-desc text-neutral-50">53% more than last month</div>
                                 </div>
-                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
+                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800  hidden 2xl:block">
                                     <div className="stat-title text-white">Tickets</div>
                                     <div className="stat-value text-neutral-50">4</div>
                                     <div className="stat-desc text-neutral-50">400% more than last month</div>
@@ -73,10 +73,10 @@ export function OrgDetails() {
 
                         <div className="flex flex-col rounded-[1.5rem] bg-white dark:bg-neutral-800 shadow-md">
                             <div
-                                className="block sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl w-full">
+                                className="block">
                                 <div className="flex gap-x-12 flex-col lg:flex-row">
                                     <div
-                                        className="bg-amber-400 flex flex-col text-center rounded-tl-[1.5rem] rounded-br-[1.5rem] pb-1 pt-2 px-16 font-bold tracking-widest text-white">
+                                        className="bg-amber-400 flex w-full flex-col text-center rounded-tl-[1.5rem] rounded-tr-[1.5rem] lg:rounded-tr-none lg:rounded-br-[1.5rem] pb-1 pt-2 px-16 font-bold tracking-widest text-white">
                                         <span>
                                             ORGANIZATION
                                         </span>
@@ -84,24 +84,22 @@ export function OrgDetails() {
                                             {organization.name}
                                         </span>
                                     </div>
-                                    <div className="flex width-full gap-16 grid-cols-5 mt-2">
+                                    <div className="w-full block">
+
+                                    <div className="flex  w-full gap-16 mt-2 pr-8">
                                         <InfoCard title="IDENTIFIER" value={organization.id.replace("org_", "")}/>
                                         <InfoCard title="MEMBERS" value={(organization?.membersCount || 0) + "/5"}/>
-                                        <InfoCard title="PENDING INVITATIONS"
+                                        <span className={"hidden md:block"}>
+                                            <InfoCard title="BILLING" value="Not Required"/>
+                                        </span>
+                                        <span className={"hidden 2xl:block"}>
+                                            <InfoCard title="PENDING INVITATIONS"
                                                   value={organization?.pendingInvitationsCount || 0}/>
-                                        <InfoCard title="BILLING" value="Not Required"/>
-                                        <InfoCard title="NODES" value={"1/3"}/>
-
-                                        <div className="relative">
-                                            <span className="bg-gray-600 w-3 h-3 absolute -right-[4rem] top-3 rounded-full">
-                                            </span>
-
-                                            <span className="bg-amber-400 w-3 h-3 absolute -right-[5rem] top-3 rounded-full">
-                                            </span>
-
-                                            <span className="bg-red-600 w-3 h-3 absolute -right-[6rem] top-3 rounded-full">
-                                            </span>
-                                        </div>
+                                        </span>
+                                        <span className={"hidden 2xl:block"}>
+                                            <InfoCard title="NODES" value={"1/3"}/>
+                                        </span>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +108,7 @@ export function OrgDetails() {
                             <NodeDetails/>
 
                             {organization ? (
-                                <div>
+                                <div className="mx-auto">
                                     <div className={"flex flex-row"}>
                                         <div className={"flex flex-col"}>
                                             <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
@@ -256,21 +254,14 @@ export function NodeDetails() {
                                                                 <Link href={`/dashboard/nodes/${node.identifier}/containers`}
                                                                       className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
                                                                     <FontAwesomeIcon icon={faDocker}/>
-                                                                    <span className="-mt-2">
+                                                                    <span className="-mt-2 hidden xl:block">
                                                                      Containers
                                                                  </span>
-                                                                </Link>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}`}
-                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
-                                                                    <FontAwesomeIcon icon={faDashboard}/>
-                                                                    <span className="-mt-2">
-                                                                 Details
-                                                             </span>
                                                                 </Link>
                                                                 <Link href={`/dashboard/nodes/${node.identifier}/modules`}
                                                                       className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
                                                                     <FontAwesomeIcon icon={faCube}/>
-                                                                    <span className="-mt-2">
+                                                                    <span className="-mt-2 hidden xl:block">
                                                                  Modules
                                                              </span>
                                                                 </Link>
@@ -281,14 +272,14 @@ export function NodeDetails() {
                                                                     <Link href={`/dashboard/nodes/${node.identifier}/setup`}
                                                                           className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">
                                                                         <FontAwesomeIcon icon={faYoutube}/>
-                                                                        <span className="-mt-2">
+                                                                        <span className="-mt-2 hidden xl:block">
                                                                              Watch tutorial
                                                                         </span>
                                                                     </Link>
                                                                     <Link href={`/dashboard/nodes/${node.identifier}/setup`}
                                                                           className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
                                                                         <FontAwesomeIcon icon={faCogs}/>
-                                                                        <span className="-mt-2">
+                                                                        <span className="-mt-2 hidden xl:block">
                                                                              Setup
                                                                         </span>
                                                                     </Link>
@@ -296,7 +287,7 @@ export function NodeDetails() {
                                                         ) : (<></>)}
                                                     </div>
 
-                                                    <span className="flex flex-col text-right px-2 w-72">
+                                                    <span className="hidden xl:flex flex-col text-right px-2 w-72">
                                                         <span className="text-xs dark:text-neutral-700 font-bold">
                                                             Node #{node.identifier}
                                                         </span>

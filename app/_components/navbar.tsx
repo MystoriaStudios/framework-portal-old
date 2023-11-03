@@ -39,7 +39,7 @@ export default function Navbar({children}) {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="ml-12 text-2xl flex-col font-bold tracking-wider">
+                            <div className="ml-12 text-2xl flex-col font-bold tracking-wider min-w-max">
                                 <Link href="/" className="text-amber-400">
                                     Framew
 
@@ -52,7 +52,7 @@ export default function Navbar({children}) {
                                 </div>
                             </div>
                             <div
-                                className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
+                                className="hidden xl:flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-auto">
                                 <div className="ml-12">
                                     <div className="relative mt-2 rounded-full shadow-sm">
                                         <div
@@ -150,7 +150,7 @@ export default function Navbar({children}) {
                                 </div>
                             )}
                             <div
-                                className="absolute inset-y-0 mr-3 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                className="absolute inset-y-0 xl:mr-3 right-0 flex items-center xl:pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 {children}
                             </div>
                         </div>

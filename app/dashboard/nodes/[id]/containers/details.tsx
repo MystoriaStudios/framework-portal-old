@@ -96,7 +96,7 @@ export function NodeDetails() {
                                                     <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
                                                     <InfoCard title="ADDRESS" value={data[0].href}/>
                                                     <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
-                                                    <InfoCard title="TEMPLATES" value={organization?.publicMetadata?.templates || 0}/>
+                                                    <InfoCard title="TEMPLATES" value={Number.parseInt(organization?.publicMetadata?.templates?.toString() || "0")}/>
                                                     <InfoCard title="MODULES" value={data[0].modules || 0}/>
                                                     <InfoCard title="STATE" value={data[0].state}/>
                                                 </>

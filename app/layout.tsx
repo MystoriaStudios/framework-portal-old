@@ -34,15 +34,12 @@ export default function RootLayout({
     return (
         <html lang="en" className="transition-colors delay-100 duration-200 ease-in-out block max-w-[100vw]">
 
-        <header>
-            <meta content="Framework - The all in one minecraft" property="og:title" />
+        <meta content="Framework - The all in one minecraft" property="og:title" />
 
-            <meta content="All-in-one server deployment and creation environment, secure, and works on both your desktop and phone. Stop paying for overpriced machines and join the cloud. Simplify your life." property="og:description" />
+        <meta content="All-in-one server deployment and creation environment, secure, and works on both your desktop and phone. Stop paying for overpriced machines and join the cloud. Simplify your life." property="og:description" />
 
-            <meta content='https://discordapp.com/assets/ba74954dde74ff40a32ff58069e78c36.png' property='og:image' />
+        <meta content='https://imgs.search.brave.com/QA-ofQEF-eW6XEH42EiGzTAjNPmoXPyIyJmgKBencb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzIzL05vcnRoZXJu/XzMzMV8xMDFfbGVh/dmluZ19CZW5fUmh5/ZGRpbmcuanBn' property='og:image' />
 
-            <link type="application/json+oembed" href="https://owo.whats-th.is//e61180.json" />
-        </header>
         <ClerkProvider
             appearance={{
                 baseTheme: dark,

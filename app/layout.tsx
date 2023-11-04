@@ -34,6 +34,15 @@ export default function RootLayout({
     return (
         <html lang="en" className="transition-colors delay-100 duration-200 ease-in-out block max-w-[100vw]">
 
+        <header>
+            <meta content="Framework - The all in one minecraft" property="og:title" />
+
+            <meta content="All-in-one server deployment and creation environment, secure, and works on both your desktop and phone. Stop paying for overpriced machines and join the cloud. Simplify your life." property="og:description" />
+
+            <meta content='https://discordapp.com/assets/ba74954dde74ff40a32ff58069e78c36.png' property='og:image' />
+
+            <link type="application/json+oembed" href="https://owo.whats-th.is//e61180.json" />
+        </header>
         <ClerkProvider
             appearance={{
                 baseTheme: dark,
@@ -45,15 +54,6 @@ export default function RootLayout({
                 },
             }}
         >
-            <header>
-                <meta content="Framework - The all in one minecraft" property="og:title" />
-
-                <meta content="All-in-one server deployment and creation environment, secure, and works on both your desktop and phone. Stop paying for overpriced machines and join the cloud. Simplify your life." property="og:description" />
-
-                <meta content='https://discordapp.com/assets/ba74954dde74ff40a32ff58069e78c36.png' property='og:image' />
-
-                <link type="application/json+oembed" href="https://owo.whats-th.is//e61180.json" />
-            </header>
             <body
                 className={`${inter.className} min-h-screen flex flex-col bg-cover bg-neutral-100 dark:bg-neutral-900 dark:text-white`}>
             <Navbar>

@@ -31,17 +31,21 @@ export function TemplateDetails() {
     const id = params.id;
 
 
-    const {data, error, isValidating} = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, { refreshInterval: 5000 })
+    const {
+        data,
+        error,
+        isValidating
+    } = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, {refreshInterval: 5000})
 
     if (!isValidating && data[0].state == "SETUP") {
-    //    router.push(`/dashboard/nodes/${id}/setup`)
+        //    router.push(`/dashboard/nodes/${id}/setup`)
         return <></>
     }
 
     const route = `http://${data ? data[0].href : ""}:8086/deployment/templates`
     console.log(route)
 
-    const {data: templates} = useSWR(route, fetcher, { refreshInterval: 5000 })
+    const {data: templates} = useSWR(route, fetcher, {refreshInterval: 5000})
 
     if (error) {
         return <p>{error.toString()}</p>
@@ -51,14 +55,14 @@ export function TemplateDetails() {
         <div className="mt-12">
             {isLoaded && !isValidating && templates && templates.length > 0 ? (
                 <div className="pb-6">
-                    <div className="grid grid-cols-3 grid-flow-row gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-8">
                         {
                             // @ts-ignore
                             templates.map((template: any) => {
                                 return (
                                     <Link
                                         key={template.templateKey}
-                                        href={template.templateKey}
+                                        href={`template/${template.templateKey}`}
                                         className="card flex justify-between gap-x-6 my-1 w-full py-3 dark:bg-neutral-950 dark:text-white">
                                         <div className="p-4">
                                             <h1 className="font-bold text-2xl">{template.templateKey}</h1>

@@ -2,7 +2,15 @@ import {OrganizationSwitcher} from "@clerk/nextjs";
 import React from "react";
 import Link from "next/link"
 
-import {faBookBookmark, faChartArea, faComputer, faServer, faClipboard, faTools, faUsers} from '@fortawesome/free-solid-svg-icons'
+import {
+    faBookBookmark,
+    faChartArea,
+    faClipboard,
+    faComputer,
+    faServer,
+    faTools,
+    faUsers
+} from '@fortawesome/free-solid-svg-icons'
 import {faHive} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -30,37 +38,23 @@ export default function RootLayout({
 }) {
     // @ts-ignore
     return (
-            <div className="flex-col xl:flex-row flex min-h-fit w-full max-w-full">
-                {<div
-                    className="w-64 bg-neutral-100 dark:bg-neutral-950 min-h-fit max-w-full">
+        <div className="flex-col xl:flex-row flex min-h-fit w-full max-w-full">
+            {<div
+                className="w-full xl:w-64 bg-neutral-100 dark:bg-neutral-950 min-h-fit max-w-full dark:border-black border-neutral-300 border-b-4 xl:border-0">
+                <div
+                    className="flex flex-row  xl:flex-col text-center xl:pb-12 dark:bg-neutral-900 xl:dark:bg-transparent mx-auto">
                     <div
-                        className="flex flex-row xl:flex-col text-center pb-12 dark:bg-neutral-900 xl:dark:bg-transparent mx-auto">
-                        <div
-                            className="w-full border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-neutral-300">
-                            <div className="hidden sm:block">
-                                <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
-                            </div>
-                            <div className="block sm:hidden">
-                                <OrganizationSwitcher
-                                    afterCreateOrganizationUrl="/dashboard"
-                                    appearance={{
-                                        elements: {
-                                            organizationSwitcherTriggerIcon: `hidden`,
-                                            organizationPreviewTextContainer: `hidden`,
-                                            organizationSwitcherTrigger: `pr-0`,
-                                        },
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        {
+                        className="xl:border-b-2 flex justify-center py-6 bg-neutral-100 dark:bg-neutral-900 dark:border-black border-neutral-300 px-12">
+                        <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard"/>
+                    </div>
+                    {
 
-                            navigation.map((item) => (
+                        navigation.map((item) => (
 
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className='px-3 pr-12 font-semibold rounded-none tracking-wide w-24 xl:w-full my-1.5 text-2xl border-black'
+                                className='px-3 pr-12 font-semibold rounded-none tracking-wide w-24 xl:w-full my-auto xl:my-1.5 text-2xl border-black'
                                 aria-current={item.current ? 'page' : undefined}
                             >
                                     <span className="flex my-auto xl:my-none">
@@ -83,14 +77,16 @@ export default function RootLayout({
                                     </span>
                             </Link>
                         ))}
-                    </div>
-                </div>
-                }
-                <div className="block w-full bg-neutral-100 dark:bg-neutral-950 h-fit pb-32 max-w-7xl xl:max-w-[80vw] 2xl:max-w-[90vw]">
-                    <div className="bg-neutral-50 lg:p-16 min-h-[80vh] dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black max-w-full">
-                        {children}
-                    </div>
                 </div>
             </div>
+            }
+            <div
+                className="block w-full bg-neutral-100 dark:bg-neutral-950 h-fit pb-32 max-w-7xl xl:max-w-[80vw] 2xl:max-w-[90vw]">
+                <div
+                    className="bg-neutral-50 lg:p-16 min-h-[80vh] dark:bg-neutral-900 border-b-4 border-l-4 rounded-bl-3xl dark:border-black max-w-full">
+                    {children}
+                </div>
+            </div>
+        </div>
     );
 }

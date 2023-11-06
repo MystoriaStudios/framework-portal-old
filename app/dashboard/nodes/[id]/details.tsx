@@ -1,15 +1,12 @@
 "use client";
 
 import {useOrganization} from "@clerk/nextjs";
-import classNames from "classnames";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCogs, faCube, faDashboard, faPodcast} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faCogs, faCube} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import moment from 'moment';
-import {faHeart} from "@fortawesome/free-regular-svg-icons";
-import {faDocker} from "@fortawesome/free-brands-svg-icons";
+import {faDocker, faYoutube} from "@fortawesome/free-brands-svg-icons";
 import {useParams, useRouter} from "next/navigation";
 
 declare global {
@@ -37,16 +34,20 @@ export function NodeDetails() {
     const id = params.id;
 
 
-    const {data, error, isValidating} = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, { refreshInterval: 5000 })
+    const {
+        data,
+        error,
+        isValidating
+    } = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, {refreshInterval: 5000})
 
-/*    if (!isValidating && data[0].state == "SETUP") {
-        router.push(`/dashboard/nodes/${id}/setup`)
-    }*/
+    /*    if (!isValidating && data[0].state == "SETUP") {
+            router.push(`/dashboard/nodes/${id}/setup`)
+        }*/
 
     const route = `http://${data ? data[0].href : ""}:8086/peak`
     console.log(route)
 
-    const {data: node} = useSWR(route, fetcher, { refreshInterval: 5000 })
+    const {data: node} = useSWR(route, fetcher, {refreshInterval: 5000})
 
     console.log(node)
 
@@ -64,7 +65,8 @@ export function NodeDetails() {
 
                                 <div className="stat rounded-2xl bg-amber-400">
                                     <div className="stat-title text-white">Used Memory</div>
-                                    <div className="stat-value text-neutral-50">{(node?.usedMemory) / 10240000 || 0}GB</div>
+                                    <div className="stat-value text-neutral-50">{(node?.usedMemory) / 10240000 || 0}GB
+                                    </div>
                                 </div>
                                 <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
                                     <div className="stat-title text-white">Assigned Memory</div>
@@ -94,18 +96,22 @@ export function NodeDetails() {
                                         <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
                                         <InfoCard title="ADDRESS" value={data[0].href}/>
                                         <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
-                                        <InfoCard title="TEMPLATES" value={Number.parseInt(organization?.publicMetadata?.templates?.toString() || "0")}/>
+                                        <InfoCard title="TEMPLATES"
+                                                  value={Number.parseInt(organization?.publicMetadata?.templates?.toString() || "0")}/>
                                         <InfoCard title="MODULES" value={data[0].modules || 0}/>
                                         <InfoCard title="STATE" value={data[0].state}/>
 
                                         <div className="relative">
-                                            <span className="bg-gray-600 w-3 h-3 absolute -right-[4rem] top-3 rounded-full">
+                                            <span
+                                                className="bg-gray-600 w-3 h-3 absolute -right-[4rem] top-3 rounded-full">
                                             </span>
 
-                                            <span className="bg-amber-400 w-3 h-3 absolute -right-[5rem] top-3 rounded-full">
+                                            <span
+                                                className="bg-amber-400 w-3 h-3 absolute -right-[5rem] top-3 rounded-full">
                                             </span>
 
-                                            <span className="bg-red-600 w-3 h-3 absolute -right-[6rem] top-3 rounded-full">
+                                            <span
+                                                className="bg-red-600 w-3 h-3 absolute -right-[6rem] top-3 rounded-full">
                                             </span>
                                         </div>
                                     </div>
@@ -116,35 +122,94 @@ export function NodeDetails() {
                                 <div>
                                     <div className="flex">
                                         <div className="alert alert-success m-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 className="stroke-current shrink-0 h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
                                             <span>Your docker installation is up to date!</span>
                                         </div>
                                     </div>
 
-                                    <div className="mockup-code center bg-neutral-800 md:mt-8 m-4 text-primary-content text-left w-[96%] mx-[2%] drop-shadow-2xl">
+                                    <div
+                                        className="mockup-code center bg-neutral-800 md:mt-8 m-4 text-primary-content text-left w-[96%] mx-[2%] drop-shadow-2xl">
                                         <pre data-prefix="$" className="text-warning"><code>
                                             Welcome to Framework Node version aa99f2
                                         </code></pre>
                                         <pre data-prefix=">" className="text-success"><code>
-                                            Setup in 2.042 seconds <Link href="https://mystoria.dev" target="_blank" rel="noreferrer noopener" className="hover:underline">https://mystoria.dev</Link>
+                                            Setup in 2.042 seconds <Link href="https://mystoria.dev" target="_blank"
+                                                                         rel="noreferrer noopener"
+                                                                         className="hover:underline">https://mystoria.dev</Link>
                                         </code></pre>
                                         <ul>
 
                                         </ul>
 
-                                        <form className="my-4 flex-row gap-10 w-1/2" method="post"
-                                              action={`http://${data[0].href}:8086/setup/${data[0].identifier}`}>
-                                            <input list="data" autoComplete="off" placeholder="$   Type help to view a list of commands" id="key" name="key" className="ml-2 dark:bg-neutral-800 input border-none hover:border-none w-full text-neutral-100" />
-                                            <datalist id="data">
-                                                {[
-                                                    "help",
-                                                    "template",
-                                                    "container"
-                                                ].map((item, key) =>
-                                                    <option key={key} value={item} />
-                                                )}
-                                            </datalist>
-                                        </form>
+                                        <div className="flex flex-row">
+                                            <form className="my-4 flex-row gap-10 w-1/2" method="post"
+                                                  action={`http://${data[0].href}:8086/setup/${data[0].identifier}`}>
+                                                <input list="data" autoComplete="off"
+                                                       placeholder="$   Type help to view a list of commands" id="key"
+                                                       name="key"
+                                                       className="ml-2 dark:bg-neutral-800 input border-none hover:border-none w-full text-neutral-100"/>
+                                                <datalist id="data">
+                                                    {[
+                                                        "help",
+                                                        "template",
+                                                        "container"
+                                                    ].map((item, key) =>
+                                                        <option key={key} value={item}/>
+                                                    )}
+                                                </datalist>
+                                            </form>
+                                            <div
+                                                className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl ml-auto">
+                                                {data[0].state === "ONLINE" ?
+                                                    <>
+                                                        <Link href={`/dashboard/nodes/${data[0].identifier}/container`}
+                                                              className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
+                                                            <FontAwesomeIcon icon={faDocker}/>
+                                                            <span className="-mt-2 hidden xl:block">
+                                                                Containers
+                                                            </span>
+                                                        </Link>
+                                                        <Link href={`/dashboard/nodes/${data[0].identifier}/modules`}
+                                                              className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
+                                                            <FontAwesomeIcon icon={faCube}/>
+                                                            <span className="-mt-2 hidden xl:block">
+                                                                Modules
+                                                            </span>
+                                                        </Link>
+                                                        <Link href={`/dashboard/nodes/${data[0].identifier}/template`}
+                                                              className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
+                                                            <FontAwesomeIcon icon={faClipboard}/>
+                                                            <span className="-mt-2 hidden xl:block">
+                                                                Templates
+                                                            </span>
+                                                        </Link>
+                                                    </> : <></>
+                                                }
+                                                {data[0].state === "SETUP" ? (
+                                                    <>
+                                                        <Link href={`/dashboard/nodes/${data[0].identifier}/setup`}
+                                                              className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                            <FontAwesomeIcon icon={faYoutube}/>
+                                                            <span className="-mt-2 hidden xl:block">
+                                                                 Watch tutorial
+                                                            </span>
+                                                        </Link>
+                                                        <Link href={`/dashboard/nodes/${data[0].identifier}/setup`}
+                                                              className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                            <FontAwesomeIcon icon={faCogs}/>
+                                                            <span className="-mt-2 hidden xl:block">
+                                                                 Setup
+                                                            </span>
+                                                        </Link>
+                                                    </>
+                                                ) : (<></>)}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
@@ -162,9 +227,6 @@ export function NodeDetails() {
         </div>
     );
 }
-
-import { ResponsiveCalendar } from '@nivo/calendar'
-import {BiAlarmExclamation, BiCheck, BiCommand, BiSleepy, BiWrench} from "react-icons/bi";
 
 const fetcher = async (...args: [string, RequestInit?]) => await fetch(...args).then(async res => {
     const response = await res.json()

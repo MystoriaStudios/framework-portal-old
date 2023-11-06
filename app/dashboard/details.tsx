@@ -7,11 +7,10 @@ import {CopyIcon} from "../icons";
 import "./prism.css";
 import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClipboard, faCogs, faCross, faCube, faDashboard, faPodcast, faX} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faCogs, faCube, faX} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import moment from 'moment';
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
-import {faDiscord, faDocker, faSnapchat, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons";
+import {faDocker, faYoutube} from "@fortawesome/free-brands-svg-icons";
 
 declare global {
     interface Window {
@@ -86,20 +85,20 @@ export function OrgDetails() {
                                     </div>
                                     <div className="w-full block">
 
-                                    <div className="flex  w-full gap-16 mt-2 pr-8">
-                                        <InfoCard title="IDENTIFIER" value={organization.id.replace("org_", "")}/>
-                                        <InfoCard title="MEMBERS" value={(organization?.membersCount || 0) + "/5"}/>
-                                        <span className={"hidden md:block"}>
+                                        <div className="flex  w-full gap-16 mt-2 pr-8">
+                                            <InfoCard title="IDENTIFIER" value={organization.id.replace("org_", "")}/>
+                                            <InfoCard title="MEMBERS" value={(organization?.membersCount || 0) + "/5"}/>
+                                            <span className={"hidden md:block"}>
                                             <InfoCard title="BILLING" value="Not Required"/>
                                         </span>
-                                        <span className={"hidden 2xl:block"}>
+                                            <span className={"hidden 2xl:block"}>
                                             <InfoCard title="PENDING INVITATIONS"
-                                                  value={organization?.pendingInvitationsCount || 0}/>
+                                                      value={organization?.pendingInvitationsCount || 0}/>
                                         </span>
-                                        <span className={"hidden 2xl:block"}>
+                                            <span className={"hidden 2xl:block"}>
                                             <InfoCard title="NODES" value={"1/3"}/>
                                         </span>
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -111,27 +110,30 @@ export function OrgDetails() {
                                 <div className="mx-auto">
                                     <div className={"flex flex-row"}>
                                         <div className={"flex flex-col"}>
-                                            <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                            <div
+                                                className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                                                 Network Display Name
                                             </div>
                                             <div className="p-4">
                                                 <input // @ts-ignore
                                                     type="text" placeholder="Enter a primary display name" value={
                                                     organization.publicMetadata["network_displayName"] || ""
-                                                } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                                }
+                                                    className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs"/>
                                             </div>
                                         </div>
 
 
-
                                         <div className={"flex flex-col"}>
-                                            <div className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
+                                            <div
+                                                className="flex justify-between gap-x-6 mx-4 py-5 font-bold tracking-widest text-2xl">
                                                 Allocated Primary Domain
                                             </div>
                                             <div className="p-4">
                                                 <input type="text" placeholder="Update primary domain" value={
                                                     "nopox.xyz"
-                                                } className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs" />
+                                                }
+                                                       className="input input-bordered bg-neutral-50 dark:bg-neutral-900 input-warning w-full max-w-xs"/>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +167,11 @@ export function NodeDetails() {
     const route = `https://api.nopox.xyz/api/nodes/${organization?.id}`
     console.log(route)
 
-    const {data, error, isValidating} = useSWR(route, fetcher, { revalidateIfStale: true, revalidateOnFocus: true, refreshInterval: 30000 })
+    const {data, error, isValidating} = useSWR(route, fetcher, {
+        revalidateIfStale: true,
+        revalidateOnFocus: true,
+        refreshInterval: 30000
+    })
 
     if (error) {
         return <p>{error.toString()}</p>
@@ -204,27 +210,34 @@ export function NodeDetails() {
                                             key={node.identifier}
                                             className="transition-all delay-150 duration-200"
                                         >
-                                            <Link href={state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
+                                            <Link
+                                                href={state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`}
+                                                className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
 
-                                                 <span className="flex gap-x-6 ml-6" >
+                                                 <span className="flex gap-x-6 ml-6">
                                                     {state === "ONLINE" ? (
-                                                        <span className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
+                                                        <span
+                                                            className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
                                                     ) : (state === "BOOTING" ? (
-                                                        <span className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
+                                                        <span
+                                                            className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
                                                     ) : (state === "SETUP" ? (
-                                                        <span className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
+                                                        <span
+                                                            className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
                                                         </span>
                                                     ) : (state === "CRASHED" ? (
-                                                        <span className="text-red-700 mx-auto my-auto w-fit text-lg border-red-900 btn font-extrabold animate-pulse">
+                                                        <span
+                                                            className="text-red-700 mx-auto my-auto w-fit text-lg border-red-900 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
                                                         </span>
                                                     ) : (
-                                                        <span className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
+                                                        <span
+                                                            className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
                                                     ))))}
@@ -242,29 +255,36 @@ export function NodeDetails() {
                                                             state == "OFFLINE" ? "offline since" : state == "CRASHED" ? "crashed" : "updated"
                                                         } {
                                                         date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + "m" : (date / 1000).toString().split(".")[0] + "s")
-                                                        } {
-                                                            date > 2000 ? "ago" : ""
+                                                    } {
+                                                        date > 2000 ? "ago" : ""
                                                     }
                                                     </span>
                                                 </span>
                                                 <div className="mr-8 flex flex-row">
 
-                                                    <div className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl">
-                                                        { state === "ONLINE" ?
+                                                    <div
+                                                        className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl">
+                                                        {state === "ONLINE" ?
                                                             <>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}/containers`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
+                                                                <Link
+                                                                    href={`/dashboard/nodes/${node.identifier}/container`}
+                                                                    className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
                                                                     <FontAwesomeIcon icon={faDocker}/>
                                                                     <span className="-mt-2 hidden xl:block">
                                                                         Containers
                                                                     </span>
                                                                 </Link>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}/modules`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
+                                                                <Link
+                                                                    href={`/dashboard/nodes/${node.identifier}/modules`}
+                                                                    className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
                                                                     <FontAwesomeIcon icon={faCube}/>
                                                                     <span className="-mt-2 hidden xl:block">
                                                                         Modules
                                                                     </span>
                                                                 </Link>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}/template`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
+                                                                <Link
+                                                                    href={`/dashboard/nodes/${node.identifier}/template`}
+                                                                    className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
                                                                     <FontAwesomeIcon icon={faClipboard}/>
                                                                     <span className="-mt-2 hidden xl:block">
                                                                         Templates
@@ -273,22 +293,22 @@ export function NodeDetails() {
                                                             </> : <></>
                                                         }
                                                         {state === "SETUP" ? (
-                                                                <>
-                                                                    <Link href={`/dashboard/nodes/${node.identifier}/setup`}
-                                                                          className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                                        <FontAwesomeIcon icon={faYoutube}/>
-                                                                        <span className="-mt-2 hidden xl:block">
+                                                            <>
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/setup`}
+                                                                      className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                    <FontAwesomeIcon icon={faYoutube}/>
+                                                                    <span className="-mt-2 hidden xl:block">
                                                                              Watch tutorial
                                                                         </span>
-                                                                    </Link>
-                                                                    <Link href={`/dashboard/nodes/${node.identifier}/setup`}
-                                                                          className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
-                                                                        <FontAwesomeIcon icon={faCogs}/>
-                                                                        <span className="-mt-2 hidden xl:block">
+                                                                </Link>
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/setup`}
+                                                                      className="animate-pulse flex flex-col p-2 px-4 text-blue-400 dark:bg-neutral-800 btn join-item font-bold">
+                                                                    <FontAwesomeIcon icon={faCogs}/>
+                                                                    <span className="-mt-2 hidden xl:block">
                                                                              Setup
                                                                         </span>
-                                                                    </Link>
-                                                                </>
+                                                                </Link>
+                                                            </>
                                                         ) : (<></>)}
                                                     </div>
 
@@ -316,7 +336,8 @@ export function NodeDetails() {
                     </div>
                 ) : (
                     <div className="text-gray-50 px-8 pb-5 text-2xl text-center transition-all delay-300">
-                        There are no nodes found on this organization you can follow our node setup guide <Link className="text-amber-400" href={"/"}>here</Link>
+                        There are no nodes found on this organization you can follow our node setup guide <Link
+                        className="text-amber-400" href={"/"}>here</Link>
                     </div>
                 )
                 }

@@ -3,16 +3,25 @@ import React from 'react'
 import {Disclosure} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 
-import {faCube, faDatabase, faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faBlog, faCube, faDollar, faSearch, faServer} from '@fortawesome/free-solid-svg-icons'
 import useDarkMode from "@/app/utils/useDarkMode";
 import Link from "next/link";
-import {faBlog, faDollar, faServer, faTools} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const navigation = [
-    {name: 'Dashboard', href: '/dashboard', current: true, icon: <FontAwesomeIcon className="text-blue-400" icon={faServer}/>},
+    {
+        name: 'Dashboard',
+        href: '/dashboard',
+        current: true,
+        icon: <FontAwesomeIcon className="text-blue-400" icon={faServer}/>
+    },
     {name: 'Blog', href: '/blog', current: false, icon: <FontAwesomeIcon className="text-amber-400" icon={faBlog}/>},
-    {name: 'Marketplace', href: '/marketplace', current: false, icon: <FontAwesomeIcon className="text-success" icon={faDollar}/>},
+    {
+        name: 'Marketplace',
+        href: '/marketplace',
+        current: false,
+        icon: <FontAwesomeIcon className="text-success" icon={faDollar}/>
+    },
 ]
 
 // @ts-ignore
@@ -75,14 +84,16 @@ export default function Navbar({children}) {
                             </div>
                             <div className="flex flex-row gap-x-1 px-3 py-2 mr-4 rounded-full">
                                 {navigation.map((nav) => (
-                                    <Link href={nav.href} className="mx-2 p-1 flex flex-row uppercase font-bold tracking-widest text-neutral-400 dark:text-neutral-300">
+                                    <Link href={nav.href}
+                                          className="mx-2 p-1 flex flex-row uppercase font-bold tracking-widest text-neutral-400 dark:text-neutral-300">
                                         {nav.name}
                                     </Link>
                                 ))
                                 }
                             </div>
                             {colorTheme === "light" ? (
-                                <div className="flex flex-row gap-x-4 bg-neutral-100 bg-opacity-10 px-3 py-2 rounded-tl-2xl rounded-br-2xl">
+                                <div
+                                    className="flex flex-row gap-x-4 bg-neutral-100 bg-opacity-10 px-3 py-2 rounded-tl-2xl rounded-br-2xl">
                                     <svg
                                         // @ts-ignore
                                         onClick={() => setTheme("light")}
@@ -115,7 +126,8 @@ export default function Navbar({children}) {
                                     </svg>
                                 </div>
                             ) : (
-                                <div className="flex flex-row gap-x-4 bg-neutral-400 bg-opacity-10 px-3 py-2 rounded-tr-2xl rounded-bl-2xl">
+                                <div
+                                    className="flex flex-row gap-x-4 bg-neutral-400 bg-opacity-10 px-3 py-2 rounded-tr-2xl rounded-bl-2xl">
                                     <svg
                                         // @ts-ignore
                                         xmlns="http://www.w3.org/2000/svg"

@@ -1,14 +1,12 @@
 "use client"
 
-import {auth, useUser} from "@clerk/nextjs"
-import {redirect} from "next/navigation";
-import React, {useEffect} from 'react';
+import {clerkClient, useUser} from "@clerk/nextjs"
+import React from 'react';
 
 interface UserDetailsProps {
     user: any; // Replace 'any' with the actual type of the user
 }
 
-import { clerkClient } from "@clerk/nextjs"
 export default function UsersPage() {
     const [users, setUsers] = React.useState<any[]>([]);
 

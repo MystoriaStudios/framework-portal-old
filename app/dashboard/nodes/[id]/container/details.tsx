@@ -191,7 +191,7 @@ export function NodeDetails() {
                                                                  </span>
                                                                         </Link>
                                                                         <Link
-                                                                            href={`/dashboard/nodes/${node.identifier}`}
+                                                                            href={`/dashboard/nodes/${container.identifier}`}
                                                                             className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
                                                                             <FontAwesomeIcon icon={faDashboard}/>
                                                                             <span className="-mt-2">
@@ -207,7 +207,7 @@ export function NodeDetails() {
                                                                         </Link>
                                                                     </> : <></>
                                                                 }
-                                                                {node.state === "SETUP" ? (
+                                                                {container.state === "SETUP" ? (
                                                                     <>
                                                                         <Link href={`${container.pod}/setup`}
                                                                               className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">

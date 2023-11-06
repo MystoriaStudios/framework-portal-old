@@ -4,7 +4,7 @@ import {useOrganization} from "@clerk/nextjs";
 import React from "react";
 import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCogs, faCube, faDashboard} from "@fortawesome/free-solid-svg-icons";
+import {faCloud, faCogs, faCube, faDashboard} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
 import {faDocker, faYoutube} from "@fortawesome/free-brands-svg-icons";
@@ -45,12 +45,12 @@ export function NodeDetails() {
             router.push(`/dashboard/nodes/${id}/setup`)
         }*/
 
-    const route = `http://${data ? data[0].href : ""}:8086/peak`
+    const route = `http://${data ? data[0].href : ""}:8086/deployment/containers`
     console.log(route)
 
-    const {data: node} = useSWR(route, fetcher, {refreshInterval: 5000})
+    const {data: containers} = useSWR(route, fetcher, {refreshInterval: 5000})
 
-    console.log(node)
+    console.log(containers)
 
     if (error) {
         return <p>{error.toString()}</p>
@@ -59,26 +59,8 @@ export function NodeDetails() {
     return (
         <div className="mt-12">
             <div className="mt-4">
-                {!isValidating && node !== undefined ? (
+                {!isValidating && containers !== undefined ? (
                     <div>
-                        <div className="flex flex-row pb-8">
-                            <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
-
-                                <div className="stat rounded-2xl bg-amber-400">
-                                    <div className="stat-title text-white">Containers</div>
-                                    <div className="stat-value text-neutral-50">{(node?.pods?.length) || 0}</div>
-                                </div>
-                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
-                                    <div className="stat-title text-white">Assigned Memory</div>
-                                    <div className="stat-value text-neutral-50">{node?.assignedMemory || "None"}</div>
-                                </div>
-                                <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
-                                    <div className="stat-title text-white">Assignable Cores</div>
-                                    <div className="stat-value text-neutral-50">{node?.availableCores || 1}</div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div className="flex flex-col rounded-[1.5rem] bg-white dark:bg-neutral-800 shadow-md">
                             <div
                                 className="block sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl w-full">
@@ -122,12 +104,12 @@ export function NodeDetails() {
                                     </div>
                                 </div>
                             </div>
-                            {isLoaded && data && !isValidating && data.length > 0 ? (
+                            {isLoaded && data && !isValidating && containers.length > 0 ? (
                                 <div className="pb-6">
                                     <ul role="list" className="divide-y divide-neutral-900">
                                         {
                                             // @ts-ignore
-                                            node.pods.sort((first: any, second: any) => {
+                                            containers.sort((first: any, second: any) => {
                                                 return (first.state == "SETUP" ? -10 : first.state == "OFFLINE" ? 199 : 0) - (second.state == "SETUP" ? -10 : second.state == "OFFLINE" ? 199 : 0)
                                             }).map((container: any) => {
                                                 const date = Date.now() - Date.now()
@@ -270,9 +252,9 @@ export function NodeDetails() {
                                     </ul>
                                 </div>
                             ) : (
-                                <div className="text-gray-50 px-8 pb-5 text-2xl text-center transition-all delay-300">
-                                    There are no nodes found on this organization you can follow our node setup
-                                    guide <Link className="text-amber-400" href={"/"}>here</Link>
+                                <div className="text-gray-50 px-8 text-2xl text-center transition-all delay-300 py-32">
+                                    There are no containers running at the moment
+                                    start a template <Link className="text-amber-400" href={"template"}>here</Link>
                                 </div>
                             )}
                         </div>

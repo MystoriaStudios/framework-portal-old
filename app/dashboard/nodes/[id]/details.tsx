@@ -4,10 +4,11 @@ import {useOrganization} from "@clerk/nextjs";
 import React from "react";
 import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClipboard, faCogs, faCube} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faClock, faCogs, faCube, faGlobe, faWifi, faX} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {faDocker, faYoutube} from "@fortawesome/free-brands-svg-icons";
 import {useParams, useRouter} from "next/navigation";
+import {faHeart} from "@fortawesome/free-regular-svg-icons";
 
 declare global {
     interface Window {
@@ -223,6 +224,117 @@ export function NodeDetails() {
                         Loading node data...
                     </div>
                 )}
+            </div>
+        </div>
+    );
+}
+
+export function AllocationDetails() {
+    const router = useRouter()
+    const {isLoaded, organization} = useOrganization();
+    const params = useParams();
+    const id = params.id;
+
+
+    const {
+        data,
+        error,
+        isValidating
+    } = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, {refreshInterval: 5000})
+
+    /*    if (!isValidating && data[0].state == "SETUP") {
+            router.push(`/dashboard/nodes/${id}/setup`)
+        }*/
+
+    const route = `http://${data ? data[0].href : ""}:8086/allocations`
+    console.log(route)
+
+    const {data: allocations} = useSWR(route, fetcher, {refreshInterval: 5000})
+
+    console.log(allocations)
+
+    if (error) {
+        return <p>{error.toString()}</p>
+    }
+
+    return (
+        <div className="mt-12">
+            <div className="mt-4">
+                <form className="my-4 flex-row gap-10" method="post"
+                      action={route}>
+                    <div className={"flex flex-col gap-y-4"}>
+                            <span className="flex flex-row gap-x-4">
+                                <span className={"flex flex-col gap-1 w-full max-w-xs"}>
+                                    Bind Address:
+                                    <input type="text" placeholder="0.0.0.0" id="hostname"
+                                           name="hostname"
+                                           className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100"
+                                    />
+                                </span>
+                                <span className={"flex flex-col gap-1 w-full max-w-xs"}>
+                                    Port:
+                                    <input type="number" placeholder="25565" id="port"
+                                           name="port"
+                                           className="dark:bg-neutral-800 input input-bordered w-full max-w-xs text-neutral-100"
+                                    />
+                                </span>
+                            </span>
+                        <button role="submit"
+                                className="btn text-blue-500 border-blue-500 w-1/3 animate-pulse">
+                            Submit Allocation
+                        </button>
+                    </div>
+                </form>
+                {!isValidating && allocations !== undefined ? (
+                    <div className="grid grid-cols-7">
+                        {
+                            // @ts-ignore
+                            allocations.map((allocation: any) => {
+                                return (
+                                    <div
+                                        key={allocation.port}
+                                        className="transition-all delay-150 duration-200"
+                                    >
+                                        <div
+                                            className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
+
+                                                 <span className="flex gap-x-6 ml-6">
+                                                     {
+                                                         allocation.state == "IN_USE" ? (
+                                                             <span className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
+                                                                <FontAwesomeIcon icon={faGlobe}></FontAwesomeIcon>
+                                                            </span>
+                                                         ) : (
+                                                             <span className="text-amber-400 mx-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
+                                                                <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
+                                                            </span>
+                                                         )
+                                                     }
+                                                </span>
+
+                                            <span
+                                                className='text-mds my-auto flex flex-col ml-2 tracking-widest mr-auto border-black'>
+                                                        <span className="font-extrabold">
+                                                            {
+                                                                allocation.bindAddress
+                                                            }
+                                                        </span>
+                                                    <span className="-mt-1 text-sm w-56 dark:text-neutral-300">
+                                                        { allocation.port }
+                                                    </span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                ) : (
+                    <div className="text-neutral-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        Loading node allocation data...
+                    </div>
+                )
+                }
             </div>
         </div>
     );

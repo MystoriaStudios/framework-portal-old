@@ -1,6 +1,6 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
-import {NodeDetails} from "@/app/dashboard/nodes/[id]/details";
+import {AllocationDetails, NodeDetails} from "@/app/dashboard/nodes/[id]/details";
 
 export default async function DashboardPage() {
     const {userId} = auth();
@@ -17,10 +17,11 @@ export default async function DashboardPage() {
             {user && (
                 <>
                     <h1 className="text-3xl font-semibold">
-                        Nodes
+                        Node
                     </h1>
 
                     <NodeDetails></NodeDetails>
+                    <AllocationDetails></AllocationDetails>
                 </>
             )}
         </div>

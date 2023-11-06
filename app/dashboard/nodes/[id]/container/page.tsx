@@ -1,6 +1,6 @@
 import {auth, clerkClient} from "@clerk/nextjs";
 import {redirect} from "next/navigation";
-import {NodeDetails} from "@/app/dashboard/nodes/[id]/containers/details";
+import {NodeDetails} from "@/app/dashboard/nodes/[id]/container/details";
 
 export default async function DashboardPage() {
     const {userId} = auth();

@@ -183,7 +183,7 @@ export function NodeDetails() {
                                                             <div className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl">
                                                                 { container.state === "ONLINE" ?
                                                                     <>
-                                                                        <Link href={`/dashboard/nodes/${container.identifier}/containers`}
+                                                                        <Link href={`/dashboard/nodes/${container.identifier}/container`}
                                                                               className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
                                                                             <FontAwesomeIcon icon={faDocker}/>
                                                                             <span className="-mt-2">

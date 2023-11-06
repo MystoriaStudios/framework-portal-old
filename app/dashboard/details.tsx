@@ -7,7 +7,7 @@ import {CopyIcon} from "../icons";
 import "./prism.css";
 import useSWR from 'swr'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCogs, faCube, faDashboard, faPodcast} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faCogs, faCross, faCube, faDashboard, faPodcast, faX} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import moment from 'moment';
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
@@ -197,36 +197,37 @@ export function NodeDetails() {
                                 }).map((node: any) => {
                                     const date = Date.now() - node.pushedAt
                                     if (date > 60 * (60 * 1000)) return null
+                                    const state = node.state != "OFFLINE" && date > 60 * 1000 ? "CRASHED" : node.state
+
                                     return (
                                         <li
                                             key={node.identifier}
                                             className="transition-all delay-150 duration-200"
                                         >
-                                            <Link href={node.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
+                                            <Link href={state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${node.identifier}`} className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
 
                                                  <span className="flex gap-x-6 ml-6" >
-                                                    {node.state === "ONLINE" ? (
-                                                        <span
-                                                            className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
+                                                    {state === "ONLINE" ? (
+                                                        <span className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
-                                                    ) : (node.state === "BOOTING" ? (
-                                                        <span
-                                                            className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
+                                                    ) : (state === "BOOTING" ? (
+                                                        <span className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
-                                                    ) : (node.state === "SETUP" ? (
-                                                            <span
-                                                                className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
+                                                    ) : (state === "SETUP" ? (
+                                                        <span className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faCogs}></FontAwesomeIcon>
                                                         </span>
-                                                        ) : (
-                                                            <span
-                                                                className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
+                                                    ) : (state === "CRASHED" ? (
+                                                        <span className="text-red-700 mx-auto my-auto w-fit text-lg border-red-900 btn font-extrabold animate-pulse">
+                                                            <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
                                                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                                                         </span>
-                                                        )
-                                                    ))}
+                                                    ))))}
                                                 </span>
 
                                                 <span
@@ -238,7 +239,7 @@ export function NodeDetails() {
                                                         </span>
                                                     <span className="-mt-1 text-sm w-56 dark:text-neutral-300">
                                                         {
-                                                            node.state == "OFFLINE" ? "offline since" : "updated"
+                                                            state == "OFFLINE" ? "offline since" : state == "CRASHED" ? "crashed" : "updated"
                                                         } {
                                                         date < 2000 ? "just now" : (date > (60 * 1000) ? (date / 60000).toString().split(".")[0] + "m" : (date / 1000).toString().split(".")[0] + "s")
                                                         } {
@@ -249,25 +250,29 @@ export function NodeDetails() {
                                                 <div className="mr-8 flex flex-row">
 
                                                     <div className="join mr-6 rounded-none rounded-bl-2xl rounded-tr-2xl">
-                                                        { node.state === "ONLINE" ?
+                                                        { state === "ONLINE" ?
                                                             <>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}/containers`}
-                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/containers`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-blue-400 text-blue-400">
                                                                     <FontAwesomeIcon icon={faDocker}/>
                                                                     <span className="-mt-2 hidden xl:block">
-                                                                     Containers
-                                                                 </span>
+                                                                        Containers
+                                                                    </span>
                                                                 </Link>
-                                                                <Link href={`/dashboard/nodes/${node.identifier}/modules`}
-                                                                      className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/modules`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-red-400 text-red-400">
                                                                     <FontAwesomeIcon icon={faCube}/>
                                                                     <span className="-mt-2 hidden xl:block">
-                                                                 Modules
-                                                             </span>
+                                                                        Modules
+                                                                    </span>
+                                                                </Link>
+                                                                <Link href={`/dashboard/nodes/${node.identifier}/template`} className="flex flex-col p-2 px-4 dark:bg-neutral-800 btn join-item font-bold border-1 border-amber-400 text-amber-400">
+                                                                    <FontAwesomeIcon icon={faClipboard}/>
+                                                                    <span className="-mt-2 hidden xl:block">
+                                                                        Templates
+                                                                    </span>
                                                                 </Link>
                                                             </> : <></>
                                                         }
-                                                        {node.state === "SETUP" ? (
+                                                        {state === "SETUP" ? (
                                                                 <>
                                                                     <Link href={`/dashboard/nodes/${node.identifier}/setup`}
                                                                           className="animate-pulse flex flex-col p-2 px-4 text-red-400 dark:bg-neutral-800 btn join-item font-bold">

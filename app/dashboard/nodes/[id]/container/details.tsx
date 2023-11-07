@@ -80,8 +80,7 @@ export function NodeDetails() {
                                                 <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
                                                 <InfoCard title="ADDRESS" value={data[0].href}/>
                                                 <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
-                                                <InfoCard title="TEMPLATES"
-                                                          value={Number.parseInt(organization?.publicMetadata?.templates?.toString() || "0")}/>
+                                                <InfoCard title="TEMPLATES" value={data[0].templates || 0}/>
                                                 <InfoCard title="MODULES" value={data[0].modules || 0}/>
                                                 <InfoCard title="STATE" value={data[0].state}/>
                                             </>
@@ -117,34 +116,29 @@ export function NodeDetails() {
                                                 return (
                                                     <li key={container.pod}>
                                                         <Link
-                                                            href={container.state === "OFFLINE" ? "/dashboard" : `/dashboard/nodes/${container.pod}`}
+                                                            href={container?.heartbeat?.state == "OFFLINE" || container.heartbeat == null ? "container" : `container/${
+                                                                container.template.idScheme.replace("%containerId%", container.allocation.port)
+                                                            }`}
                                                             className="flex justify-between gap-x-6 my-1 w-full py-3 border-neutral-400 dark:border-neutral-900">
                                                              <span className="flex gap-x-6 ml-6">
-                                                                {container.state === "ONLINE" ? (
+                                                                {container?.heartbeat?.state == "RUNNING" ? (
                                                                     <span
                                                                         className="text-green-400 mx-auto w-fit text-lg border-green-600 btn font-extrabold animate-pulse">
                                                                         <FontAwesomeIcon
                                                                             icon={faHeart}></FontAwesomeIcon>
                                                                     </span>
-                                                                ) : (container.state === "BOOTING" ? (
+                                                                ) : (container?.heartbeat?.state == "STARTING" ? (
                                                                     <span
                                                                         className="text-amber-400 mx-auto my-auto w-fit text-lg border-amber-600 btn font-extrabold animate-pulse">
                                                                         <FontAwesomeIcon
                                                                             icon={faHeart}></FontAwesomeIcon>
                                                                     </span>
-                                                                ) : (container.state === "SETUP" ? (
-                                                                        <span
-                                                                            className="text-blue-400 mx-auto my-auto w-fit text-lg border-blue-600 btn font-extrabold animate-pulse">
-                                                                        <FontAwesomeIcon
-                                                                            icon={faCogs}></FontAwesomeIcon>
-                                                                    </span>
-                                                                    ) : (
-                                                                        <span
-                                                                            className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
-                                                                        <FontAwesomeIcon
-                                                                            icon={faHeart}></FontAwesomeIcon>
-                                                                    </span>
-                                                                    )
+                                                                ) : (
+                                                                    <span
+                                                                        className="text-red-400 mx-auto my-auto w-fit text-lg border-red-600 btn font-extrabold animate-pulse">
+                                                                    <FontAwesomeIcon
+                                                                        icon={faHeart}></FontAwesomeIcon>
+                                                                </span>
                                                                 ))}
                                                             </span>
 
@@ -152,7 +146,7 @@ export function NodeDetails() {
                                                                 className='text-mds my-auto flex flex-col ml-2 tracking-widest mr-auto border-black'>
                                                                 <span className="font-extrabold">
                                                                     {
-                                                                        container.pod
+                                                                        container.template.idScheme.replace("%containerId%", container.allocation.port)
                                                                     }
                                                                 </span>
                                                                 <span
@@ -169,12 +163,12 @@ export function NodeDetails() {
 
                                                             <div
                                                                 className="join mr-6 rounded-none text-3xl font-extrabold uppercase mb-2 mt-1 rounded-bl-2xl rounded-tr-2xl">
-                                                                TPS: {container.tps}
+                                                                TPS: {container.heartbeat?.tps || 20}
                                                             </div>
 
                                                             <div
                                                                 className="join mr-6 rounded-none text-3xl font-extrabold uppercase mb-2 mt-1 rounded-bl-2xl rounded-tr-2xl">
-                                                                Clients: {container.playersConnected}
+                                                                Clients: {container.heartbeat?.playersConnected || 0}
                                                             </div>
 
 
@@ -227,10 +221,10 @@ export function NodeDetails() {
                                                                 ) : (<></>)}
                                                             </div>
 
-                                                            <span className="flex flex-col text-right px-2 w-72">
+                                                            <span className="flex flex-col text-right px-2 w-96">
                                                                 <span
                                                                     className="text-xs dark:text-neutral-700 font-bold">
-                                                                    Node #{container.pod}
+                                                                    #{container.container.id}
                                                                 </span>
 
                                                                 <span

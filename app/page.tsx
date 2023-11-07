@@ -41,7 +41,7 @@ export default function Home() {
                         In Development
                     </div>
                     <Link
-                        href={"https://discord.gg/TAv6N6RKQk"}
+                        href={"https://discord.gg/Xy4ytrNUkx"}
                         className={"b-2 border-[#5865F2] text-[#5865F2] btn shadow-sm dark:text-amber-50 font-bold px-4 py-1 w-fit rounded"}>
                         Discord
                     </Link>

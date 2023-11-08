@@ -48,7 +48,9 @@ export function NodeDetails() {
     const route = `http://${data ? data[0].href : ""}:8086/peak`
     console.log(route)
 
+
     const {data: node} = useSWR(route, fetcher, {refreshInterval: 5000})
+    const {data: peak} = useSWR(`http://${data ? data[0].href : ""}:8086/peak`, fetcher, {refreshInterval: 5000})
 
     console.log(node)
 
@@ -94,12 +96,17 @@ export function NodeDetails() {
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
-                                        <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
-                                        <InfoCard title="ADDRESS" value={data[0].href}/>
-                                        <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
-                                        <InfoCard title="TEMPLATES" value={data[0].templates || 0}/>
-                                        <InfoCard title="MODULES" value={data[0].modules || 0}/>
-                                        <InfoCard title="STATE" value={data[0].state}/>
+                                        {data.length && data.length > 0 && peak ? (
+                                            <>
+                                                <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
+                                                <InfoCard title="ADDRESS" value={data[0].href}/>
+                                                <InfoCard title="CONTAINERS" value={peak.containers}/>
+                                                <InfoCard title="TEMPLATES" value={peak.templates}/>
+                                                <InfoCard title="MODULES" value={peak.modules}/>
+                                                <InfoCard title="STATE" value={data[0].state}/>
+                                            </>
+                                        ) : (<></>)
+                                        }
 
                                         <div className="relative">
                                             <span
@@ -148,7 +155,7 @@ export function NodeDetails() {
 
                                         <div className="flex flex-row">
                                             <form className="my-4 flex-row gap-10 w-1/2" method="post"
-                                                  action={`http://${data[0].href}:8086/setup/${data[0].identifier}`}>
+                                                  action={`${data[0].href}setup/${data[0].identifier}`}>
                                                 <input list="data" autoComplete="off"
                                                        placeholder="$   Type help to view a list of commands" id="key"
                                                        name="key"

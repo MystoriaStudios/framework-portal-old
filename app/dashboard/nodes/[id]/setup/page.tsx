@@ -47,7 +47,7 @@ export default function DashboardPage() {
                     </div>
 
                     <form className="my-4 flex-row gap-10 w-1/2" method="post"
-                          action={`http://${data[0].href}:8086/setup/${data[0].identifier}`}>
+                          action={`${data[0].href}setup/${data[0].identifier}`}>
                         <div className={"flex flex-col gap-y-4"}>
                             <span className={"flex flex-col gap-1"}>
                                 Node Key:

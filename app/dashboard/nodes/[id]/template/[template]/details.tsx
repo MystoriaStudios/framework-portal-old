@@ -1,7 +1,7 @@
 "use client";
 
 import {useOrganization} from "@clerk/nextjs";
-import React from "react";
+import React, {useState} from "react";
 import useSWR from 'swr'
 import Link from "next/link";
 import {useParams, useRouter} from "next/navigation";
@@ -58,13 +58,13 @@ export function TemplateDetails() {
                     </h1>
 
 
-                    <Link href={`http://${data[0].href}:8086/deployment/call/${template.templateKey}`}
+                    <Link href={`${data[0].href}deployment/call/${template.templateKey}`}
                           className="btn text-green-500 border-green-500 w-1/3 animate-pulse">
                         Deploy Template
                     </Link>
 
                     <form className="my-4 flex-row gap-10" method="post"
-                          action={`http://${data[0].href}:8086/deployment/template/${template.templateKey}`}>
+                          action={`${data[0].href}deployment/template/${template.templateKey}`}>
                         <div className={"flex flex-col gap-y-4"}>
                             <span className="flex flex-row gap-x-4">
                                 <span className={"flex flex-col gap-1 w-full max-w-xs"}>
@@ -83,19 +83,19 @@ export function TemplateDetails() {
                             </span>
                             <span className={"flex flex-col gap-1"}>
                                 Origin:
-                                <input type="text" placeholder="Origin" value={template.serverExecutableOrigin}
+                                <input type="text" placeholder="Origin" defaultValue={template.serverExecutableOrigin}
                                        id="serverExecutableOrigin" name="serverExecutableOrigin"
                                        className="dark:bg-neutral-800 input input-bordered w-full max-w-2xl text-neutral-100"/>
                             </span>
                             <span className={"flex flex-col gap-1"}>
                                 Startup Command:
-                                <textarea placeholder="Origin" value={template.startupCommand} id="startupCommand"
+                                <textarea placeholder="Origin" defaultValue={template.startupCommand} id="startupCommand"
                                           name="startupCommand"
                                           className="dark:bg-neutral-800 input input-bordered w-full max-w-2xl h-56 text-neutral-100"/>
                             </span>
                             <span className={"flex flex-col gap-1"}>
                                 Docker Image:
-                                <input type="text" placeholder="Origin" value={template.dockerImage} id="dockerImage"
+                                <input type="text" placeholder="Origin" defaultValue={template.dockerImage} id="dockerImage"
                                        name="dockerImage"
                                        className="dark:bg-neutral-800 input input-bordered w-full max-w-2xl text-neutral-100"/>
                             </span>

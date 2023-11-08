@@ -45,10 +45,10 @@ export function NodeDetails() {
             router.push(`/dashboard/nodes/${id}/setup`)
         }*/
 
-    const route = `http://${data ? data[0].href : ""}:8086/deployment/containers`
-    console.log(route)
+    const {data: containers} = useSWR(`http://${data ? data[0].href : ""}:8086/deployment/containers`, fetcher, {refreshInterval: 5000})
+    const {data: peak} = useSWR(`http://${data ? data[0].href : ""}:8086/peak`, fetcher, {refreshInterval: 5000})
 
-    const {data: containers} = useSWR(route, fetcher, {refreshInterval: 5000})
+
 
     console.log(containers)
 
@@ -75,16 +75,16 @@ export function NodeDetails() {
                                         </span>
                                     </div>
                                     <div className="flex width-full gap-16 grid-cols-5 mt-2">
-                                        {data.length && data.length > 0 ? (
+                                        {data.length && data.length > 0 && peak ? (
                                             <>
                                                 <InfoCard title="IDENTIFIER" value={data[0].identifier.split("-")[0]}/>
                                                 <InfoCard title="ADDRESS" value={data[0].href}/>
-                                                <InfoCard title="CONTAINERS" value={data[0].containers || 0}/>
-                                                <InfoCard title="TEMPLATES" value={data[0].templates || 0}/>
-                                                <InfoCard title="MODULES" value={data[0].modules || 0}/>
+                                                <InfoCard title="CONTAINERS" value={peak.containers}/>
+                                                <InfoCard title="TEMPLATES" value={peak.templates}/>
+                                                <InfoCard title="MODULES" value={peak.modules}/>
                                                 <InfoCard title="STATE" value={data[0].state}/>
                                             </>
-                                        ) : <></>
+                                        ) : (<></>)
                                         }
 
                                         <div className="relative">

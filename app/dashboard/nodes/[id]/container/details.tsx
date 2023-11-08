@@ -45,8 +45,8 @@ export function NodeDetails() {
             router.push(`/dashboard/nodes/${id}/setup`)
         }*/
 
-    const {data: containers} = useSWR(`http://${data ? data[0].href : ""}:8086/deployment/containers`, fetcher, {refreshInterval: 5000})
-    const {data: peak} = useSWR(`http://${data ? data[0].href : ""}:8086/peak`, fetcher, {refreshInterval: 5000})
+    const {data: containers} = useSWR(`${data ? data[0].href : ""}deployment/containers`, fetcher, {refreshInterval: 5000})
+    const {data: peak} = useSWR(`${data ? data[0].href : ""}peak`, fetcher, {refreshInterval: 5000})
 
 
 

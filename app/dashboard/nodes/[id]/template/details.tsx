@@ -42,7 +42,7 @@ export function TemplateDetails() {
         return <></>
     }
 
-    const route = `http://${data ? data[0].href : ""}:8086/deployment/templates`
+    const route = `${data ? data[0].href : ""}deployment/templates`
     console.log(route)
 
     const {data: templates} = useSWR(route, fetcher, {refreshInterval: 5000})

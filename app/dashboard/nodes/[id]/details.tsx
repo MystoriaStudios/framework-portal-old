@@ -45,12 +45,16 @@ export function NodeDetails() {
             router.push(`/dashboard/nodes/${id}/setup`)
         }*/
 
-    const route = `http://${data ? data[0].href : ""}:8086/peak`
+    const route = `${data ? data[0].href : ""}peak`
     console.log(route)
 
 
     const {data: node} = useSWR(route, fetcher, {refreshInterval: 5000})
-    const {data: peak} = useSWR(`http://${data ? data[0].href : ""}:8086/peak`, fetcher, {refreshInterval: 5000})
+    const {data: peak} = useSWR(`${data ? data[0].href : ""}peak`, fetcher, {refreshInterval: 5000})
+
+    if (!peak) {
+
+    }
 
     console.log(node)
 
@@ -61,7 +65,14 @@ export function NodeDetails() {
     return (
         <div className="mt-12">
             <div className="mt-4">
-                {!isValidating && data[0] !== undefined ? (
+                {
+                    isValidating ? (
+                        <>
+
+                        </>
+                    ) : <></>
+                }
+                {!isValidating && peak !== undefined ? (
                     <div>
                         <div className="flex flex-row pb-8">
                             <div className="flex flex-row gap-x-4 justify-evenly w-full mx-auto">
@@ -77,7 +88,7 @@ export function NodeDetails() {
                                 </div>
                                 <div className="stat rounded-2xl bg-neutral-400 dark:bg-neutral-800">
                                     <div className="stat-title text-white">Assignable Cores</div>
-                                    <div className="stat-value text-neutral-50">{node?.availableCores || 1}</div>
+                                    <div className="stat-value text-neutral-50">{node?.availableCores || 0}</div>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +263,7 @@ export function AllocationDetails() {
             router.push(`/dashboard/nodes/${id}/setup`)
         }*/
 
-    const route = `http://${data ? data[0].href : ""}:8086/allocations`
+    const route = `${data ? data[0].href : ""}allocations`
     console.log(route)
 
     const {data: allocations} = useSWR(route, fetcher, {refreshInterval: 5000})

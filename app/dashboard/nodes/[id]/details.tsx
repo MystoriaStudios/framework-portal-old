@@ -39,7 +39,7 @@ export function NodeDetails() {
         data,
         error,
         isValidating
-    } = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher, {refreshInterval: 5000})
+    } = useSWR(`https://api.nopox.xyz/api/nodes/${id}`, fetcher)
 
     /*    if (!isValidating && data[0].state == "SETUP") {
             router.push(`/dashboard/nodes/${id}/setup`)
@@ -49,12 +49,10 @@ export function NodeDetails() {
     console.log(route)
 
 
-    const {data: node} = useSWR(route, fetcher, {refreshInterval: 5000})
-    const {data: peak} = useSWR(`${data ? data[0].href : ""}peak`, fetcher, {refreshInterval: 5000})
+    const {data: node} = useSWR(route, fetcher)
+    const {data: peak} = useSWR(`${data ? data[0].href : ""}peak`, fetcher)
+    const {data: cli} = useSWR(`${data ? data[0].href : ""}console`, fetcher)
 
-    if (!peak) {
-
-    }
 
     console.log(node)
 
@@ -65,13 +63,6 @@ export function NodeDetails() {
     return (
         <div className="mt-12">
             <div className="mt-4">
-                {
-                    isValidating ? (
-                        <>
-
-                        </>
-                    ) : <></>
-                }
                 {!isValidating && peak !== undefined ? (
                     <div>
                         <div className="flex flex-row pb-8">
@@ -152,17 +143,29 @@ export function NodeDetails() {
 
                                     <div
                                         className="mockup-code center bg-neutral-800 md:mt-8 m-4 text-primary-content text-left w-[96%] mx-[2%] drop-shadow-2xl">
-                                        <pre data-prefix="$" className="text-warning"><code>
+                                        <div className={"h-72 overflow-auto flex flex-col-reverse overflow-x-hidden"}>
+                                        <div className={"flex flex-col"}>
+                                            {
+                                                cli ? (
+                                                    cli.map((log: string) => (
+                                                        <pre data-prefix=">">
+                                                        <code>
+                                                            { log }
+                                                        </code>
+                                                    </pre>
+                                                    ))
+                                                ) : <></>
+                                            }
+                                        </div>
+                                            <pre data-prefix="$" className="text-warning"><code>
                                             Welcome to Framework Node version aa99f2
                                         </code></pre>
-                                        <pre data-prefix=">" className="text-success"><code>
-                                            Setup in 2.042 seconds <Link href="https://mystoria.dev" target="_blank"
+                                            <pre data-prefix=">" className="text-success"><code>
+                                            Setup in 2.042 seconds <Link href="" target="_blank"
                                                                          rel="noreferrer noopener"
-                                                                         className="hover:underline">https://mystoria.dev</Link>
+                                                                         className="hover:underline">${data[0].href}</Link>
                                         </code></pre>
-                                        <ul>
-
-                                        </ul>
+                                        </div>
 
                                         <div className="flex flex-row">
                                             <form className="my-4 flex-row gap-10 w-1/2" method="post"

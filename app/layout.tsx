@@ -30,7 +30,7 @@ export default function RootLayout({
 
     // @ts-ignore
     return (
-        <html lang="en" className="transition-colors delay-100 duration-200 ease-in-out block max-w-[100vw]">
+        <html lang="en" className="transition-colors delay-100 duration-200 ease-in-out block max-w-[100vw] overflow-x-hidden">
 
         <meta
             property="og:title"
